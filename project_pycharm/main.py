@@ -38,7 +38,9 @@ for file_excel_name in file_excel_names:
         model = rate_oil_model.RateOilModel(data,
                                             mult_watercuts_train=1.1,
                                             mult_indexes_train=mult_indexes_train)
-        plot.Plot.create_plots(data, model)
+        plot.Plot.create_plots(data,
+                               model,
+                               save_png=False)
         data_dict[file_excel_name][mult_indexes_train] = file_dict
         data_dict[file_excel_name][mult_indexes_train]['data'] = data
         data_dict[file_excel_name][mult_indexes_train]['model'] = model

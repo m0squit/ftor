@@ -10,90 +10,92 @@ import project_pycharm.watercut_model_optimizer as watercut_model_optimizer
 
 class Plot(object):
 
-    _versions_train = {0.3: 'train_0.3', 0.7: 'train_0.7', 1: 'train_1'}
     _directory_data_artifical = pathlib.Path.cwd().parent / 'data' / 'artificial'
+    _versions_train = {0.3: 'train_0.3', 0.7: 'train_0.7', 1: 'train_1'}
     _directory_plot = None
     _data = None
     _model = None
 
     @classmethod
-    def create_plots(cls, data, model):
+    def create_plots(cls, data, model, save_png=False):
         cls._directory_plot = cls._directory_data_artifical / cls._versions_train[model.mult_indexes_train]
         cls._data = data
         cls._model = model
-        cls._create_plot_plotly()
-        cls._create_plot_bokeh()
+        cls._create_plotly_plot(save_png)
+        cls._create_bokeh_plot()
 
     @classmethod
-    def _create_plot_plotly(cls):
-        params_watercut = cls._model.params_watercut
-        title_text = f'watercut_initial={round(params_watercut[0], 2)},' + \
-                     f'mobility_ratio={round(params_watercut[1], 2)},' + \
-                     f'parameter_alpha={round(params_watercut[2], 2)},' + \
-                     f'parameter_beta={round(params_watercut[3], 2)}'
-        title_dict = dict(text=f'{title_text}',
-                          font=dict(size=12))
-        cls._create_plot_plotly_watercut(title_dict)
-        cls._create_plot_plotly_rate_oil(title_dict)
+    def _create_plotly_plot(cls, save_png):
+        # Создание fig
+        fig = subplots.make_subplots(rows=2,
+                                     cols=1,
+                                     shared_xaxes=True,
+                                     print_grid=True,
+                                     vertical_spacing=0.02,
+                                     specs=[[{'type': 'xy'}],
+                                            [{'type': 'xy', 'secondary_y': True}]],
+                                     x_title='<b>time, hr<b>')
+        x = cls._data.times
+        fig = cls._create_plotly_plot_top(fig, x)
+        fig = cls._create_plotly_plot_bottom(fig, x)
+        fig.update_layout(width=1500,
+                          title=dict(text=f'<b>case_{cls._data.file_excel_name}<b>',
+                                     font=dict(size=20)))
+        # Запись в файл
+        file = str(cls._directory_plot / f'plotly_{cls._data.file_excel_name}')
+        if save_png is True:
+            fig.write_image(f'{file}.png')
+        pl.io.write_html(fig, f'{file}.html', auto_open=False)
 
     @classmethod
-    def _create_plot_plotly_watercut(cls, title_dict):
-        # Создание data trace
-        recovery_factors_data = cls._data.recovery_factors
-        watercuts_data = cls._data.watercuts
-        trace_watercuts_data = cls._create_trace(name_trace='data',
-                                                 x=recovery_factors_data,
-                                                 y=watercuts_data,
-                                                 mode='markers')
-        # Создание model trace
-        recovery_factors_model = cls._model.recovery_factors
-        watercuts_model = cls._model.watercuts
-        trace_watercuts_model = cls._create_trace(name_trace='model',
-                                                  x=recovery_factors_model,
-                                                  y=watercuts_model)
-        fig_watercut = go.Figure()
-        fig_watercut.add_trace(trace_watercuts_data)
-        fig_watercut.add_trace(trace_watercuts_model)
-        fig_watercut.update_layout(title=title_dict)
-        fig_watercut.update_xaxes(title_text='recovery_factor, fr')
-        fig_watercut.update_yaxes(title_text='watercut, fr')
-        file = str(cls._directory_plot / f'{cls._data.file_excel_name}_watercut_plotly.html')
-        pl.io.write_html(fig=fig_watercut, file=file, auto_open=False)
+    def _create_plotly_plot_top(cls, fig, x):
+        # Добавление вертикальных линий для разделения временного диапазона на train и prediction
+        x_start_train = x[cls._model.index_start_train]
+        x_start_prediction = x[cls._model.index_start_prediction]
+        fig.add_shape(type='line', opacity=0.4, x0=x_start_train, x1=x_start_train, y0=0, y1=1)
+        fig.add_shape(type='line', opacity=0.4, x0=x_start_prediction, x1=x_start_prediction, y0=0, y1=1)
+        # Добавление аннотации
+        x_annotation = (x_start_train + x_start_prediction) / 2
+        fig.add_annotation(text='train_range',
+                           font=dict(size=20),
+                           x=x_annotation,
+                           y=0.9,
+                           showarrow=False)
+
+        trace_watercuts_data = cls._create_trace(name_trace='watercut_data', x=x, y=cls._data.watercuts)
+        trace_watercuts_model = cls._create_trace(name_trace='watercut_model', x=x, y=cls._model.watercuts)
+        fig.add_trace(trace_watercuts_data, row=1, col=1)
+        fig.add_trace(trace_watercuts_model, row=1, col=1)
+        fig.update_yaxes(title_text='<b>watercut, fr<b>', row=1, col=1, range=[0, 1])
+        return fig
 
     @classmethod
-    def _create_plot_plotly_rate_oil(cls, title_dict):
-        times = cls._data.times
-        # Создание data trace
+    def _create_plotly_plot_bottom(cls, fig, x):
         rates_oil_data = cls._data.rates_oil
-        trace_rates_oil_data = cls._create_trace(name_trace='data',
-                                                 x=times,
-                                                 y=rates_oil_data)
-        # Создание model trace
         rates_oil_model = cls._model.rates_oil
-        trace_rates_oil_model = cls._create_trace(name_trace='model',
-                                                  x=times,
-                                                  y=rates_oil_model)
-        # Создание deviation trace
         deviations_rates_oil = cls._calc_deviations(rates_oil_data, rates_oil_model)
-        trace_deviation_rates_oil = cls._create_trace(name_trace='deviation',
-                                                      x=times,
-                                                      y=deviations_rates_oil)
-        fig_rate = subplots.make_subplots(specs=[[{'secondary_y': True}]])
-        fig_rate.add_trace(trace_rates_oil_data)
-        fig_rate.add_trace(trace_rates_oil_model)
-        fig_rate.add_trace(trace_deviation_rates_oil, secondary_y=True)
-        fig_rate.update_layout(title=title_dict)
-        fig_rate.update_xaxes(title_text='time, hr')
-        fig_rate.update_yaxes(title_text='rate_oil, m3/day', secondary_y=False)
-        fig_rate.update_yaxes(title_text='deviation, fr', secondary_y=True)
-        file = str(cls._directory_plot / f'{cls._data.file_excel_name}_rate_oil.html')
-        pl.io.write_html(fig=fig_rate, file=file, auto_open=False)
+        trace_rates_oil_data = cls._create_trace(name_trace='rate_oil_data', x=x, y=rates_oil_data)
+        trace_rates_oil_model = cls._create_trace(name_trace='rate_oil_model', x=x, y=rates_oil_model)
+        trace_deviation_rates_oil = cls._create_trace(name_trace='deviation', x=x, y=deviations_rates_oil)
+        fig.add_trace(trace_rates_oil_data, row=2, col=1)
+        fig.add_trace(trace_rates_oil_model, row=2, col=1)
+        fig.add_trace(trace_deviation_rates_oil, row=2, col=1, secondary_y=True)
+        fig.update_yaxes(title_text='<b>rate_oil, m3/day<b>', row=2, col=1)
+        fig.update_yaxes(title_text='<b>deviation, fr<b>', row=2, col=1, secondary_y=True)
+        return fig
 
     @classmethod
-    def _create_plot_bokeh(cls):
+    def _create_bokeh_plot(cls):
+        # Создание plot
+        plot = plotting.figure(title=f'case_{cls._data.file_excel_name}',
+                               plot_width=1000,
+                               plot_height=800)
+        plot.xaxis.axis_label = 'recovery_factor, fr'
+        plot.yaxis.axis_label = 'watercut, fr'
         # Создание data данных
         recovery_factors_data = cls._data.recovery_factors
         watercuts_data = cls._data.watercuts
+        plot.circle(x=recovery_factors_data, y=watercuts_data, size=1)
         # Создание model данных
         rate_oil_model = cls._model
         index_start_train = rate_oil_model.index_start_train
@@ -101,9 +103,6 @@ class Plot(object):
         recovery_factors_model = rate_oil_model.recovery_factors[index_start_train:index_start_prediction]
         watercuts_model = rate_oil_model.watercuts[index_start_train:index_start_prediction]
         source = plotting.ColumnDataSource(data=dict(x=recovery_factors_model, y=watercuts_model))
-
-        plot = plotting.figure(y_range=(0, 1), plot_width=1000, plot_height=800)
-        plot.circle(x=recovery_factors_data, y=watercuts_data, size=1)
         plot.line('x', 'y', source=source, line_color='red', line_width=2, line_alpha=0.6)
 
         params_watercut = rate_oil_model.params_watercut
@@ -111,7 +110,6 @@ class Plot(object):
         mobility_ratio_slider = cls._create_slider(parameter_name='mobility_ratio', value=params_watercut[1])
         parameter_alpha_slider = cls._create_slider(parameter_name='parameter_alpha', value=params_watercut[2])
         parameter_beta_slider = cls._create_slider(parameter_name='parameter_beta', value=params_watercut[3])
-
         callback = models.CustomJS(args=dict(source=source,
                                              watercut_initial=watercut_initial_slider,
                                              mobility_ratio=mobility_ratio_slider,
@@ -142,8 +140,9 @@ class Plot(object):
                                                   mobility_ratio_slider,
                                                   parameter_alpha_slider,
                                                   parameter_beta_slider))
-        file = str(cls._directory_plot / f'{cls._data.file_excel_name}_watercut_bokeh.html')
-        plotting.output_file(filename=file)
+        # Запись в файл
+        file = str(cls._directory_plot / f'bokeh_{cls._data.file_excel_name}')
+        plotting.output_file(f'{file}.html')
         plotting.save(layout)
 
     @staticmethod

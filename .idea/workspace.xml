@@ -1,7 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="" />
+    <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_aquifer_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_aquifer_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_aquifer_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_200_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_200_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_200_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_250_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_250_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_250_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_1_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_1_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_1_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_variable_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_variable_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_variable_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_diagonal_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_diagonal_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_diagonal_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_aquifer_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_aquifer_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_aquifer_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_aquifer_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_aquifer_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_aquifer_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_200_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_200_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_200_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_250_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_250_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_250_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_1_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_1_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_1_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_variable_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_variable_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_variable_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_diagonal_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_diagonal_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_diagonal_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_aquifer_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_aquifer_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_aquifer_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_aquifer_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_aquifer_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_aquifer_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_200_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_200_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_200_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_250_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_250_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_250_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_1_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_1_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_1_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_variable_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_variable_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_variable_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_diagonal_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_diagonal_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_diagonal_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_aquifer_rate_oil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_aquifer_watercut_bokeh.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_aquifer_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/plot.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +113,13 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1ZAEMxykEfJ2djxq6cSChu7zfsf" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
@@ -81,5 +181,16 @@
       <updated>1584273453214</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
