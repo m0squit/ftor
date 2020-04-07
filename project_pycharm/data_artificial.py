@@ -8,8 +8,8 @@ class DataArtificial(object):
     _nrows_max = 1e5
 
     def __init__(self,
-                 file_excel_name):
-        self.file_excel_name = file_excel_name
+                 name_file_excel):
+        self.name_file_excel = name_file_excel
 
         self.times = []
         self.times_count = None
@@ -29,19 +29,16 @@ class DataArtificial(object):
         return list(map(lambda x: x / 24, rates))
 
     def _read_data(self):
-        io = pathlib.Path.cwd().parent / 'data' / 'artificial' / f'{self.file_excel_name}.xlsx'
+        io = pathlib.Path.cwd().parent / 'data' / 'artificial' / f'{self.name_file_excel}.xlsx'
         data = pd.read_excel(io=io,
                              sheet_name='data',
                              header=0,
                              usecols=[1, 2, 3],
                              skiprows=1,
                              nrows=self._nrows_max)
-        data.drop(labels=0,
-                  axis='index',
-                  inplace=True)
-        data.dropna(axis='index',
-                    how='all',
-                    inplace=True)
+        data.drop(labels=0, axis='index', inplace=True)
+        data.dropna(axis='index', how='all', inplace=True)
+
         self.times = data['Elapsed time'].tolist()
         self.times_count = len(self.times)
         self.rates_oil = data['qo'].tolist()

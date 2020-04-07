@@ -2,100 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project_pycharm/data_day_fact.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project_pycharm/data_fact.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project_pycharm/data_month_fact.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project_pycharm/model_rate/fluid.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project_pycharm/model_rate/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project_pycharm/model_rate/reservoir.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project_pycharm/model_rate/well.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Kuchkildin_DK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Kuchkildin_DK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/research_watercut.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/research_watercut.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_aquifer_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_aquifer_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_aquifer_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_1_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_200_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_200_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_200_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_250_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_250_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/circle_500_aquifer_bhp_250_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_1_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_1_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_1_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_variable_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_variable_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_variable_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_2_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_diagonal_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_diagonal_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_diagonal_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_4_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_aquifer_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_aquifer_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.3/square_500_aquifer_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_aquifer_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_aquifer_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_aquifer_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_1_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_200_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_200_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_200_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_250_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_250_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/circle_500_aquifer_bhp_250_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_1_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_1_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_1_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_variable_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_variable_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_variable_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_2_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_diagonal_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_diagonal_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_diagonal_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_4_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_aquifer_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_aquifer_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_0.7/square_500_aquifer_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_aquifer_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_aquifer_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_aquifer_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_1_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_200_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_200_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_200_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_250_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_250_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/circle_500_aquifer_bhp_250_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_1_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_1_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_1_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_variable_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_variable_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_variable_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_2_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_diagonal_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_diagonal_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_diagonal_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_4_injector_watercut_plotly.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_aquifer_rate_oil.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_aquifer_watercut_bokeh.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/artificial/train_1/square_500_aquifer_watercut_plotly.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/163.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/502.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/data_artificial.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/data_artificial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_pycharm/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_pycharm/plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/plot.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -117,11 +37,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ZAEMxykEfJ2djxq6cSChu7zfsf" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -141,7 +68,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.data_fact">
+    <configuration name="data_fact" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="research_watercut" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project_pycharm" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project_pycharm/data_fact.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="research_watercut" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -154,7 +102,29 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project_pycharm/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="reader_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="research_watercut" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/fact/kholmogorskoe" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/fact/kholmogorskoe/reader_data.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -165,6 +135,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.data_fact" />
+        <item itemvalue="Python.reader_data" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
@@ -179,18 +151,46 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1584273453214</updated>
+      <workItem from="1585558917424" duration="3785000" />
+      <workItem from="1585563207568" duration="70000" />
+      <workItem from="1585563330649" duration="606000" />
+      <workItem from="1585640316731" duration="1808000" />
+      <workItem from="1585906727147" duration="1219000" />
+      <workItem from="1585915680502" duration="560000" />
+      <workItem from="1585917423015" duration="975000" />
+      <workItem from="1586160978803" duration="54000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="32" y="105" key="FileChooserDialogImpl" timestamp="1585559303226">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="32" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585559303226" />
+    <state x="232" y="0" key="SettingsEditor" timestamp="1585640383523">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="232" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1585640383523" />
+    <state x="472" y="261" key="com.intellij.ide.util.TipDialog" timestamp="1586160981047">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="384" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1585917422304" />
+    <state x="472" y="261" key="com.intellij.ide.util.TipDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1586160981047" />
   </component>
 </project>
