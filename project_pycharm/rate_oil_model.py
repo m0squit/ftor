@@ -31,15 +31,6 @@ class RateOilModel(object):
         self.index_start_prediction = None
         self._calc_rates_oil()
 
-    @staticmethod
-    def _solve_ode(fun, t_span, y0, t_eval):
-        solution = integrate.solve_ivp(fun=fun,
-                                       t_span=t_span,
-                                       y0=y0,
-                                       method='RK45',
-                                       t_eval=t_eval)
-        return list(solution.y[0])
-
     def _calc_rates_oil(self):
         self._get_settings_watercut_model()
         if self.mult_watercuts_train != 1:
@@ -97,3 +88,12 @@ class RateOilModel(object):
         stoiip = self.data.stoiip
         term = (1 - watercut_model.WatercutModel.calc_watercut(recovery_factor, self.params_watercut)) * 1 / stoiip
         return term
+
+    @staticmethod
+    def _solve_ode(fun, t_span, y0, t_eval):
+        solution = integrate.solve_ivp(fun=fun,
+                                       t_span=t_span,
+                                       y0=y0,
+                                       method='RK45',
+                                       t_eval=t_eval)
+        return list(solution.y[0])

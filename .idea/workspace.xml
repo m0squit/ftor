@@ -4,6 +4,8 @@
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_pycharm/data_fact.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/data_fact.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/rate_oil_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/rate_oil_model.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +58,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.data_fact">
+  <component name="RunManager" selected="Python.main">
     <configuration name="data_fact" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="research_watercut" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -123,9 +125,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.data_fact" />
         <item itemvalue="Python.reader_data" />
-        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>

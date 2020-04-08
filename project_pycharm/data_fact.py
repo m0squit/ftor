@@ -2,8 +2,6 @@ import pathlib
 import pandas as pd
 import datetime
 import calendar
-import math
-import scipy.optimize as optimize
 
 
 class DataFact(object):
@@ -17,6 +15,7 @@ class DataFact(object):
                  ratio_points_month_day):
         self.path_data = self._path_data / f'{name_field}' / f'{name_well}.xlsx'
         self.ratio_points_month_day = ratio_points_month_day
+
         self.df = None
         self.df_month = None
         self.df_day = None
@@ -97,7 +96,6 @@ class DataFact(object):
             production_liquid = self.df['production_liquid'][i]
             df.loc[i, 'watercut'] = (production_liquid - production_oil) / production_liquid
         self.df = df
-        print(self.df)
 
     @staticmethod
     def _convert_date_from_string(x):
@@ -108,6 +106,3 @@ class DataFact(object):
         day_last = calendar.monthrange(date.year, date.month)[1]  # A last day of the date month.
         date = date.replace(day=day_last)
         return date
-
-
-DataFact('kholmogorskoe', '2276_116', 0.3)
