@@ -14,9 +14,9 @@ class DataFact(object):
     def __init__(self,
                  name_field,
                  name_well,
-                 month_day_ratio):
+                 ratio_points_month_day):
         self.path_data = self._path_data / f'{name_field}' / f'{name_well}.xlsx'
-        self.month_day_points_ratio = month_day_ratio
+        self.ratio_points_month_day = ratio_points_month_day
         self.df = None
         self.df_month = None
         self.df_day = None
@@ -27,11 +27,11 @@ class DataFact(object):
     def _prepare_data(self):
         self._read_data()
         self._combine_month_day_dataframes()
-        self._function()
+        self._calc_watercut()
 
     def _read_data(self):
-        self.df_month = self._read_excel(sheet_name='month', usecols=[0, 20, 21], skiprows=2, indexes_drop=[0, 1])
-        self.df_day = self._read_excel(sheet_name='day', usecols=[2, 8, 11], skiprows=2, indexes_drop=[None])
+        self.df_month = self._read_excel(sheet_name='month', usecols=[0, 20, 21], skiprows=3, indexes_drop=[0, 1])
+        self.df_day = self._read_excel(sheet_name='day', usecols=[2, 11, 8], skiprows=3, indexes_drop=[None])
         self.df_month_count = len(self.df_month.index)
         self.df_day_count = len(self.df_day.index)
 
@@ -41,6 +41,8 @@ class DataFact(object):
         Args:
             usecols: A list of integers representing column numbers of excel table.
                 First integer must be column number of time.
+                Second - column number of oil production.
+                Third - column number of liquid production.
                 Column numeration starts from zero.
             indexes_drop: A list of integers representing index numbers of excel table.
                 Index numerations starts from zero.
@@ -48,47 +50,54 @@ class DataFact(object):
         io = self.path_data
         df = pd.read_excel(io=io,
                            sheet_name=sheet_name,
-                           header=0,
+                           header=None,
                            usecols=usecols,
                            skiprows=skiprows,
-                           nrows=self._nrows_max)
-
+                           nrows=self._nrows_max,
+                           na_values=0)
         # We prepare dataframe.
+        df = df[usecols]
+        df.columns = ['date', 'production_oil', 'production_liquid']
         df.drop(index=indexes_drop, inplace=True, errors='ignore')
         df.dropna(axis='index', how='any', inplace=True)
-        df['Дата'] = df['Дата'].apply(func=self._convert_date_from_string)
-        df.sort_values(by='Дата', axis='index', ascending=True, inplace=True, ignore_index=True)
-        df.set_index(keys=['Дата', df.index], drop=True, inplace=True, verify_integrity=True)
-        df = df.sum(axis='index', level='Дата')
+        df['date'] = df['date'].apply(func=self._convert_date_from_string)
+        df.sort_values(by='date', axis='index', ascending=True, inplace=True, ignore_index=True)
+        df.set_index(keys=['date', df.index], drop=True, inplace=True, verify_integrity=True)
+        df = df.sum(axis='index', level='date')
         return df
 
     def _combine_month_day_dataframes(self):
-        x_min = 0
-        x_max = self.df_day_count
-        solution = optimize.differential_evolution(func=self._target_function, bounds=[(x_min, x_max)]).x
-        number_points_day = round(solution)
-        number_points_month = round(number_points_day * self.month_day_points_ratio)
-        index_end_month = number_points_month
-        index_start_day = self.df_day_count - number_points_day
-        df_month = self.df_month.iloc[:index_end_month]
-        df_day = self.df_day.iloc[index_start_day:]
+        dates_month = self.df_month.index
+        dates_day = self.df_day.index
+        ratios = []
+        for i in range(len(dates_day)):
+            date_day = dates_day[i]
+            number_points_month = len(dates_month[dates_month < date_day])
+            number_points_day = len(dates_day[dates_day >= date_day])
+            ratio = number_points_month / number_points_day
+            ratios.append(ratio)
+        ratio_points_month_day = min(ratios, key=lambda x: abs(x - self.ratio_points_month_day))
+        i = ratios.index(ratio_points_month_day)
+        number_points_month = len(dates_month[dates_month < dates_day[i]])
+        number_points_day = len(dates_day[dates_day >= dates_day[i]])
+        df_month = self.df_month.head(number_points_month)
+        df_day = self.df_day.tail(number_points_day)
+        self.df = pd.concat(objs=[df_month, df_day],
+                            axis='index',
+                            keys=['month', 'day'],
+                            names=['level_date', 'date'],
+                            verify_integrity=True)
 
-    def _target_function(self, number_points_day):
-        number_points_day = round(number_points_day)
-        row_month = round(number_points_day * self.month_day_points_ratio)
-        row_day = self.df_day_count - number_points_day
-        error = self.df_month['Дата'][row_month].month - self.df_day['Дата'][row_day].month
-        return error
- 
-    def _function(self):
-        pass
-        # df['production_cumulative_oil'] = 0
-        # df['watercut'] = 0
-        # for i in df.index:
-        #     production_oil = df['Добыча нефти (объем)'][i]
-        #     production_liquid = df['Добыча жидкости'][i]
-        #     df['production_cumulative_oil'][i] += production_oil
-        #     df['watercut'][i] = (production_liquid - production_oil) / production_liquid
+    def _calc_watercut(self):
+        df = self.df.drop(columns='production_liquid')
+        df = df.cumsum(axis='index')
+        df['watercut'] = 0
+        for i in self.df.index:
+            production_oil = self.df['production_oil'][i]
+            production_liquid = self.df['production_liquid'][i]
+            df.loc[i, 'watercut'] = (production_liquid - production_oil) / production_liquid
+        self.df = df
+        print(self.df)
 
     @staticmethod
     def _convert_date_from_string(x):
