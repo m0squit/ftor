@@ -3,9 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_pycharm/data_fact.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/data_fact.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_pycharm/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_pycharm/rate_oil_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/rate_oil_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/163_18.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/2276_116.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/502_1.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/reader_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/163_18.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/2276_116.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/502_1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/data_day_fact.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/data_month_fact.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/unused/data_fact.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/unused/old_data_fact.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/unused/old_data_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/unused/rates_fact.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/unused/watercut_fact.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
