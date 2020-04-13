@@ -3,9 +3,6 @@ import project_pycharm.data_artificial as data_artificial
 import project_pycharm.rate_oil_model as rate_oil_model
 import project_pycharm.plot as plot
 import project_pycharm.data_fact as data_fact
-import project_pycharm.watercut_model as watercut_model
-import plotly as pl
-import plotly.graph_objects as go
 
 
 class Calculator(object):
@@ -66,33 +63,49 @@ class Calculator(object):
 
     @staticmethod
     def _run_fact():
-        wells = ['163_18', '502_1', '2276_116']
+        wells = [#'1_502',
+                 '18_163',
+                 #'36_368',
+                 #'82_1102',
+                 #'100_1248',
+                 '112_2190',
+                 '116_2276',]
+                 #'132_2165']
+
         for well in wells:
             data = data_fact.DataFact('kholmogorskoe', f'{well}', 0.5)
+            data.file_excel_name = well
+
             df = data.df
-            stoiip = 1e6
-            df.columns = ['recovery_factors', 'watercuts']
-            df['recovery_factors'] = df['recovery_factors'].apply(lambda x: x / stoiip)
+            df.columns = ['production_oil', 'production_liquid', 'recovery_factor', 'cumprod_liquid', 'watercut']
 
-            data.times_count = len(df.index)
-            data.watercuts = df.watercuts.to_list()
-            data.recovery_factors = df.recovery_factors.to_list()
+            data.times = [x[1].date() for x in df.index.to_list()]
+            data.times_count = len(data.times)
+            data.rates_oil = df['production_oil'].to_list()
+            data.rates_liquid = df['production_liquid'].to_list()
+            data.watercuts = df['watercut'].to_list()
+            data.stoiip = 1e6
+            data.cumulative_productions_liquid = df['cumprod_liquid'].to_list()
+            data.recovery_factors = df['recovery_factor'].apply(lambda x: x / data.stoiip)
 
-            watercut_model.WatercutModel.mult_watercuts_train = 1
-            watercut_model.WatercutModel.mult_indexes_train = 1
-            settings = watercut_model.WatercutModel.get_settings(data, None, 'differential_evolution')
-            params = settings['params']
+            model = rate_oil_model.RateOilModel(data, mult_indexes_train=0.7)
+            plot.Plot.create_plots(data, model)
 
-            fun = watercut_model.WatercutModel.calc_watercut
-            data.watercuts_model = [fun(x, params) for x in data.recovery_factors]
-
-            fig = go.Figure()
-            x = data.recovery_factors
-            y1 = data.watercuts
-            y2 = data.watercuts_model
-            fig.add_trace(go.Scatter(x=x, y=y1, mode='markers'))
-            fig.add_trace(go.Scatter(x=x, y=y2, mode='lines'))
-            pl.io.write_html(fig, f'{well}.html', auto_open=False)
+            # watercut_model.WatercutModel.mult_watercuts_train = 1
+            # watercut_model.WatercutModel.mult_indexes_train = 0.7
+            # settings = watercut_model.WatercutModel.get_settings(data, None, 'differential_evolution')
+            # params = settings['params']
+            #
+            # fun = watercut_model.WatercutModel.calc_watercut
+            # data.watercuts_model = [fun(x, params) for x in data.recovery_factors]
+            #
+            # fig = go.Figure()
+            # x = data.recovery_factors
+            # y1 = data.watercuts
+            # y2 = data.watercuts_model
+            # fig.add_trace(go.Scatter(x=x, y=y1, mode='markers'))
+            # fig.add_trace(go.Scatter(x=x, y=y2, mode='lines'))
+            # pl.io.write_html(fig, f'{well}.html', auto_open=False)
 
 
 Calculator.run('fact')

@@ -29,12 +29,32 @@ class DataFact(object):
         self._calc_watercut()
 
     def _read_data(self):
-        self.df_month = self._read_excel(sheet_name='month', usecols=[0, 20, 21], skiprows=3, indexes_drop=[0, 1])
-        self.df_day = self._read_excel(sheet_name='day', usecols=[2, 11, 8], skiprows=3, indexes_drop=[None])
+        self.df_month = self._read(sheet_name='month', usecols=[0, 20, 21], skiprows=3, indexes_drop=[0, 1])
+        self.df_day = self._read(sheet_name='day', usecols=[1, 3, 2], skiprows=1, indexes_drop=[None])
+
+        self.df_day_watercut_telemetry = self._read_excel(sheet_name='day', usecols=[1, 4], skiprows=0, indexes_drop=[None])
+        self.df_day_watercut_lab = self._read_excel(sheet_name='day', usecols=[1, 5], skiprows=0, indexes_drop=[None])
+
         self.df_month_count = len(self.df_month.index)
         self.df_day_count = len(self.df_day.index)
 
     def _read_excel(self, sheet_name, usecols, skiprows, indexes_drop):
+        io = self.path_data
+        df = pd.read_excel(io=io,
+                           sheet_name=sheet_name,
+                           header=0,
+                           usecols=usecols,
+                           skiprows=skiprows,
+                           nrows=self._nrows_max,
+                           na_values=0)
+        # We prepare dataframe.
+        df.drop(index=indexes_drop, inplace=True, errors='ignore')
+        df.dropna(axis='index', how='any', inplace=True)
+        df['Дата'] = df['Дата'].apply(func=self._convert_date_from_string)
+        df.sort_values(by='Дата', axis='index', ascending=True, inplace=True, ignore_index=True)
+        return df
+
+    def _read(self, sheet_name, usecols, skiprows, indexes_drop):
         """Reads excel file and returns final data as dataframe.
 
         Args:
@@ -63,6 +83,9 @@ class DataFact(object):
         df.sort_values(by='date', axis='index', ascending=True, inplace=True, ignore_index=True)
         df.set_index(keys=['date', df.index], drop=True, inplace=True, verify_integrity=True)
         df = df.sum(axis='index', level='date')
+
+        #df['production_oil'] = df['production_oil'].apply(lambda x: x / 0.864)
+
         return df
 
     def _combine_month_day_dataframes(self):
@@ -78,6 +101,7 @@ class DataFact(object):
         ratio_points_month_day = min(ratios, key=lambda x: abs(x - self.ratio_points_month_day))
         i = ratios.index(ratio_points_month_day)
         number_points_month = len(dates_month[dates_month < dates_day[i]])
+        self.month_end = number_points_month
         number_points_day = len(dates_day[dates_day >= dates_day[i]])
         df_month = self.df_month.head(number_points_month)
         df_day = self.df_day.tail(number_points_day)
@@ -88,14 +112,18 @@ class DataFact(object):
                             verify_integrity=True)
 
     def _calc_watercut(self):
-        df = self.df.drop(columns='production_liquid')
-        df = df.cumsum(axis='index')
+        # df = self.df.drop(columns='production_liquid')
+
+        self.df_liquid = self.df
+
+        df = self.df.cumsum(axis='index')
+        df.columns = ['cumprod_oil', 'cumprod_liquid']
         df['watercut'] = 0
         for i in self.df.index:
             production_oil = self.df['production_oil'][i]
             production_liquid = self.df['production_liquid'][i]
             df.loc[i, 'watercut'] = (production_liquid - production_oil) / production_liquid
-        self.df = df
+        self.df = self.df.join(df)
 
     @staticmethod
     def _convert_date_from_string(x):

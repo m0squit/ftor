@@ -27,16 +27,16 @@ class WatercutModel(object):
         watercuts = cls._data.watercuts
         watercut_initial = watercuts[0]
         watercut_critical = watercut_initial * cls.mult_watercuts_train
-        for watercut in watercuts:
-            if watercut > watercut_critical:
-                indexes_count = cls._data.times_count
-                index_start_train = watercuts.index(watercut)
-                range_train = (indexes_count - index_start_train) * cls.mult_indexes_train
-                range_train = math.ceil(range_train)
-                index_start_prediction = index_start_train + range_train
-                cls._index_start_train = index_start_train
-                cls._index_start_prediction = index_start_prediction
-                break
+        # for watercut in watercuts:
+        #     if watercut > watercut_critical:
+        indexes_count = cls._data.times_count
+        index_start_train = 0  # watercuts.index(watercut)
+        range_train = (indexes_count - index_start_train) * cls.mult_indexes_train
+        range_train = math.ceil(range_train)
+        index_start_prediction = index_start_train + range_train
+        cls._index_start_train = index_start_train
+        cls._index_start_prediction = index_start_prediction
+        # break
 
     @classmethod
     def _target_function(cls, params):
