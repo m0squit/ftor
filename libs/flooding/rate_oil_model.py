@@ -1,5 +1,5 @@
 import scipy.integrate as integrate
-import project_pycharm.watercut_model as watercut_model
+import libs.flooding.watercut_model as watercut_model
 
 
 class RateOilModel(object):

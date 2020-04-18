@@ -5,13 +5,13 @@ import plotly.subplots as subplots
 import bokeh.plotting as plotting
 import bokeh.models as models
 import bokeh.layouts as layouts
-import project_pycharm.watercut_model_optimizer as watercut_model_optimizer
+import libs.watercut_model_optimizer as watercut_model_optimizer
 
 
 class Plot(object):
 
     _directory_data_artifical = pathlib.Path.cwd().parent / 'data' / 'artificial'
-    _directory_data_fact = pathlib.Path.cwd().parent / 'data' / 'fact' / 'kholmogorskoe'
+    _directory_data_fact = pathlib.Path.cwd().parent / 'data' / 'real' / 'kholmogorskoe'
 
     _versions_train = {0.3: 'train_0.3', 0.7: 'train_0.7', 1: 'train_1'}
     _directory_plot = None

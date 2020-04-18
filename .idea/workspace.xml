@@ -2,15 +2,61 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/field.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/fluid.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/formation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/reservoir.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/well.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain/zone.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/flooding/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/unsteady_flow/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/research_watercut.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/predictor.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/116_2276.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/fact/kholmogorskoe/116_2276.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/18_163.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/fact/kholmogorskoe/18_163.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/1_502.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/data/fact/kholmogorskoe/1_502.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_pycharm/data_fact.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/data_fact.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_pycharm/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_pycharm/plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_pycharm/rate_oil_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/rate_oil_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_pycharm/watercut_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_pycharm/watercut_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/circle_500_1_injector.ktz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/circle_500_1_injector.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/circle_500_1_injector_aquifer.ktz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/circle_500_1_injector_aquifer.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/circle_500_aquifer_bhp_200.ktz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/circle_500_aquifer_bhp_200.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/circle_500_aquifer_bhp_250.ktz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/circle_500_aquifer_bhp_250.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_1_injector.ktz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_1_injector.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_2_injector.ktz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_2_injector.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_2_injector_variable.ktz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_2_injector_variable.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_4_injector.ktz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_4_injector.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_4_injector_diagonal.ktz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_4_injector_diagonal.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_aquifer.ktz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/artificial/square_500_aquifer.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/forms.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/100_1248.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/112_2190.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/116_2276.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/132_2165.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/18_163.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/1_502.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/36_368.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/fact/kholmogorskoe/82_1102.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/data_artificial.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/data_artificial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/data_fact.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/data_fact.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/calculator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/model_rate/fluid.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/model_rate/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/model_rate/reservoir.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/model_rate/well.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/rate_oil_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flooding/rate_oil_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/watercut_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flooding/watercut_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_pycharm/watercut_model_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/watercut_model_optimizer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,12 +89,16 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\backup\projects\kappa\research_watercut\project_pycharm" />
-      <recent name="D:\backup\projects\kappa\research_watercut\project_pycharm\plots" />
+      <recent name="D:\backup\projects\kappa\code\predictor\data" />
+      <recent name="D:\backup\projects\kappa\code\predictor" />
+      <recent name="D:\backup\projects\kappa\code\predictor\libs" />
+      <recent name="D:\backup\projects\kappa\code\predictor\domain" />
+      <recent name="D:\backup\projects\kappa\code\predictor\app" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -65,7 +115,7 @@
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="data_fact" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="research_watercut" />
+      <module name="predictor" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -86,7 +136,7 @@
       <method v="2" />
     </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="research_watercut" />
+      <module name="predictor" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -98,7 +148,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/project_pycharm/main.py" />
+      <option name="SCRIPT_NAME" value="D:\backup\projects\kappa\diploma\predic_tor\project_pycharm\calculator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -108,7 +158,7 @@
       <method v="2" />
     </configuration>
     <configuration name="reader_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="research_watercut" />
+      <module name="predictor" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>

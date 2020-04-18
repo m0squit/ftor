@@ -1,7 +1,7 @@
 import time
 import project_pycharm.data_artificial as data_artificial
-import project_pycharm.rate_oil_model as rate_oil_model
-import project_pycharm.plot as plot
+import libs.flooding.rate_oil_model as rate_oil_model
+import libs.plot as plot
 import project_pycharm.data_fact as data_fact
 
 
@@ -13,7 +13,7 @@ class Calculator(object):
 
         if type_data == 'artificial':
             cls._run_artificial()
-        if type_data == 'fact':
+        if type_data == 'real':
             cls._run_fact()
 
         print(f'--- {time.time() - start_time} seconds ---')
@@ -108,4 +108,4 @@ class Calculator(object):
             # pl.io.write_html(fig, f'{well}.html', auto_open=False)
 
 
-Calculator.run('fact')
+Calculator.run('real')

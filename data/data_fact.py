@@ -6,15 +6,14 @@ import calendar
 
 class DataFact(object):
 
-    _path_data = pathlib.Path.cwd().parent / 'data' / 'fact'
-    _nrows_max = 1e5
+    path = super().path / 'real'
+    _ratio_points_month_day = 0.5
 
     def __init__(self,
                  name_field,
                  name_well,
-                 ratio_points_month_day):
-        self.path_data = self._path_data / f'{name_field}' / f'{name_well}.xlsx'
-        self.ratio_points_month_day = ratio_points_month_day
+                 ):
+        self.path_data = self.path / f'{name_field}' / f'{name_well}.xlsx'
 
         self.df = None
         self.df_month = None

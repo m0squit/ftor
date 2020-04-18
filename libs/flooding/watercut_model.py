@@ -1,5 +1,5 @@
 import math
-import project_pycharm.watercut_model_optimizer as model_optimizer
+import libs.watercut_model_optimizer as model_optimizer
 
 
 class WatercutModel(object):

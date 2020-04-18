@@ -2,14 +2,18 @@ import pathlib
 import pandas as pd
 import scipy.integrate as integrate
 
+from project_pycharm.data_support import Data_support
 
-class DataArtificial(object):
 
-    _nrows_max = 1e5
+class DataArtificial(Data_support):
+
+    path = super().path / 'artificial'
 
     def __init__(self,
                  name_file_excel):
-        self.name_file_excel = name_file_excel
+        self.id = name_file_excel
+        self.df = None
+        self.stoiip = None
 
         self.times = []
         self.times_count = None
@@ -21,15 +25,11 @@ class DataArtificial(object):
         self.cumulative_productions_oil = []
         self.cumulative_productions_liquid = []
         self.recovery_factors = []
-        self._read_data()
-        self._prepare_data()
 
-    @staticmethod
-    def _convert_rate_units(rates):
-        return list(map(lambda x: x / 24, rates))
+    def _fetch(self):
+        path = self.path / f'{self.id}.xlsx'
 
-    def _read_data(self):
-        io = pathlib.Path.cwd().parent / 'data' / 'artificial' / f'{self.name_file_excel}.xlsx'
+
         data = pd.read_excel(io=io,
                              sheet_name='data',
                              header=0,
@@ -73,3 +73,7 @@ class DataArtificial(object):
             # Расчет КИН
             recovery_factor = cumulative_production_oil / self.stoiip
             self.recovery_factors.append(recovery_factor)
+
+    @staticmethod
+    def _convert_rate_units(rates):
+        return list(map(lambda x: x / 24, rates))
