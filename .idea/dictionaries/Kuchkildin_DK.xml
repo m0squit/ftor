@@ -10,7 +10,9 @@
       <w>mults</w>
       <w>nrows</w>
       <w>plotly</w>
+      <w>skiprows</w>
       <w>stoiip</w>
+      <w>usecols</w>
       <w>watercut</w>
       <w>watercuts</w>
       <w>xlsx</w>
