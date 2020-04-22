@@ -2,28 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/repository.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/repository_excel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/aggregates/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/aggregates/project.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/aggregates/zone.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/entities/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/factories/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/factories/object_creator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/value_objects/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/value_objects/report.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/reader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Kuchkildin_DK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Kuchkildin_DK.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/flood/corey/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/flood/corey/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/flood/corey/params.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/flood/watercut_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/flux/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/numeric_tools/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/parser/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/parser/processor/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/parser/processor/flood_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/parser/processor/flux_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/parser/reader/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/parser/reader/_reader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/calculator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/field.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/aggregates/field.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/fluid.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/value_objects/fluid.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/formation.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/entities/formation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/reservoir.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/value_objects/reservoir.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/well.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/entities/well.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/zone.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/data/real/forms.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/data/real/notes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/repository_excel.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/repository_excel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/aggregates/zone.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/aggregates/zone.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/entities/formation.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/entities/formation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/entities/well.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/entities/well.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/factories/object_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/factories/object_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/flooding/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/flooding/rate_oil_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/rate_oil_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/flooding/watercut_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/watercut_model_support.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/reader.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/unsteady_flow/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/watercut_model_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/numeric_tools/optimizer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,11 +67,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\backup\projects\kappa\code\predictor\domain\aggregates" />
-      <recent name="D:\backup\projects\kappa\code\predictor\domain\entities" />
-      <recent name="D:\backup\projects\kappa\code\predictor\domain\value_objects" />
-      <recent name="D:\backup\projects\kappa\code\predictor\data" />
-      <recent name="D:\backup\projects\kappa\code\predictor" />
+      <recent name="D:\backup\projects\kappa\code\predictor\libs\parser\processor" />
+      <recent name="D:\backup\projects\kappa\code\predictor\libs\parser\reader" />
+      <recent name="D:\backup\projects\kappa\code\predictor\libs\parser" />
+      <recent name="D:\backup\projects\kappa\code\predictor\libs\flood" />
+      <recent name="D:\backup\projects\kappa\code\predictor\libs\flood\corey" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -81,7 +86,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.reader">
     <configuration name="data_fact" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="predictor" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -125,6 +130,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="reader" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="predictor" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/libs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="D:\backup\projects\kappa\code\predictor\libs\parser\parser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="reader_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="predictor" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -148,11 +174,15 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.reader" />
+        <item itemvalue="Python.reader_data" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.data_fact" />
-        <item itemvalue="Python.reader_data" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -192,18 +222,12 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="32" y="105" key="FileChooserDialogImpl" timestamp="1585559303226">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="32" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585559303226" />
-    <state x="232" y="0" key="SettingsEditor" timestamp="1585640383523">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="232" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1585640383523" />
-    <state x="472" y="261" key="com.intellij.ide.util.TipDialog" timestamp="1586160981047">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="384" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1585917422304" />
-    <state x="472" y="261" key="com.intellij.ide.util.TipDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1586160981047" />
+    <state x="32" y="105" key="FileChooserDialogImpl" />
+    <state x="32" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" />
+    <state x="232" y="0" key="SettingsEditor" />
+    <state x="232" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" />
+    <state x="472" y="261" key="com.intellij.ide.util.TipDialog" />
+    <state x="384" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" />
+    <state x="472" y="261" key="com.intellij.ide.util.TipDialog/0.0.1680.1010@0.0.1680.1010" />
   </component>
 </project>

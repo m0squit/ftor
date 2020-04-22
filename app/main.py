@@ -1,0 +1,7 @@
+from app.calculator import Calculator
+from data.repository_excel import ExcelRepository
+
+path = 'str'
+repository = ExcelRepository(path)
+project = repository.create_project()
+project = Calculator.run(project)

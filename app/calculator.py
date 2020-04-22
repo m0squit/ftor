@@ -1,3 +1,5 @@
 class Calculator(object):
 
-    pass
+    @staticmethod
+    def run(project):
+        return project

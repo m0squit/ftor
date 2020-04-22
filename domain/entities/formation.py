@@ -10,3 +10,4 @@ class Formation(object):
         self.reservoir = reservoir
         self.fluid = fluid
         self.compressibility_total = compressibility_total
+        self.zones = []

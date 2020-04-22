@@ -1,5 +1,5 @@
 import scipy.integrate as integrate
-import libs.flooding.watercut_model as watercut_model
+import libs.flood.watercut_model_support as watercut_model
 
 
 class RateOilModel(object):

@@ -1,5 +1,5 @@
 import math
-import libs.watercut_model_optimizer as model_optimizer
+import libs.numeric_tools.optimizer as model_optimizer
 
 
 class WatercutModel(object):
@@ -14,9 +14,9 @@ class WatercutModel(object):
     def get_settings(cls, data, params_initial, method_optimization):
         cls._data = data
         cls._calc_bounds_train()
-        params = model_optimizer.WatercutsModelOptimizer.calc_params(cls._target_function,
-                                                                     params_initial,
-                                                                     method_optimization)
+        params = model_optimizer.Optimizer.calc_params(cls._target_function,
+                                                       params_initial,
+                                                       method_optimization)
         settings = {'index_start_train': cls._index_start_train,
                     'index_start_prediction': cls._index_start_prediction,
                     'params': params}

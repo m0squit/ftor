@@ -5,7 +5,7 @@ import plotly.subplots as subplots
 import bokeh.plotting as plotting
 import bokeh.models as models
 import bokeh.layouts as layouts
-import libs.watercut_model_optimizer as watercut_model_optimizer
+import libs.numeric_tools.optimizer as watercut_model_optimizer
 
 
 class Plot(object):
@@ -196,7 +196,7 @@ class Plot(object):
 
     @staticmethod
     def _create_slider(parameter_name, value):
-        bounds_params_watercut = watercut_model_optimizer.WatercutsModelOptimizer.params_bounds
+        bounds_params_watercut = watercut_model_optimizer.Optimizer.params_bounds
         bounds = bounds_params_watercut[parameter_name]
         start = bounds['min']
         end = bounds['max']

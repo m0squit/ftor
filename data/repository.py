@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from domain.factories.object_creator import ObjectCreator
+
 
 class Repository(ABC):
 
@@ -8,9 +10,9 @@ class Repository(ABC):
         self.data = None
 
     @abstractmethod
-    def get_data(self):
+    def _get_data(self):
         pass
 
-    def create_project(self, data):
-        # Calls factory to create all objects as project.
-        pass
+    def create_project(self):
+        project = ObjectCreator.run(self.data)
+        return project
