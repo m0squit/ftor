@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/aggregates/field.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/aggregates/field.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/aggregates/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/aggregates/project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/entities/formation.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/entities/formation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/entities/well.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/entities/well.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/value_objects/fluid.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/value_objects/fluid.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/value_objects/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/value_objects/report.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
