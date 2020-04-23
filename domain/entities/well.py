@@ -1,8 +1,8 @@
 class Well(object):
 
     def __init__(self,
-                 name,
-                 radius):
+                 name: str,
+                 radius: float):
 
         self.name = name
         self.radius = radius

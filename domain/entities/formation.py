@@ -1,9 +1,9 @@
 class Formation(object):
 
     def __init__(self,
-                 name,
-                 porosity,
-                 compressibility_total):
+                 name: str,
+                 porosity: float,
+                 compressibility_total: float):
 
         self.name = name
         self.porosity = porosity

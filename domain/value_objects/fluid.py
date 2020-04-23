@@ -1,9 +1,9 @@
 class Fluid(object):
 
     def __init__(self,
-                 density,
-                 viscosity,
-                 volume_factor):
+                 density: float,
+                 viscosity: float,
+                 volume_factor: float):
 
         self.density = density
         self.viscosity = viscosity
