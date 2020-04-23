@@ -1,17 +1,29 @@
+from domain.entities.formation import Formation
+from domain.entities.well import Well
+from domain.value_objects.fluid import Fluid
+from domain.value_objects.report import Report
+
+
 class Zone(object):
 
     def __init__(self,
-                 formation,
-                 well,
-                 report,
-                 type_completion,
-                 type_boundaries):
+                 thickness: float,
+                 type_boundaries: str,
+                 type_completion: str,
+                 formation: Formation,
+                 fluid: Fluid,
+                 well: Well,
+                 report: Report):
 
-        self._formation = formation
-        self._well = well
-        self._report = report
-        self.type_completion = type_completion
+        self.thickness = thickness
         self.type_boundaries = type_boundaries
+        self.type_completion = type_completion
+        self.formation = formation
+        self.fluid = fluid
+        self.well = well
+        self.report = report
+        self._add_self()
 
-        self._formation.zones.append(self)
-        self._well.zones.append(self)
+    def _add_self(self):
+        self.formation.zones.append(self)
+        self.well.zones.append(self)

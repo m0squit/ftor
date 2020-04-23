@@ -2,12 +2,10 @@ class Formation(object):
 
     def __init__(self,
                  name,
-                 reservoir,
-                 fluid,
+                 porosity,
                  compressibility_total):
 
         self.name = name
-        self.reservoir = reservoir
-        self.fluid = fluid
+        self.porosity = porosity
         self.compressibility_total = compressibility_total
         self.zones = []

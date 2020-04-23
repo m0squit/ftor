@@ -16,7 +16,6 @@ class _Reader(ABC):
         """Reads file and returns final raw data as pandas dataframe."""
         cls._customize(path, usecols, skiprows, nrows_max)
         cls._read()
-        pass
 
     @classmethod
     def run_specific(cls, path, usecols, skiprows, nrows_max=1e5):
