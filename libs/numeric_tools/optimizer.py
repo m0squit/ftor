@@ -46,12 +46,12 @@ class Optimizer(object):
                                          jac='2-point',
                                          bounds=bounds_type_2)
 
-        if method_optimization == 'diff':
+        if method_optimization == 'dif':
             solution = optimize.differential_evolution(loss_function,
                                                        bounds=bounds_type_2,
                                                        strategy='best2bin')
 
-        if method_optimization == 'dual':
+        if method_optimization == 'dua':
             solution = optimize.dual_annealing(func=loss_function,
                                                bounds=bounds_type_2,
                                                maxiter=1000,

@@ -4,7 +4,7 @@ from libs.parser.reader.csv import CsvReader
 from libs.parser.reader.excel import ExcelReader
 
 
-class Calculator(object):
+class Parser(object):
 
     _df_month = None
     _df_day = None

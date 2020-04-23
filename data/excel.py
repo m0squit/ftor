@@ -1,5 +1,5 @@
 from data.repository import Repository
-from libs.parser.reader import Reader
+from libs.parser.parser import Parser
 
 
 class ExcelRepository(Repository):
@@ -11,4 +11,4 @@ class ExcelRepository(Repository):
         self._get_data()
 
     def _get_data(self):
-        self.data = Reader().run(self.path)
+        self.data = Parser().run(self.path)

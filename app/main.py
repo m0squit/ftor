@@ -1,5 +1,5 @@
 from app.calculator import Calculator
-from data.repository_excel import ExcelRepository
+from data.excel import ExcelRepository
 
 path = 'str'
 repository = ExcelRepository(path)

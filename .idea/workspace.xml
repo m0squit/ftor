@@ -2,33 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/libs/flood/corey/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/flood/corey/model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/flood/corey/params.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/flood/watercut_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/flux/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/numeric_tools/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/parser/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/parser/processor/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/parser/processor/flood_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/parser/processor/flux_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/parser/reader/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/parser/reader/_reader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/flood/_predictor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/numeric_tools/solver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/calculator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/repository_excel.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/repository_excel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/aggregates/zone.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/aggregates/zone.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/entities/formation.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/entities/formation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/entities/well.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/entities/well.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/factories/object_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/factories/object_creator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/flooding/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/flooding/rate_oil_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/rate_oil_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/flooding/watercut_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/watercut_model_support.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/reader.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/unsteady_flow/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/watercut_model_optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/numeric_tools/optimizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/repository_excel.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/excel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/flood/corey/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/corey/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/flood/corey/params.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/corey/params.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/numeric_tools/optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/numeric_tools/optimizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/parser/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/parser/parser.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

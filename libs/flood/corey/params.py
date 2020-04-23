@@ -23,10 +23,10 @@ class CoreyModelParams(object):
         self.beta = None
         self.stoiip = None
 
-    def set_values(self, params):
+    def set_values(self, *params):
         self.watercut_initial = params[0]
         self.mobility_ratio = params[1]
         self.alpha = params[2]
         self.beta = params[3]
-        if len(params) == 5:
+        if 'stoiip' in self.usable_params:
             self.stoiip = params[4]
