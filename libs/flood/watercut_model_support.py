@@ -24,7 +24,7 @@ class WatercutModel(object):
 
     @classmethod
     def _calc_bounds_train(cls):
-        watercuts = cls._data.watercuts
+        watercuts = cls._data.watercuts_fact
         watercut_initial = watercuts[0]
         watercut_critical = watercut_initial * cls.mult_watercuts_train
         # for watercut in watercuts:
@@ -42,7 +42,7 @@ class WatercutModel(object):
     def _target_function(cls, params):
         error_total = 0
         for i in range(cls._index_start_train, cls._index_start_prediction):
-            watercut_fact = cls._data.watercuts[i]
+            watercut_fact = cls._data.watercuts_fact[i]
             recovery_factor = cls._data.recovery_factors[i]
             watercut_model = cls.calc_watercut(recovery_factor, params)
             error = abs(watercut_fact - watercut_model)

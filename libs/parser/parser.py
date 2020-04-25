@@ -68,6 +68,8 @@ class Parser(object):
 
     @classmethod
     def _create_zones(cls):
+        # TODO: Delete temp code row 72 (it is created here to avoid run all wells).
+        cls._names_well = ['232']
         zone_dict = dict.fromkeys(cls._names_well)
         # TODO: Fetch density, viscosity, volume_factor, thickness, type of completion values
         #  for each well from file "Техрежим..." and set in dict below.

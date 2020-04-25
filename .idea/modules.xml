@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/predictor.iml" filepath="$PROJECT_DIR$/.idea/predictor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ftor.iml" filepath="$PROJECT_DIR$/.idea/ftor.iml" />
     </modules>
   </component>
 </project>

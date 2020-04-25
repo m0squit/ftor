@@ -51,7 +51,7 @@ class RateOilModel(object):
 
     def _copy_before_train(self):
         recovery_factors = self.data.recovery_factors[:self.index_start_train]
-        watercuts = self.data.watercuts[:self.index_start_train]
+        watercuts = self.data.watercuts_fact[:self.index_start_train]
         rates_oil = self.data.rates_oil[:self.index_start_train]
         self.recovery_factors.extend(recovery_factors)
         self.watercuts.extend(watercuts)

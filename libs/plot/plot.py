@@ -64,8 +64,8 @@ class Plot(object):
         #                    y=0.9,
         #                    showarrow=False)
 
-        trace_watercuts_data = cls._create_trace(name_trace='watercut_data', x=x, y=cls._data.watercuts, mode='markers')
-        trace_watercuts_model = cls._create_trace(name_trace='watercut_model', x=x, y=cls._model.watercuts)
+        trace_watercuts_data = cls._create_trace(name_trace='watercut_data', x=x, y=cls._data.watercuts_fact, mode='markers')
+        trace_watercuts_model = cls._create_trace(name_trace='watercut_model', x=x, y=cls._model.watercuts_fact)
         fig.add_trace(trace_watercuts_data, row=1, col=1)
         fig.add_trace(trace_watercuts_model, row=1, col=1)
 
@@ -123,14 +123,14 @@ class Plot(object):
         plot.yaxis.axis_label = 'watercut, fr'
         # Создание data данных
         recovery_factors_data = cls._data.recovery_factors
-        watercuts_data = cls._data.watercuts
+        watercuts_data = cls._data.watercuts_fact
         plot.circle(x=recovery_factors_data, y=watercuts_data, size=1)
         # Создание model данных
         rate_oil_model = cls._model
         index_start_train = rate_oil_model.index_start_train
         index_start_prediction = rate_oil_model.index_start_prediction
         recovery_factors_model = rate_oil_model.recovery_factors[index_start_train:index_start_prediction]
-        watercuts_model = rate_oil_model.watercuts[index_start_train:index_start_prediction]
+        watercuts_model = rate_oil_model.watercuts_fact[index_start_train:index_start_prediction]
         source = plotting.ColumnDataSource(data=dict(x=recovery_factors_model, y=watercuts_model))
         plot.line('x', 'y', source=source, line_color='red', line_width=2, line_alpha=0.6)
 
