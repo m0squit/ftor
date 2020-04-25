@@ -11,6 +11,7 @@ class ExcelReader(_Reader):
                                 sheet_name=0,
                                 header=None,
                                 usecols=cls._usecols,
+                                dtype={0: str},
                                 skiprows=cls._skiprows,
                                 nrows=cls._nrows_max,
                                 na_values=0)

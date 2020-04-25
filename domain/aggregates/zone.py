@@ -2,6 +2,7 @@ from domain.entities.formation import Formation
 from domain.entities.well import Well
 from domain.value_objects.fluid import Fluid
 from domain.value_objects.report import Report
+from libs.flood.corey.model import CoreyModel
 
 
 class Zone(object):
@@ -27,3 +28,9 @@ class Zone(object):
     def _add_self(self):
         self.formation.zones.append(self)
         self.well.zones.append(self)
+
+    def predict_rate_oil(self):
+        data_production = self.report.data_production
+        cum_prods_oil = data_production['cum_prod_oil']
+        watercuts = data_production['watercut']
+        self.flood_model = CoreyModel(cum_prods_oil, watercuts)

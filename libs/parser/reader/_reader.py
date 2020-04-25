@@ -54,9 +54,10 @@ class _Reader(ABC):
     @abstractmethod
     def _process(cls):
         cls._df = cls._df[cls._usecols]
+        cls._df.columns = range(cls._df.shape[1])
         cls._df.rename(columns={0: 'date'}, inplace=True)
         cls._df['date'] = cls._df['date'].apply(func=cls._convert_date_from_string)
-        cls._df.sort_values(by='date', axis='index', ascending=True, inplace=True, ignore_index=True)
+        cls._df.sort_values(by='date', axis='index', ascending=True, inplace=True, ignore_index=False)
 
     @staticmethod
     def _convert_date_from_string(x):

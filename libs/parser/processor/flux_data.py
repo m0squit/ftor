@@ -4,13 +4,14 @@ class FluxData(object):
                  df):
 
         self.df = df
+        self._create()
 
-    def create(self):
+    def _create(self):
         self._prepare()
         return self.df
 
     def _prepare(self):
-        self.df.drop(columns=['well'], inplace=True)
-        self.df.dropna(axis='index', how='any', inplace=True)
-        self.df.drop_duplicates(subset='date', inplace=True)
-        self.df.set_index(keys='date', inplace=True, verify_integrity=True)
+        self.df = self.df.drop(columns=['well'])
+        self.df = self.df.dropna(axis='index', how='any')
+        self.df = self.df.drop_duplicates(subset='date')
+        self.df = self.df.set_index(keys='date', verify_integrity=True)

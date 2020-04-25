@@ -13,10 +13,12 @@ class FloodData(object):
         self.df_day = df_day
         self.df = None
         self.delimiter_month_day = None
+        self._create()
 
-    def create(self):
+    def _create(self):
         self._prepare()
         self._combine_month_day()
+        self._calc_watercut()
         return self.df
 
     def _prepare(self):
@@ -49,7 +51,7 @@ class FloodData(object):
                             verify_integrity=True)
 
     def _calc_watercut(self):
-        df = self.df.drop(columns='prod_liq')
+        df = self.df
         df = df.cumsum(axis='index')
         df.columns = ['cum_prod_oil', 'cum_prod_liq']
         df['watercut'] = None
@@ -61,8 +63,8 @@ class FloodData(object):
 
     @staticmethod
     def _process(df, drop_cols):
-        df.drop(columns=drop_cols, inplace=True)
-        df.dropna(axis='index', how='any', inplace=True)
-        df.set_index(keys=['date', df.index], drop=True, inplace=True, verify_integrity=True)
+        df = df.drop(columns=drop_cols)
+        df = df.dropna(axis='index', how='any')
+        df = df.set_index(keys=['date', df.index], drop=True, verify_integrity=True)
         df = df.sum(axis='index', level='date')
         return df

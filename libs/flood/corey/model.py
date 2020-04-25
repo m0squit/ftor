@@ -69,4 +69,5 @@ class CoreyModel(object):
             watercut_fact = self.watercuts[i]
             error = abs(watercut_model - watercut_fact)
             error_total += error
+            print(error_total)
         return error_total

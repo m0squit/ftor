@@ -8,11 +8,15 @@ class CsvReader(_Reader):
     @classmethod
     def _read(cls):
         cls._df = pd.read_csv(filepath_or_buffer=cls._path,
+                              sep=';',
                               header=None,
                               usecols=cls._usecols,
                               skiprows=cls._skiprows,
                               nrows=cls._nrows_max,
-                              na_values=0)
+                              na_values=0,
+                              parse_dates=[1],
+                              dayfirst=True,
+                              encoding='windows-1251')
 
     @classmethod
     def _process(cls):
