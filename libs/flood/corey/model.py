@@ -37,7 +37,9 @@ class CoreyModel(object):
         watercut = self.params.watercut_initial + (1 - self.params.watercut_initial) / (1 + term_1 / term_2)
         return watercut
 
-    def predict(self, cum_prod_oil_start: float, cum_prod_liq_start: float,
+    def predict(self,
+                cum_prod_oil_start: float,
+                cum_prod_liq_start: float,
                 rates_liq: List[float]) -> Dict[str, List[float]]:
         """Predicts oil rate depending on liquid rate.
 
