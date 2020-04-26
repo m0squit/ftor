@@ -6,5 +6,5 @@ class Calculator(object):
     @staticmethod
     def run(project: Project) -> Project:
         for zone in project.zones:
-            zone.predict_rate_oil()
+            zone.predict()
         return project

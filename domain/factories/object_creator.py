@@ -1,6 +1,5 @@
 from typing import List
 
-from domain.aggregates.field import Field
 from domain.aggregates.project import Project
 from domain.aggregates.zone import Zone
 from domain.entities.formation import Formation
@@ -16,7 +15,6 @@ class ObjectCreator(object):
     _formations: List[Formation]
     _wells: List[Well]
     _zones: List[Zone]
-    _fields: List[Field]
     _project: Project
 
     @classmethod
@@ -25,8 +23,7 @@ class ObjectCreator(object):
         cls._create_formations()
         cls._create_wells()
         cls._create_zones()
-        field = Field('kholmogorskoe', cls._formations, cls._wells)
-        project = Project('project', cls._zones, [field])
+        project = Project('kholmogorskoe', cls._formations, cls._wells, cls._zones)
         return project
 
     @classmethod
@@ -65,7 +62,7 @@ class ObjectCreator(object):
 
                 flood_data = formation_dict['flood_data']
                 flux_data = formation_dict['flux_data']
-                report = Report(data_rate=flux_data.df, data_production=flood_data.df)
+                report = Report(df_flux=flux_data.df, df_flood=flood_data.df)
                 zone = Zone(thickness, type_boundaries, type_completion, formation, fluid, well, report)
                 zones.append(zone)
         cls._zones = zones

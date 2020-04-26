@@ -1,16 +1,19 @@
 from typing import List
 
-from domain.aggregates.field import Field
 from domain.aggregates.zone import Zone
+from domain.entities.formation import Formation
+from domain.entities.well import Well
 
 
 class Project(object):
 
     def __init__(self,
-                 name: str,
-                 zones: List[Zone],
-                 fields: List[Field]):
+                 field_name: str,
+                 formations: List[Formation],
+                 wells: List[Well],
+                 zones: List[Zone]):
 
-        self.name = name
+        self.field_name = field_name
+        self.formations = formations
+        self.wells = wells
         self.zones = zones
-        self.fields = fields

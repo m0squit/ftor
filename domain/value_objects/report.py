@@ -4,8 +4,8 @@ import pandas as pd
 class Report(object):
 
     def __init__(self,
-                 data_rate: pd.DataFrame,
-                 data_production: pd.DataFrame):
+                 df_flux: pd.DataFrame,
+                 df_flood: pd.DataFrame):
 
-        self.data_rate = data_rate
-        self.data_production = data_production
+        self.df_flux = df_flux
+        self.df_flood = df_flood

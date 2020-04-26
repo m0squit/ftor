@@ -20,9 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/libs/plot/_plot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/flood/corey/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/corey/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/calculator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/aggregates/field.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/aggregates/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/aggregates/project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/aggregates/zone.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/aggregates/zone.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/factories/object_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/factories/object_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/value_objects/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/value_objects/report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data/real/kholmogorskoe/day.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data/real/kholmogorskoe/month.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data/real/kholmogorskoe/notes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data/real/kholmogorskoe/Техрежим ОАО  Газпромнефть-Ноябрьскнефтегаз  апрель 2020 (005).xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data/real/Печать справочника физико-химических свойств пласта за декабрь 2019 г по предприятию АО Газпромнефть-ННГ.xls" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +152,7 @@
       <workItem from="1587822414665" duration="113000" />
       <workItem from="1587822977483" duration="453000" />
       <workItem from="1587823452160" duration="11999000" />
-      <workItem from="1587882268333" duration="1534000" />
+      <workItem from="1587882268333" duration="8613000" />
     </task>
     <servers />
   </component>
@@ -162,6 +172,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="561" y="271" key="#Scopes" timestamp="1587890058722">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="561" y="271" key="#Scopes/0.0.1536.824@0.0.1536.824" timestamp="1587890058722" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587891892693">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1587891892693" />
     <state width="1534" height="440" key="DebuggerActiveHint" timestamp="1587821370015">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -171,38 +189,38 @@
     </state>
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587808430820" />
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587882459114" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1587821941016">
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom" timestamp="1587897841152">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587821941016" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1587821941016">
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587897841152" />
+    <state width="1493" height="261" key="GridCell.Tab.0.center" timestamp="1587897841152">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587821941016" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1587821941016">
+    <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587897841152" />
+    <state width="1493" height="261" key="GridCell.Tab.0.left" timestamp="1587897841152">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587821941016" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1587821941016">
+    <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587897841152" />
+    <state width="1493" height="261" key="GridCell.Tab.0.right" timestamp="1587897841152">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587821941016" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1587821941016">
+    <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587897841152" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1587897841152">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587821941016" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1587821941016">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587897841152" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1587897841152">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1587821941016" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1587821941016">
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1587897841152" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1587897841152">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1587821941016" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1587821941016">
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1587897841152" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1587897841152">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1587821941016" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1587897841152" />
     <state x="238" y="39" key="SettingsEditor" timestamp="1587882481237">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -224,20 +242,10 @@
           <line>5</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/calculator.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/domain/aggregates/zone.py</url>
-          <line>32</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1587821559322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1587897885823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
   </component>
 </project>
