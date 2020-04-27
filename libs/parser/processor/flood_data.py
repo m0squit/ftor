@@ -66,6 +66,13 @@ class FloodData(object):
             df.loc[i, 'watercut'] = (prod_liq - prod_oil) / prod_liq
         self.df = self.df.join(df)
 
+        df_drop = []
+        for i in self.df.index:
+            x = df.loc[i, 'watercut']
+            if x == 0:
+                df_drop.append(i)
+        self.df = self.df.drop(df_drop)
+
     @staticmethod
     def _process(df, drop_cols):
         df = df.drop(columns=drop_cols)

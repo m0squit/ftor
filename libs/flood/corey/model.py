@@ -28,6 +28,7 @@ class CoreyModel(object):
 
         self.cum_prods_oil = cum_prods_oil
         self.watercuts_fact = watercuts
+        self.watercuts = None
         self._create_model(stoiip)
 
     def calc_watercut(self, cum_prod_oil: float) -> float:
@@ -50,6 +51,7 @@ class CoreyModel(object):
             cum_prod_liq_start: Start value of liquid cumulative production for prediction.
             rates_liq: Sequence of liquid rate values for oil rate definition in forecast.
         """
+        # rates_liq = [0.0] + rates_liq
         cum_prods_liq = [cum_prod_liq_start + x for x in np.cumsum(rates_liq)]
         cum_prods_oil = _Predictor.run(cum_prod_oil_start, cum_prods_liq, self)
         watercuts = []
@@ -61,6 +63,7 @@ class CoreyModel(object):
             rate_oil = rate_liq * (1 - watercut)
             watercuts.append(watercut)
             rates_oil.append(rate_oil)
+        self.watercuts = watercuts
         return {'watercut': watercuts, 'rate_oil': rates_oil}
 
     def _create_model(self, stoiip):
@@ -87,11 +90,14 @@ class CoreyModel(object):
         self.watercuts_model: List[float] = []
         self._set_params(params)
         error_total = 0
-        for i in range(len(self.cum_prods_oil)):
+        n = len(self.cum_prods_oil)
+        for i in range(n):
             cum_prod = self.cum_prods_oil[i]
             watercut_model = self.calc_watercut(cum_prod)
             watercut_fact = self.watercuts_fact[i]
             error = abs(watercut_model - watercut_fact)
+            if i == n - 1:
+                error = error * 10
             error_total += error
             self.watercuts_model.append(watercut_model)
             print(error_total)

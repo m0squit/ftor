@@ -8,7 +8,7 @@ import bokeh.layouts as layouts
 import libs.numeric_tools.optimizer as watercut_model_optimizer
 
 
-class Plot(object):
+class Plot_support(object):
 
     _directory_data_artifical = pathlib.Path.cwd().parent / 'data' / 'artificial'
     _directory_data_fact = pathlib.Path.cwd().parent / 'data' / 'real' / 'kholmogorskoe'

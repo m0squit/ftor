@@ -9,7 +9,7 @@ class Report(object):
 
         self.df_flux = df_flux
         self.df_flood = df_flood
-        self.df_flood_result = self.df_flood
+        self.df_flood_result = df_flood.copy()
 
     def prepare(self, mode):
         pass
