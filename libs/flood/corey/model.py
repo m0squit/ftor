@@ -4,6 +4,7 @@ import numpy as np
 
 from libs.flood._predictor import _Predictor
 from libs.flood.corey.params import CoreyModelParams
+from libs.numeric_tools.loss_functions import LossFunctions
 from libs.numeric_tools.optimizer import Optimizer
 
 
@@ -89,19 +90,13 @@ class CoreyModel(object):
     def _loss_function(self, params):
         self.watercuts_model: List[float] = []
         self._set_params(params)
-        error_total = 0
-        n = len(self.cum_prods_oil)
-        for i in range(n):
+        for i in range(len(self.cum_prods_oil)):
             cum_prod = self.cum_prods_oil[i]
             watercut_model = self.calc_watercut(cum_prod)
-            watercut_fact = self.watercuts_fact[i]
-            error = abs(watercut_model - watercut_fact)
-            if i == n - 1:
-                error = error * 10
-            error_total += error
             self.watercuts_model.append(watercut_model)
-            print(error_total)
-        return error_total
+        error = LossFunctions.mse(self.watercuts_fact, self.watercuts_model)
+        print(error)
+        return error
 
     def _set_params(self, params):
         self.params.set_values(params)
