@@ -8,7 +8,6 @@ class FluxData(object):
 
     def _create(self):
         self._prepare()
-        return self.df
 
     def _prepare(self):
         self.df = self.df.drop(columns=['well'])

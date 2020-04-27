@@ -29,23 +29,39 @@ class Zone(object):
         self.formation.zones.append(self)
         self.well.zones.append(self)
 
-    def predict(self, time_period: int = 1):
-        """Predicts liquid and oil rate for a given time period.
+    def predict(self, mode='test'):
+        """Predicts liquid and oil rate on 1 month.
 
         Args:
-            time_period: Month number for prediction. Default 1.
+            mode: Calculation mode for prediction. Available modes: 'final', 'test'.
+                Final mode - prediction on unverifiable month.
+                Test mode - prediction on last month from given data.
+                Default - test.
         """
+        self.report.prepare(mode)
         self._predict_rate_liquid()
         self._predict_rate_oil()
 
     def _predict_rate_liquid(self):
-        df_flux = self.report.df_flux
+        # TODO: Write code about liquid prediction using flux lib.
+        pass
 
     def _predict_rate_oil(self):
-        df_flood = self.report.df_flood
+        df_flood = self.report.df_flood.loc[slice('month', 'day')]
+
         cum_prods_oil = df_flood['cum_prod_oil'].to_list()
         cum_prods_liq = df_flood['cum_prod_liq'].to_list()
         watercuts = df_flood['watercut'].to_list()
         cum_prod_oil_start = max(cum_prods_oil)
         cum_prod_liq_start = max(cum_prods_liq)
-        self.flood_model = CoreyModel(cum_prods_oil, watercuts)
+
+        df_flood_result = self.report.df_flood.loc['test']
+        rates_liq = df_flood_result['prod_liq'].to_list()
+        rates_liq.insert(0, 0)
+        self.flood_model = CoreyModel(cum_prods_oil, watercuts, 12627651260.49573)
+        result = self.flood_model.predict(cum_prod_oil_start, cum_prod_liq_start, rates_liq)
+
+        df_flood_result['prod_oil'] = result['rate_oil']
+        df_flood_result['watercut'] = result['watercut']
+        df_flood_result['cum_prod_oil'] = [cum_prod_oil_start + x for x in result['rate_oil']]
+        self.report.df_flood_result = df_flood_result

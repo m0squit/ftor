@@ -47,22 +47,23 @@ class ObjectCreator(object):
         zones = []
         zone_dict = cls._data.zone_dict
         for well_name, well_dict in zone_dict.items():
-            well = cls._find_well(name=well_name)
+            well = cls._find_well(well_name)
 
             for formation_name, formation_dict in well_dict.items():
                 thickness = formation_dict['thickness']
                 type_boundaries = formation_dict['type_boundaries']
                 type_completion = formation_dict['type_completion']
-                formation = cls._find_formation(name=formation_name)
+                formation = cls._find_formation(formation_name)
 
                 density = formation_dict['density']
                 viscosity = formation_dict['viscosity']
                 volume_factor = formation_dict['volume_factor']
                 fluid = Fluid(density, viscosity, volume_factor)
 
-                flood_data = formation_dict['flood_data']
-                flux_data = formation_dict['flux_data']
-                report = Report(df_flux=flux_data.df, df_flood=flood_data.df)
+                df_flux = formation_dict['df_flux']
+                df_flood = formation_dict['df_flood']
+                report = Report(df_flux, df_flood)
+
                 zone = Zone(thickness, type_boundaries, type_completion, formation, fluid, well, report)
                 zones.append(zone)
         cls._zones = zones
