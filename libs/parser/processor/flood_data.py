@@ -19,6 +19,7 @@ class FloodData(object):
         self._conjoin_month_day()
         self._combine_month_day_test()
         self._calc_watercut()
+        self._drop_zero_watercut()
 
     def _prepare_month_day(self):
         self._df_month = self._process(self._df_month, drop_cols=['well', 'formation'])
@@ -66,12 +67,9 @@ class FloodData(object):
             df.loc[i, 'watercut'] = (prod_liq - prod_oil) / prod_liq
         self.df = self.df.join(df)
 
-        df_drop = []
-        for i in self.df.index:
-            x = df.loc[i, 'watercut']
-            if x == 0:
-                df_drop.append(i)
-        self.df = self.df.drop(df_drop)
+    def _drop_zero_watercut(self):
+        indexes_to_drop = self.df[self.df['watercut'] == 0].index
+        self.df.drop(index=indexes_to_drop, inplace=True)
 
     @staticmethod
     def _process(df, drop_cols):
