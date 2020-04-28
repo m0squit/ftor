@@ -30,3 +30,21 @@ class CoreyModelParams(object):
         self.beta = params[3]
         if 'stoiip' in self.usable_params:
             self.stoiip = params[4]
+
+    def get_values(self):
+        values = [self.watercut_initial,
+                  self.mobility_ratio,
+                  self.alpha,
+                  self.beta]
+        if self.stoiip is not None:
+            values.append(self.stoiip)
+        return values
+
+    def get_units(self):
+        units = {'watercut_initial': 'fr',
+                 'mobility_ratio': 'dim',
+                 'alpha': 'dim',
+                 'beta': 'dim'}
+        if self.stoiip is not None:
+            units['stoiip'] = 'mn_m3'
+        return units

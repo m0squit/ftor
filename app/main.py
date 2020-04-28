@@ -8,4 +8,4 @@ path = pathlib.Path.cwd().parent / 'tests' / 'data' / 'real' / 'nng' / 'kholmogo
 repository = ExcelRepository(path)
 project = repository.create_project()
 project = Calculator.run(project)
-Plotly.create(path, project)
+Plotly.create_figures(path, project)

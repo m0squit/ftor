@@ -26,10 +26,7 @@ class Zone(object):
         self.well = well
         self.report = report
         self._add_self()
-
-    def _add_self(self):
-        self.formation.zones.append(self)
-        self.well.zones.append(self)
+        self._mark_current_state()
 
     def predict(self, mode='test'):
         """Predicts liquid and oil rate on 1 month.
@@ -44,57 +41,54 @@ class Zone(object):
         self._predict_rate_liquid()
         self._predict_rate_oil()
 
+    def _add_self(self):
+        self.formation.zones.append(self)
+        self.well.zones.append(self)
+
+    def _mark_current_state(self):
+        df = self.report.df_flood
+        df_train = df.loc[slice('month', 'day')]
+        self._cum_prods_oil = df_train['cum_prod_oil'].to_list()
+        self._cum_prods_liq = df_train['cum_prod_liq'].to_list()
+        self._cum_prod_oil_cur = self._cum_prods_oil[-1]
+        self._cum_prod_liq_cur = self._cum_prods_liq[-1]
+        self.watercuts = df_train['watercut'].to_list()
+
     def _predict_rate_liquid(self):
         # TODO: Write code about liquid prediction using flux lib.
-
-        cum_prods_liq = self.report.df_flood_result.loc[slice('month', 'day')]['cum_prod_liq'].to_list()
-        cum_prod_liq_start = max(cum_prods_liq)
-        rates_liq = self.report.df_flood_result.loc['test']['prod_liq'].to_list()
-        self.report.df_flood_result.loc['test']['cum_prod_liq'] = [cum_prod_liq_start + x for x in np.cumsum(rates_liq)]
+        self._rates_liq = self.report.df_flood.loc['test']['prod_liq'].to_list()
+        pass
 
     def _predict_rate_oil(self):
-        cum_prods_oil = self.report.df_flood_result.loc[slice('month', 'day')]['cum_prod_oil'].to_list()
-        cum_prods_liq = self.report.df_flood_result.loc[slice('month', 'day')]['cum_prod_liq'].to_list()
-        watercuts = self.report.df_flood_result.loc[slice('month', 'day')]['watercut'].to_list()
+        df = self.report.df_flood.copy()
+        df['watercut_model'] = None
+        df['prod_oil_model'] = df['prod_oil']
+        df['cum_prod_oil_model'] = df['cum_prod_oil']
 
-        rate_liq = self.report.df_flood_result.loc['day']['prod_liq'].iloc[-1]
-        rates_liq = [rate_liq] + self.report.df_flood_result.loc['test']['prod_liq'].to_list()
+        self.flood_model = CoreyModel(self._cum_prods_oil, self.watercuts)
+        result = self.flood_model.predict(self._cum_prod_oil_cur, self._cum_prod_liq_cur, self._rates_liq)
+        watercut_model = self.flood_model.watercuts_model + result['watercut']
+        df['watercut_model'] = watercut_model
+        df.loc['test']['prod_oil_model'] = result['rate_oil']
+        df.loc['test']['cum_prod_oil_model'] = [self._cum_prod_oil_cur + x for x in np.cumsum(result['rate_oil'])]
 
-        self.flood_model = CoreyModel(cum_prods_oil, watercuts)
-        cum_prod_oil_start = max(cum_prods_oil)
-        cum_prod_liq_start = max(cum_prods_liq)
-        result = self.flood_model.predict(cum_prod_oil_start, cum_prod_liq_start, rates_liq)
+        df = self._calc_prediction_metric(df)
+        self.report.df_flood = df.copy()
 
-        # self.report.df_flood_result.loc[slice('month', 'day')]['watercut'] = self.flood_model.watercuts_model
-        # self.report.df_flood_result.loc['test']['watercut'] = result['watercut']
-        self.report.df_flood_result.loc['test']['prod_oil'] = result['rate_oil']
-        self.report.df_flood_result.loc['test']['cum_prod_oil'] = [cum_prod_oil_start + x for x in np.cumsum(result['rate_oil'])]
+    @staticmethod
+    def _calc_prediction_metric(df):
+        df['diff_rel_prod_oil'] = None
+        df['diff_prod_oil'] = None
+        df['diff_cum_prod_oil'] = None
+        df_test = df.loc['test']
+        for i in df_test['prod_oil'].index:
+            prod_oil = df_test.loc[i, 'prod_oil']
+            prod_oil_model = df_test.loc[i, 'prod_oil_model']
+            df_test.loc[i, 'diff_rel_prod_oil'] = abs(prod_oil - prod_oil_model) / max(prod_oil, prod_oil_model)
 
-        df = self.report.df_flood.loc['test']
-        df_r = self.report.df_flood_result.loc['test']
+            df_test.loc[i, 'diff_prod_oil'] = abs(prod_oil - prod_oil_model)
 
-        rates_oil_f = df['prod_oil'].to_list()
-        rates_oil_m = df_r['prod_oil'].to_list()
-        diffs_relative = []
-        n = len(rates_oil_f)
-        for i in range(n):
-            rate_f = rates_oil_f[i]
-            rate_m = rates_oil_m[i]
-            diff = abs(rate_f - rate_m) / max(rate_f, rate_m)
-            diffs_relative.append(diff)
-        mape = sum(diffs_relative) / n
-
-        self.diffs_relative_rate = diffs_relative
-        self.mape = mape
-
-        cp_oil_f = df['cum_prod_oil'].to_list()
-        cp_oil_m = df_r['cum_prod_oil'].to_list()
-        diffs_relative = []
-        n = len(rates_oil_f)
-        for i in range(n):
-            cp_f = cp_oil_f[i]
-            cp_m = cp_oil_m[i]
-            diff = cp_m / cp_f
-            diffs_relative.append(diff)
-
-        self.diffs_relative_cp = diffs_relative
+            cum_prod_oil = df_test.loc[i, 'cum_prod_oil']
+            cum_prod_oil_model = df_test.loc[i, 'cum_prod_oil_model']
+            df_test.loc[i, 'diff_cum_prod_oil'] = cum_prod_oil_model - cum_prod_oil
+        return df

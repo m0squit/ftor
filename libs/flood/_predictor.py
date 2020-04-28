@@ -17,7 +17,7 @@ class _Predictor(object):
         cls._cum_prods_oil = solve_ode(fun=cls._calc_right_hand_side_ode,
                                        y0=[cum_prod_oil_start],
                                        t_span=(cum_prods_liq[0], cum_prods_liq[-1]),
-                                       t_eval=cum_prods_liq[1:])
+                                       t_eval=cum_prods_liq)
 
     @classmethod
     def _calc_right_hand_side_ode(cls, cum_prod_liq, cum_prod_oil):
