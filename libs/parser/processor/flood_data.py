@@ -62,8 +62,8 @@ class FloodData(object):
         df.columns = ['cum_prod_oil', 'cum_prod_liq']
         df['watercut'] = None
         for i in self.df.index:
-            prod_oil = self.df['prod_oil'][i]
-            prod_liq = self.df['prod_liq'][i]
+            prod_oil = self.df.loc[i, 'prod_oil']
+            prod_liq = self.df.loc[i, 'prod_liq']
             df.loc[i, 'watercut'] = (prod_liq - prod_oil) / prod_liq
         self.df = self.df.join(df)
 

@@ -32,7 +32,7 @@ class CoreyModel(object):
         self._create_model(stoiip)
 
     def calc_watercut(self, cum_prod_oil: float) -> float:
-        recovery_factor = cum_prod_oil / self.params.stoiip
+        recovery_factor = cum_prod_oil / (self.params.stoiip * 1e6)
         term_1 = (1 - recovery_factor) ** self.params.alpha
         term_2 = self.params.mobility_ratio * recovery_factor ** self.params.beta
         watercut = self.params.watercut_initial + (1 - self.params.watercut_initial) / (1 + term_1 / term_2)
@@ -72,7 +72,7 @@ class CoreyModel(object):
     def _add_stoiip(self, stoiip):
         self.params.stoiip = stoiip
         if stoiip is None:
-            cum_prod_max = max(self.cum_prods_oil)
+            cum_prod_max = max(self.cum_prods_oil) / 1e6
             stoiip_min = cum_prod_max
             stoiip_max = cum_prod_max * 1 / self._recovery_factor_min
             self.params.usable_params['stoiip'] = {'min': stoiip_min,
