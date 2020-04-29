@@ -25,13 +25,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/libs/plot/statistic_plotly.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/calculator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/aggregates/zone.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/aggregates/zone.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/value_objects/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/value_objects/report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/flood/corey/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/corey/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/parser/processor/flood_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/parser/processor/flood_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/plot/plotly.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot/plotly.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/data/real/nng/kholmogorskoe/232_1БС11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/plot/plotly.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot/single_plotly.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data/real/nng/kholmogorskoe/232.html" beforeDir="false" afterPath="$PROJECT_DIR$/tests/data/real/nng/kholmogorskoe/232.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +157,8 @@
       <workItem from="1588016238063" duration="12793000" />
       <workItem from="1588054040013" duration="11093000" />
       <workItem from="1588070403151" duration="6063000" />
-      <workItem from="1588080180938" duration="14992000" />
+      <workItem from="1588080180938" duration="25099000" />
+      <workItem from="1588144025727" duration="3758000" />
     </task>
     <servers />
   </component>
@@ -180,10 +182,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="561" y="271" key="#Scopes/0.0.1536.824@0.0.1536.824" timestamp="1587890058722" />
-    <state x="186" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587974363666">
+    <state x="186" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588099594170">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="186" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1587974363666" />
+    <state x="186" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1588099594170" />
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587891892693">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -205,38 +207,38 @@
     </state>
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587808430820" />
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587882459114" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1588096302295">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1588147806172">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588096302295" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1588096302295">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588147806172" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1588147806172">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588096302295" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1588096302295">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588147806172" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1588147806172">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588096302295" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1588096302295">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588147806172" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1588147806172">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588096302295" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1588092446343">
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588147806172" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1588108660461">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588092446343" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1588092446343">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588108660461" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1588108660461">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1588092446343" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1588092446343">
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1588108660461" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1588108660461">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1588092446343" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1588092446343">
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1588108660461" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1588108660461">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1588092446343" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1588108660461" />
     <state x="238" y="39" key="SettingsEditor" timestamp="1587932637762">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -263,6 +265,6 @@
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1587902340304" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1588096296844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1588147814164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
   </component>
 </project>

@@ -7,21 +7,19 @@ from domain.aggregates.project import Project
 from domain.aggregates.zone import Zone
 
 
-class Plotly(object):
+class SinglePlotly(object):
 
     _path: Path
     _zone: Zone
     _fig: subplots
 
     @classmethod
-    def create_figures(cls, path: Path, project: Project, statistics: bool = False):
+    def create_figures(cls, path: Path, project: Project):
         cls._path = path
         cls._wells = []
         for zone in project.zones:
             cls._zone = zone
             cls._create_zone_fig()
-        if statistics is True:
-            cls._create_statistics()
 
     @classmethod
     def _create_zone_fig(cls):
@@ -81,12 +79,12 @@ class Plotly(object):
     @classmethod
     def _add_12(cls):
         pos = dict(row=1, col=2)
-        df = cls._zone.report.df_flood.loc['test']
+        df = cls._zone.report.df_result
         x = df.index.to_list()
-        diffs_cum_prod_oil = df['diff_cum_prod_oil'].to_list()
-        diffs_rel_prod_oil = df['diff_rel_prod_oil'].to_list()
-        trace_1 = cls._create_trace('dev_rel_rate', x, diffs_rel_prod_oil, mode='lines+markers', marker_size=5)
-        trace_2 = cls._create_trace('dev_abs_cum', x, diffs_cum_prod_oil, fill='tozeroy')
+        devs_rel_rate_oil = df['dev_rel_rate_oil'].to_list()
+        devs_abs_cum_oil = df['dev_abs_cum_oil'].to_list()
+        trace_1 = cls._create_trace('dev_rel_rate', x, devs_rel_rate_oil, mode='lines+markers', marker_size=5)
+        trace_2 = cls._create_trace('dev_abs_cum', x, devs_abs_cum_oil, fill='tozeroy')
         cls._fig.add_trace(trace_1, **pos)
         cls._fig.add_trace(trace_2, secondary_y=True, **pos)
         cls._fig.update_yaxes(title_text='relative_deviation_rate, fr', **pos)
@@ -100,7 +98,7 @@ class Plotly(object):
         x_del_md = df.index.get_loc_level(key='month')[1][-1]  # X coordinate for add line month-day delimiter.
         x_del_tt = df.index.get_loc_level(key='day')[1][-1]  # X coordinate for add line train-test delimiter.
         watercuts_fact = df['watercut'].to_list()
-        watercuts_model = df['watercut_model'].to_list()
+        watercuts_model = cls._zone.flood_model.watercuts_model + cls._zone.report.df_result['watercut_model'].to_list()
         trace_1 = cls._create_trace('watercut_fact', x, watercuts_fact, mode='markers')
         trace_2 = cls._create_trace('watercut_model', x, watercuts_model)
         cls._fig.add_trace(trace_1, **pos)
@@ -113,71 +111,20 @@ class Plotly(object):
     @classmethod
     def _add_22(cls):
         pos = dict(row=2, col=2)
-        df = cls._zone.report.df_flood.loc['test']
+        df = cls._zone.report.df_result
         x = df.index.to_list()
         rates_liq_fact = df['prod_liq'].to_list()
+        rates_oil_fact = df['prod_oil'].to_list()
         rates_oil_model = df['prod_oil_model'].to_list()
         trace_1 = cls._create_trace('rate_liq_fact', x, rates_liq_fact, mode='lines+markers', marker_size=5)
-        trace_2 = cls._create_trace('rate_oil_model', x, rates_oil_model)
+        trace_2 = cls._create_trace('rate_oil_fact', x, rates_oil_fact)
+        trace_3 = cls._create_trace('rate_oil_model', x, rates_oil_model)
         cls._fig.add_trace(trace_1, **pos)
         cls._fig.add_trace(trace_2, secondary_y=True, **pos)
+        cls._fig.add_trace(trace_3, secondary_y=True, **pos)
         cls._fig.update_xaxes(title_text='date', **pos)
         cls._fig.update_yaxes(title_text='rate_liquid_fact, m3/d', **pos)
-        cls._fig.update_yaxes(title_text='rate_oil_model, m3/d', secondary_y=True, **pos)
-
-    @classmethod
-    def _create_statistics(cls):
-        cls._fig = subplots.make_subplots(rows=2,
-                                          cols=1,
-                                          print_grid=True,
-                                          specs=[[{'type': 'xy'}],
-                                                 [{'type': 'xy'}]])
-        cls._add_diff_rel_prod_oil_well()
-        cls._add_diff_prod_oil_well()
-        cls._fig.update_layout(width=1500,
-                               title=dict(text=f'<b>Statistics on 30 days<b>',
-                                          font=dict(size=20)))
-        file = str(cls._path / f'statistics')
-        pl.io.write_html(cls._fig, f'{file}.html', auto_open=False)
-
-    @classmethod
-    def _add_mape(cls):
-        trace = go.Bar(x=cls._wells, y=cls._mapes)
-        cls._fig.add_trace(trace, row=1, col=1)
-        cls._fig.update_xaxes(title_text='well', row=1, col=1)
-        cls._fig.update_yaxes(title_text='MAPE, fr', row=1, col=1)
-
-    @classmethod
-    def _add_diff_rel_prod_oil_well(cls):
-        diff_rel_prod_oil_well = []
-        for i in range(30):
-            diff_rel_prod_oil = 0
-            for j in range(cls._n_zone):
-                diff_rel_prod_oil += cls._diffs_rel_rate_oil[j][i]
-            diff_rel_prod_oil_well.append(diff_rel_prod_oil / cls._n_zone)
-
-        x = [x for x in range(1, 31)]
-        y = diff_rel_prod_oil_well
-        trace = go.Bar(x=x, y=y)
-        cls._fig.add_trace(trace, row=1, col=1)
-        cls._fig.update_xaxes(title_text='day', row=1, col=1)
-        cls._fig.update_yaxes(title_text='deviation_rate_oil, fr', row=1, col=1)
-
-    @classmethod
-    def _add_diff_prod_oil_well(cls):
-        diff_prod_oil_well = []
-        for i in range(30):
-            diff_prod_oil = 0
-            for j in range(cls._n_zone):
-                diff_prod_oil += cls._diffs_rate_oil[j][i]
-            diff_prod_oil_well.append(diff_prod_oil / cls._n_zone)
-
-        x = [x for x in range(1, 31)]
-        y = diff_prod_oil_well
-        trace = go.Bar(x=x, y=y)
-        cls._fig.add_trace(trace, row=2, col=1)
-        cls._fig.update_xaxes(title_text='day', row=2, col=1)
-        cls._fig.update_yaxes(title_text='deviation_rate_oil, m3/day', row=2, col=1)
+        cls._fig.update_yaxes(title_text='rate_oil, m3/d', secondary_y=True, **pos)
 
     @staticmethod
     def _create_trace(name_trace, x, y, mode='lines', marker_size=3, fill=None):
