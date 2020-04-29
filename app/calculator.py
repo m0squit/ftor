@@ -13,6 +13,7 @@ class Calculator(object):
     Class contains code for object data manipulation.
     All object calculation results it save in object.
     """
+    _project: Project
     _forecast_period: int
     _zone: Zone
     _cum_oil_hist: List[float]
@@ -27,10 +28,12 @@ class Calculator(object):
 
     @classmethod
     def run(cls, project: Project, forecast_period: int = 90) -> Project:
+        cls._project = project
         cls._forecast_period = forecast_period
-        for zone in project.zones:
+        for zone in cls._project.zones:
             cls._zone = zone
             cls._compute_zone()
+        cls._calc_project()
         return project
 
     @classmethod
@@ -103,3 +106,32 @@ class Calculator(object):
             cum_prod_oil_model = df.loc[i, 'cum_oil_model']
             df.loc[i, 'dev_abs_cum_oil'] = cum_prod_oil_model - cum_prod_oil
         cls._zone.report.df_result = df.copy()
+
+    @classmethod
+    def _calc_project(cls):
+        cls._prepare()
+        cls._calc()
+
+    @classmethod
+    def _prepare(cls):
+        cls._project.df_result = cls._zone.report.df_result[['dev_rel_rate_oil', 'dev_abs_cum_oil']]
+
+    @classmethod
+    def _calc(cls):
+        days = [x for x in range(0, 90)]
+        n = len(cls._project.wells)
+        devs_rel_rate_oil = []
+        devs_abs_cum_oil = []
+        for i in days:
+            dev_rel_rate_oil = 0
+            dev_abs_cum_oil = 0
+            for zone in cls._project.zones:
+                df = zone.report.df_result
+                dev_rel_rate_oil += df['dev_rel_rate_oil'].to_list()[i]
+                dev_abs_cum_oil += df['dev_abs_cum_oil'].to_list()[i]
+            devs_rel_rate_oil.append(dev_rel_rate_oil / n)
+            devs_abs_cum_oil.append(dev_abs_cum_oil)
+        cls._project.df_result['dev_rel_rate_oil'] = devs_rel_rate_oil
+        cls._project.df_result['dev_abs_cum_oil'] = devs_abs_cum_oil
+        cls._project.maes_train = [zone.report.mae_train for zone in cls._project.zones]
+        cls._project.maes_test = [zone.report.mae_test for zone in cls._project.zones]

@@ -27,7 +27,7 @@ class FloodData(object):
 
     def _save_test_from_day(self):
         day_count = len(self._df_day.index)
-        day_number_test = 30
+        day_number_test = 90
         day_number_train = day_count - day_number_test
         self._df_test = self._df_day.tail(day_number_test)
         self._df_day = self._df_day.head(day_number_train)

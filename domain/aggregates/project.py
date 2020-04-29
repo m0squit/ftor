@@ -1,3 +1,5 @@
+import pandas as pd
+
 from typing import List
 
 from domain.aggregates.zone import Zone
@@ -17,3 +19,6 @@ class Project(object):
         self.formations = formations
         self.wells = wells
         self.zones = zones
+        self.df_result = pd.DataFrame()
+        self.maes_train = 0
+        self.maes_test = 0
