@@ -114,7 +114,7 @@ class Calculator(object):
 
     @classmethod
     def _prepare(cls):
-        cls._project.df_result = cls._zone.report.df_result[['dev_rel_rate_oil', 'dev_abs_cum_oil']]
+        cls._project.df_result = cls._zone.report.df_result[['dev_rel_rate_oil', 'dev_abs_cum_oil']].copy()
 
     @classmethod
     def _calc(cls):
