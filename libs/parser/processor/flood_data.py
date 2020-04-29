@@ -9,8 +9,8 @@ class FloodData(object):
                  df_month,
                  df_day):
 
-        self._df_month = df_month
-        self._df_day = df_day
+        self._df_month = df_month.copy()
+        self._df_day = df_day.copy()
         self._create()
 
     def _create(self):
@@ -73,8 +73,8 @@ class FloodData(object):
 
     @staticmethod
     def _process(df, drop_cols):
-        df = df.drop(columns=drop_cols)
-        df = df.dropna(axis='index', how='any')
-        df = df.set_index(keys=['date', df.index], drop=True, verify_integrity=True)
+        df.drop(columns=drop_cols, inplace=True)
+        df.dropna(axis='index', how='any', inplace=True)
+        df.set_index(keys=['date', df.index], drop=True, inplace=True, verify_integrity=True)
         df = df.sum(axis='index', level='date')
         return df
