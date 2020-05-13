@@ -11,12 +11,12 @@ path = pathlib.Path.cwd().parent / 'tests' / 'data' / 'real' / 'nng' / 'kholmogo
 repository = ExcelRepository(path)
 project = repository.create_project()
 project = Calculator.run(project)
-UnitsPlot.create(path, project)
-PerformancePlot.create(path, project)
-# ResearchPlot.create(path, project)
+# UnitsPlot.create(path, project)
+# PerformancePlot.create(path, project)
+ResearchPlot.create(path, project)
 
 # wb = xw.Book()
-# for zone in project.zones:
+# for zone in project.zones:s
 #     well_name = zone.well.name
 #     sht = wb.sheets.add(name=f'{well_name}')
 #     df = zone.report.df_result[['prod_oil',

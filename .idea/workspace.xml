@@ -25,17 +25,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/libs/plot/bokeh/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/plot/bokeh/research_plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ftor.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ftor.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/parser/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/parser/parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/plot/plotly/units_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot/plotly/units_plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/data/real/nng/kholmogorskoe/232.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/data/real/nng/kholmogorskoe/performance.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/data/real/nng/Печать справочника физико-химических свойств пласта за декабрь 2019 г по предприятию АО Газпромнефть-ННГ.xls" beforeDir="false" afterPath="$PROJECT_DIR$/tests/data/real/nng/Печать справочника физико-химических свойств пласта за декабрь 2019 г по предприятию АО Газпромнефть-ННГ.xls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/parser/processor/flood_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/parser/processor/flood_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/plot/bokeh/research_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot/bokeh/research_plot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,6 +171,8 @@
       <workItem from="1589261423379" duration="2149000" />
       <workItem from="1589265479776" duration="2327000" />
       <workItem from="1589268570822" duration="14861000" />
+      <workItem from="1589364815794" duration="603000" />
+      <workItem from="1589367549347" duration="7978000" />
     </task>
     <servers />
   </component>
@@ -225,22 +221,22 @@
     </state>
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587808430820" />
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588413866863" />
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1589279084200">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1589378824317">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589279084200" />
-    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1589279084200">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589378824317" />
+    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1589378824317">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589279084200" />
-    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1589279084200">
+    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589378824317" />
+    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1589378824317">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589279084200" />
-    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1589279084200">
+    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589378824317" />
+    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1589378824317">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589279084200" />
+    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589378824317" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1589278821553">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -277,10 +273,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="322" y="141" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1589285602875" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1588226775817">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1589364989860">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588226775817" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1589364989860" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -290,10 +286,14 @@
           <line>9</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/main.py</url>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1589278787598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1589378751675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
   </component>
 </project>

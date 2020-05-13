@@ -3,7 +3,7 @@ import pandas as pd
 
 class FloodData(object):
 
-    _ratio_points_month_day = 0.5
+    _ratio_points_month_day = 10
 
     def __init__(self,
                  df_month,
