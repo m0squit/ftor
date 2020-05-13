@@ -102,7 +102,7 @@ class ResearchPlot(object):
                         cls._create_slider('mobility_ratio', params.mobility_ratio, step=0.01),
                         cls._create_slider('alpha', params.alpha, step=0.01),
                         cls._create_slider('beta', params.beta, step=0.01),
-                        cls._create_slider('stoiip', params.stoiip, step=1e2)]
+                        cls._create_slider('stoiip', params.stoiip, step=0.001)]
 
     @classmethod
     def _create_slider(cls, param_name, value, step):

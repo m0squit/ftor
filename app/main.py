@@ -11,7 +11,7 @@ path = pathlib.Path.cwd().parent / 'tests' / 'data' / 'real' / 'nng' / 'kholmogo
 repository = ExcelRepository(path)
 project = repository.create_project()
 project = Calculator.run(project)
-# UnitsPlot.create(path, project)
+UnitsPlot.create(path, project)
 # PerformancePlot.create(path, project)
 ResearchPlot.create(path, project)
 

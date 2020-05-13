@@ -31,6 +31,7 @@ class Calculator(object):
         cls._project = project
         cls._forecast_period = forecast_period
         for zone in cls._project.zones:
+            print(zone.well.name)
             cls._zone = zone
             cls._compute_zone()
         cls._calc_project()

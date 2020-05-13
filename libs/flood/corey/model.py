@@ -20,7 +20,7 @@ class CoreyModel(object):
         watercuts_model: Model sequence of watercut values.
             Each value correlate with value in "cum_prods_oil".
     """
-    _recovery_factor_min = 1e-5
+    _recovery_factor_min = 1e-2
 
     def __init__(self,
                  cum_prods_oil: List[float],

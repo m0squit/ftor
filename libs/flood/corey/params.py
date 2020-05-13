@@ -4,16 +4,16 @@ class CoreyModelParams(object):
                                           'max': 1,
                                           'init': 0.05},
 
-                     'mobility_ratio': {'min': 0.01,
-                                        'max': 5,
+                     'mobility_ratio': {'min': 0.005,
+                                        'max': 50,
                                         'init': 1.66},
 
-                     'alpha': {'min': 0.5,
-                               'max': 20,
+                     'alpha': {'min': 1,
+                               'max': 6,
                                'init': 3.50},
 
-                     'beta': {'min': 0.1,
-                              'max': 20,
+                     'beta': {'min': 1,
+                              'max': 6,
                               'init': 3.77}}
 
     def __init__(self):

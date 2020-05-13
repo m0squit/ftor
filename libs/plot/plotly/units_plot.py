@@ -62,12 +62,16 @@ class UnitsPlot(_Plot):
     def _group_data_to_table(cls):
         params = cls._zone.flood_model.params
         names = list(params.usable_params.keys())
+        names.append('cum_prod_oil')
         names.append('mae_train')
         names.append('mae_test')
         units = list(params.get_units().values())
+        units.append('mn_m3')
         units.append('fr')
         units.append('fr')
         values = [x for x in params.get_values()]
+        cum_prod_oil = cls._zone.report.df_result['cum_prod_oil'].iloc[-1] / 1e6
+        values.append(cum_prod_oil)
         values.append(cls._zone.report.mae_train)
         values.append(cls._zone.report.mae_test)
         values = [round(x, 4) for x in values]
