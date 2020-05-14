@@ -23,9 +23,7 @@ class Optimizer(object):
         solution = None
         if method_optimization == 'diff':
             solution = optimize.differential_evolution(loss_function,
-                                                       bounds_type,
-                                                       strategy='best2exp',
-                                                       polish=True)
+                                                       bounds_type)
 
         if method_optimization == 'shgo':
             solution = optimize.shgo(loss_function,
@@ -34,5 +32,5 @@ class Optimizer(object):
         if method_optimization == 'dual':
             solution = optimize.dual_annealing(loss_function,
                                                bounds_type,
-                                               no_local_search=False)
+                                               initial_temp=1)
         return solution.x

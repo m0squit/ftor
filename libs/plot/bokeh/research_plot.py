@@ -87,7 +87,7 @@ class ResearchPlot(object):
                     recovery_factor = x[i] / (stoiip * Math.pow(10, 6));
                     term_1 = Math.pow(1 - recovery_factor, alpha);
                     term_2 = m_ratio * Math.pow(recovery_factor, beta);
-                    y[i] = wc_initial + (1 - wc_initial) / (1 + term_1 / term_2);
+                    y[i] = wc_initial + 1 / (1 + term_1 / term_2);
                 }
                 source.change.emit();
                 """)

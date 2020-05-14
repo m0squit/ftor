@@ -35,7 +35,7 @@ class CoreyModel(object):
         recovery_factor = cum_prod_oil / (self.params.stoiip * 1e6)
         term_1 = (1 - recovery_factor) ** self.params.alpha
         term_2 = self.params.mobility_ratio * recovery_factor ** self.params.beta
-        watercut = self.params.watercut_initial + (1 - self.params.watercut_initial) / (1 + term_1 / term_2)
+        watercut = self.params.watercut_initial + 1 / (1 + term_1 / term_2)
         return watercut
 
     def predict(self,
