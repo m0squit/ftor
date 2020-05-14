@@ -4,7 +4,8 @@ from typing import List
 from domain.aggregates.project import Project
 from domain.aggregates.zone import Zone
 from libs.flood.corey.model import CoreyModel
-from libs.numeric_tools.loss_functions import LossFunctions
+from libs.numeric_tools.loss_function import LossFunction
+from libs.numeric_tools.weight_distributor import WeightDistributor
 
 
 class Calculator(object):
@@ -80,7 +81,8 @@ class Calculator(object):
 
     @classmethod
     def _calc_rate_oil(cls):
-        cls._zone.flood_model = CoreyModel(cls._cum_oil_hist, cls._watercuts_hist)
+        weights = WeightDistributor.run(cls._cum_oil_hist)
+        cls._zone.flood_model = CoreyModel(cls._cum_oil_hist, cls._watercuts_hist, weights)
         result = cls._zone.flood_model.predict(cls._cum_oil_max_hist, cls._cum_liq_max_hist, cls._rates_liq_pred)
         cls._watercuts_pred = result['watercut']
         cls._rates_oil_pred = result['rate_oil']
@@ -93,7 +95,7 @@ class Calculator(object):
                                                        x for x in np.cumsum(cls._rates_oil_pred)]
         watercuts_test = cls._zone.report.df_result['watercut'].to_list()
         cls._zone.report.mae_train = cls._zone.flood_model.error
-        cls._zone.report.mae_test = LossFunctions.mae(watercuts_test, cls._watercuts_pred)
+        cls._zone.report.mae_test = LossFunction.run(watercuts_test, cls._watercuts_pred)
 
     @classmethod
     def _calc_prediction_metric(cls):

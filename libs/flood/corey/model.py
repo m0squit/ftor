@@ -4,7 +4,7 @@ import numpy as np
 
 from libs.flood._predictor import _Predictor
 from libs.flood.corey.params import CoreyModelParams
-from libs.numeric_tools.loss_functions import LossFunctions
+from libs.numeric_tools.loss_function import LossFunction
 from libs.numeric_tools.optimizer import Optimizer
 
 
@@ -20,15 +20,15 @@ class CoreyModel(object):
         watercuts_model: Model sequence of watercut values.
             Each value correlate with value in "cum_prods_oil".
     """
-    _recovery_factor_min = 0.05
-
     def __init__(self,
                  cum_prods_oil: List[float],
                  watercuts: List[float],
+                 weights: List[float] = None,
                  stoiip: float = None):
 
         self.cum_prods_oil = cum_prods_oil
         self.watercuts_fact = watercuts
+        self.weights = weights
         self._create_model(stoiip)
 
     def calc_watercut(self, cum_prod_oil: float) -> float:
@@ -74,7 +74,8 @@ class CoreyModel(object):
         if stoiip is None:
             cum_prod_max = max(self.cum_prods_oil) / 1e6
             stoiip_min = cum_prod_max
-            stoiip_max = cum_prod_max * 1 / self._recovery_factor_min
+            recovery_factor_min = 0.05
+            stoiip_max = cum_prod_max * 1 / recovery_factor_min
             self.params.usable_params['stoiip'] = {'min': stoiip_min,
                                                    'max': stoiip_max}
 
@@ -90,7 +91,7 @@ class CoreyModel(object):
             cum_prod = self.cum_prods_oil[i]
             watercut_model = self.calc_watercut(cum_prod)
             self.watercuts_model.append(watercut_model)
-        self.error = LossFunctions.mae(self.watercuts_fact, self.watercuts_model)
+        self.error = LossFunction.run(self.watercuts_fact, self.watercuts_model, self.weights, mode='mae')
         return self.error
 
     def _set_params(self, params):
