@@ -64,7 +64,11 @@ class Parser(object):
     @classmethod
     def _create_zones(cls):
         # TODO: Delete temp code row 67 (it is created here to avoid run all wells).
-        cls._names_well = ['162']
+        cls._names_well = ['255',
+                           '163',
+                           '708',
+                           '711',
+                           '113А']
 
         zone_dict = dict.fromkeys(cls._names_well)
         for name_well in cls._names_well:

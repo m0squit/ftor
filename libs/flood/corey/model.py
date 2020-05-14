@@ -20,7 +20,7 @@ class CoreyModel(object):
         watercuts_model: Model sequence of watercut values.
             Each value correlate with value in "cum_prods_oil".
     """
-    _recovery_factor_min = 1e-2
+    _recovery_factor_min = 0.05
 
     def __init__(self,
                  cum_prods_oil: List[float],
@@ -76,13 +76,12 @@ class CoreyModel(object):
             stoiip_min = cum_prod_max
             stoiip_max = cum_prod_max * 1 / self._recovery_factor_min
             self.params.usable_params['stoiip'] = {'min': stoiip_min,
-                                                   'max': stoiip_max,
-                                                   'init': stoiip_min}
+                                                   'max': stoiip_max}
 
     def _fit_params(self):
         params = Optimizer.calc_params(loss_function=self._loss_function,
                                        params=self.params,
-                                       method_optimization='dif')
+                                       method_optimization='shgo')
 
     def _loss_function(self, params):
         self.watercuts_model = []

@@ -1,20 +1,9 @@
 class CoreyModelParams(object):
 
-    usable_params = {'watercut_initial': {'min': 0,
-                                          'max': 1,
-                                          'init': 0.05},
-
-                     'mobility_ratio': {'min': 0.005,
-                                        'max': 50,
-                                        'init': 1.66},
-
-                     'alpha': {'min': 1,
-                               'max': 6,
-                               'init': 3.50},
-
-                     'beta': {'min': 1,
-                              'max': 6,
-                              'init': 3.77}}
+    usable_params = {'watercut_initial': {'min': 0, 'max': 1},
+                     'mobility_ratio': {'min': 0.0025, 'max': 50},
+                     'alpha': {'min': 1, 'max': 6},
+                     'beta': {'min': 1, 'max': 6}}
 
     def __init__(self):
         self.watercut_initial = None

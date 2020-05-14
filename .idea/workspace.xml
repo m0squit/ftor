@@ -25,15 +25,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/platy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/platy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/calculator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/flood/corey/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/corey/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/flood/corey/params.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/corey/params.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/numeric_tools/loss_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/numeric_tools/loss_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/numeric_tools/optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/numeric_tools/optimizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/parser/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/parser/parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/parser/processor/flood_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/parser/processor/flood_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/plot/bokeh/research_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot/bokeh/research_plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/plot/plotly/units_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot/plotly/units_plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/data/real/nng/kholmogorskoe/bokeh_162.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +177,8 @@
       <workItem from="1589268570822" duration="14861000" />
       <workItem from="1589364815794" duration="603000" />
       <workItem from="1589367549347" duration="13074000" />
-      <workItem from="1589390526859" duration="5233000" />
+      <workItem from="1589390526859" duration="24231000" />
+      <workItem from="1589450993186" duration="403000" />
     </task>
     <servers />
   </component>
@@ -226,38 +227,38 @@
     </state>
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587808430820" />
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588413866863" />
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1589395583893">
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom" timestamp="1589416112761">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589395583893" />
-    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1589395583893">
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589416112761" />
+    <state width="1493" height="261" key="GridCell.Tab.0.center" timestamp="1589416112761">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589395583893" />
-    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1589395583893">
+    <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589416112761" />
+    <state width="1493" height="261" key="GridCell.Tab.0.left" timestamp="1589416112761">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589395583893" />
-    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1589395583893">
+    <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589416112761" />
+    <state width="1493" height="261" key="GridCell.Tab.0.right" timestamp="1589416112761">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589395583893" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1589278821553">
+    <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589416112761" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1589416112761">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589278821553" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1589278821553">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589416112761" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1589416112761">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1589278821553" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1589278821553">
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1589416112761" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1589416112761">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1589278821553" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1589278821553">
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1589416112761" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1589416112761">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1589278821553" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1589416112761" />
     <state x="238" y="39" key="SettingsEditor" timestamp="1589265464578">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -278,28 +279,23 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="322" y="141" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1589285602875" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1589395766324">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1589399793518">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1589395766324" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1589399793518" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/main.py</url>
-          <line>9</line>
+          <line>8</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/calculator.py</url>
-          <line>36</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1589395338541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1589415327936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
   </component>
 </project>
