@@ -73,8 +73,8 @@ class CoreyModel(object):
         self.params.stoiip = stoiip
         if stoiip is None:
             cum_prod_max = max(self.cum_prods_oil) / 1e6
-            stoiip_min = cum_prod_max
             recovery_factor_min = 0.05
+            stoiip_min = cum_prod_max
             stoiip_max = cum_prod_max * 1 / recovery_factor_min
             self.params.usable_params['stoiip'] = {'min': stoiip_min,
                                                    'max': stoiip_max}

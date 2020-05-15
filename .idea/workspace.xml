@@ -26,11 +26,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/flood/_predictor.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/_predictor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/flood/corey/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/corey/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/numeric_tools/optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/numeric_tools/optimizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/flood/corey/params.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/corey/params.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/numeric_tools/weight_distributor.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/numeric_tools/weight_distributor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/parser/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/parser/parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/plot/bokeh/research_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot/bokeh/research_plot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,6 +179,7 @@
       <workItem from="1589459049110" duration="249000" />
       <workItem from="1589459954228" duration="5776000" />
       <workItem from="1589473348415" duration="4299000" />
+      <workItem from="1589534747992" duration="545000" />
     </task>
     <servers />
   </component>
@@ -227,22 +228,22 @@
     </state>
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587808430820" />
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588413866863" />
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1589478722505">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1589535103959">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589478722505" />
-    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1589478722505">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589535103959" />
+    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1589535103959">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589478722505" />
-    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1589478722505">
+    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589535103959" />
+    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1589535103959">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589478722505" />
-    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1589478722505">
+    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589535103959" />
+    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1589535103959">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589478722505" />
+    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589535103959" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1589478344795">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -279,10 +280,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="322" y="141" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1589477842101" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1589399793518">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1589534949936">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1589399793518" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1589534949936" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -296,6 +297,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1589478621578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1589534987848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
   </component>
 </project>
