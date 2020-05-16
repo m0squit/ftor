@@ -63,6 +63,7 @@ class ObjectCreator(object):
                 df_flux = formation_dict['df_flux']
                 df_flood = formation_dict['df_flood']
                 report = Report(df_flux, df_flood)
+                report.df_month = formation_dict['df_month']
 
                 zone = Zone(thickness, type_boundaries, type_completion, formation, fluid, well, report)
                 zones.append(zone)

@@ -9,6 +9,7 @@ class Report(object):
 
         self.df_flux = df_flux
         self.df_flood = df_flood
+        self.df_month = pd.DataFrame()
         self.df_result = pd.DataFrame()
         self.mae_train = 0
         self.mae_test = 0

@@ -10,6 +10,7 @@ class FloodData(object):
                  df_day):
 
         self._df_month = df_month.copy()
+        self.df_month = None
         self._df_day = df_day.copy()
         self._create()
 
@@ -23,6 +24,7 @@ class FloodData(object):
 
     def _prepare_month_day(self):
         self._df_month = self._process(self._df_month, drop_cols=['well', 'formation'])
+        self.df_month = self._df_month.copy()
         self._df_day = self._process(self._df_day, drop_cols=['well', 'bhp'])
 
     def _save_test_from_day(self):

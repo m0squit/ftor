@@ -94,6 +94,7 @@ class Parser(object):
                 flood_data = FloodData(df_month, df_day)
                 zone_dict[name_well][name_formation]['df_flux'] = flux_data.df
                 zone_dict[name_well][name_formation]['df_flood'] = flood_data.df
+                zone_dict[name_well][name_formation]['df_month'] = cls._prepare_df_month(flood_data.df_month)
         cls._data.zone_dict = zone_dict
 
     @classmethod
@@ -110,3 +111,15 @@ class Parser(object):
     def _convert_prod_oil_units(df, density):
         df = df.assign(prod_oil=lambda x: x.prod_oil / density)
         return df
+
+    @staticmethod
+    def _prepare_df_month(df_month):
+        df_month['watercut'] = None
+        for i in df_month.index:
+            prod_oil = df_month.loc[i, 'prod_oil']
+            prod_liq = df_month.loc[i, 'prod_liq']
+            df_month.loc[i, 'watercut'] = (prod_liq - prod_oil) / prod_liq
+
+        indexes_to_drop = df_month[df_month['watercut'] == 0].index
+        df_month.drop(index=indexes_to_drop, inplace=True)
+        return df_month

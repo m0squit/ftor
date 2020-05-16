@@ -9,7 +9,6 @@ from domain.aggregates.project import Project
 
 class _Plot(ABC):
 
-    _fig: subplots
     _path: Path
     _project: Project
 

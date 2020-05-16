@@ -9,6 +9,8 @@ from libs.plot.plotly._plot import _Plot
 
 class PerformancePlot(_Plot):
 
+    _fig: subplots
+
     @classmethod
     def _run(cls):
         cls._create_fig()
