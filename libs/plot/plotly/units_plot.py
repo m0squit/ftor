@@ -6,7 +6,7 @@ from domain.aggregates.zone import Zone
 from libs.plot.plotly._plot import _Plot
 
 
-class UnitPlot(_Plot):
+class UnitsPlot(_Plot):
 
     _fig: subplots
     _zone: Zone

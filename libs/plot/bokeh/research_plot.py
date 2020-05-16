@@ -99,7 +99,7 @@ class ResearchPlot(object):
     def _create_sliders(cls):
         params = cls._zone.flood_model.params
         cls._sliders = [cls._create_slider('watercut_initial', params.watercut_initial, step=0.01),
-                        cls._create_slider('mobility_ratio', params.mobility_ratio, step=0.01),
+                        cls._create_slider('mobility_ratio', params.mobility_ratio, step=0.001),
                         cls._create_slider('alpha', params.alpha, step=0.01),
                         cls._create_slider('beta', params.beta, step=0.01),
                         cls._create_slider('stoiip', params.stoiip, step=0.001)]
