@@ -6,7 +6,7 @@ from domain.aggregates.zone import Zone
 from libs.plot.plotly._plot import _Plot
 
 
-class UnitsPlot(_Plot):
+class UnitPlot(_Plot):
 
     _fig: subplots
     _zone: Zone
@@ -35,15 +35,17 @@ class UnitsPlot(_Plot):
                                                  [{}, {'secondary_y': True}]],
                                           column_widths=[0.5, 0.5],
                                           row_heights=[0.4, 0.6])
+        cls._fig.layout.template = 'plotly'
+        cls._fig.update_layout(width=1400,
+                               title=dict(text=f'<b>Case {name_well} {name_formation}<b>',
+                                          font=dict(size=20)),
+                               font=dict(family='Jost',
+                                         size=12),
+                               hovermode='x')
         cls._add_11()
         cls._add_12()
         cls._add_21()
         cls._add_22()
-        cls._fig.update_layout(width=1400,
-                               title=dict(text=f'<b>Case {name_well} {name_formation}<b>',
-                                          font=dict(size=20)),
-                               font=dict(size=11),
-                               hovermode='x')
         file = str(cls._path / f'{name_well}')
         pl.io.write_html(cls._fig, f'{file}.html', auto_open=False)
 

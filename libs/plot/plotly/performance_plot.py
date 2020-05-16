@@ -25,16 +25,18 @@ class PerformancePlot(_Plot):
                                           specs=[[{'secondary_y': True}],
                                                  [{}]],
                                           row_heights=[0.4, 0.6])
-        cls._add_11()
-        cls._add_21()
+        cls._fig.layout.template = 'plotly'
         cls._fig.update_layout(width=1400,
                                title=dict(text=f'<b>Total performance on 90 days<b>',
                                           font=dict(size=20)),
-                               font=dict(size=11),
+                               font=dict(family='Jost',
+                                         size=12),
                                hovermode='x',
                                barmode='group',
                                bargap=0.2,
                                bargroupgap=0.05)
+        cls._add_11()
+        cls._add_21()
         file = str(cls._path / f'performance')
         pl.io.write_html(cls._fig, f'{file}.html', auto_open=False)
 
