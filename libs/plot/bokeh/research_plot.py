@@ -44,7 +44,7 @@ class ResearchPlot(object):
                           plot_height=500)
         cls._fig.xaxis.axis_label = 'cumulative oil production, m3'
         cls._fig.yaxis.axis_label = 'watercut, fr'
-        cls._df = cls._zone.report.df_flood.loc[slice('month', 'day')].copy()
+        cls._df = cls._zone.report.df_flood.loc[:'test'].copy()
         cls._add_fact_trace()
         cls._add_model_trace()
         cls._add_actions()

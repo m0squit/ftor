@@ -1,20 +1,19 @@
 import plotly.graph_objects as go
-import plotly.subplots as subplots
 
 from abc import ABC, abstractmethod
-from pathlib import Path
 
+from data.settings import Settings
 from domain.aggregates.project import Project
 
 
 class _Plot(ABC):
 
-    _path: Path
+    _settings: Settings
     _project: Project
 
     @classmethod
-    def create(cls, path: Path, project: Project):
-        cls._path = path
+    def create(cls, settings: Settings, project: Project):
+        cls._settings = settings
         cls._project = project
         cls._run()
 

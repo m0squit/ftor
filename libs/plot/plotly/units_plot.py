@@ -8,6 +8,7 @@ from libs.plot.plotly._plot import _Plot
 
 class UnitsPlot(_Plot):
 
+    _train_mode: str
     _fig: subplots
     _zone: Zone
 
@@ -46,7 +47,7 @@ class UnitsPlot(_Plot):
         cls._add_12()
         cls._add_21()
         cls._add_22()
-        file = str(cls._path / f'{name_well}')
+        file = str(cls._settings.path / f'{name_well}')
         pl.io.write_html(cls._fig, f'{file}.html', auto_open=False)
 
     @classmethod
@@ -112,11 +113,13 @@ class UnitsPlot(_Plot):
 
     @classmethod
     def _draw_lines(cls, df, pos):
-        x_del_md = df.index.get_loc_level(key='month')[1][-1]  # X coordinate for add line month-day delimiter.
-        x_del_tt = df.index.get_loc_level(key='day')[1][-1]  # X coordinate for add line train-test delimiter.
-        line_1 = cls._create_line_shape(x0=x_del_md, x1=x_del_md, y0=0, y1=1)
+        if cls._settings.path == 'mix':
+            x_del_md = df.index.get_loc_level(key='day')[1][0]  # X coordinate for add line month-day delimiter.
+            line_1 = cls._create_line_shape(x0=x_del_md, x1=x_del_md, y0=0, y1=1)
+            cls._fig.add_shape(line_1, **pos)
+
+        x_del_tt = df.index.get_loc_level(key='test')[1][0]  # X coordinate for add line train-test delimiter.
         line_2 = cls._create_line_shape(x0=x_del_tt, x1=x_del_tt, y0=0, y1=1)
-        cls._fig.add_shape(line_1, **pos)
         cls._fig.add_shape(line_2, **pos)
 
     @classmethod

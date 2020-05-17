@@ -33,7 +33,7 @@ class FloodPlot(_Plot):
         cls._add_month()
         cls._add_day_and_model()
         cls._draw_lines()
-        file = str(cls._path / f'{name_well}')
+        file = str(cls._settings.path / f'{name_well}')
         pl.io.write_image(cls._fig, f'{file}.png', format='png', scale=1.2)
 
     @classmethod
@@ -51,7 +51,7 @@ class FloodPlot(_Plot):
     @classmethod
     def _prepare(cls):
         df = cls._zone.report.df_flood
-        x = df.index.get_loc_level(key='day')[1][1]  # X coordinate of month-day delimiter.
+        x = df.loc[:'test'].index.get_level_values('date').to_list()[-10]
         cls._df_month = cls._zone.report.df_month.loc[x:]
         cls._df_flood = df.loc[['day', 'test']]
 
@@ -79,7 +79,7 @@ class FloodPlot(_Plot):
     @classmethod
     def _draw_lines(cls):
         df = cls._zone.report.df_flood
-        x = df.index.get_loc_level(key='day')[1][-1]  # X coordinate of train-test delimiter.
+        x = df.index.get_loc_level(key='test')[1][0]  # X coordinate of train-test delimiter.
         y = cls._y_month + cls._y_day + cls._y_model
         y_min = min(y)
         y_max = max(y)

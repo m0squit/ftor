@@ -4,12 +4,13 @@ import pandas as pd
 class Report(object):
 
     def __init__(self,
-                 df_flux: pd.DataFrame,
-                 df_flood: pd.DataFrame):
+                 df_flood: pd.DataFrame,
+                 df_flux: pd.DataFrame):
 
-        self.df_flux = df_flux
-        self.df_flood = df_flood
         self.df_month = pd.DataFrame()
+        self.df_day = pd.DataFrame()
+        self.df_flood = df_flood
+        self.df_flux = df_flux
         self.df_result = pd.DataFrame()
         self.mae_train = 0
         self.mae_test = 0

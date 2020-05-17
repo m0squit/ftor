@@ -1,5 +1,6 @@
 from typing import List
 
+from data.settings import Settings
 from domain.factories.input_data import InputData
 from libs.parser.processor.flood_data import FloodData
 from libs.parser.processor.flux_data import FluxData
@@ -8,6 +9,8 @@ from libs.parser.reader.excel import ExcelReader
 
 
 class Parser(object):
+
+    _settings: Settings
 
     _df_month = None
     _df_day = None
@@ -23,13 +26,15 @@ class Parser(object):
     _names_well: List[str]
 
     @classmethod
-    def run(cls, path):
-        cls._read(path)
+    def run(cls, settings):
+        cls._settings = settings
+        cls._read()
         cls._create()
         return cls._data
 
     @classmethod
-    def _read(cls, path):
+    def _read(cls):
+        path = cls._settings.path
         path_month = path / 'month.xlsx'
         path_day = path / 'day.csv'
         cls._df_month = ExcelReader().run_specific(path_month, usecols=[0, 1, 20, 21, 2], skiprows=5)
@@ -71,6 +76,7 @@ class Parser(object):
             cls._cut_well(name_well)
             names_formation_well = cls._df_m_w['formation'].unique()
             zone_dict[name_well] = dict.fromkeys(names_formation_well)
+
             for name_formation in names_formation_well:
                 cls._cut_formation(name_formation)
                 zone_dict[name_well][name_formation] = {}
@@ -88,13 +94,15 @@ class Parser(object):
                 zone_dict[name_well][name_formation]['density'] = density
                 zone_dict[name_well][name_formation]['viscosity'] = None
                 zone_dict[name_well][name_formation]['volume_factor'] = None
+
                 df_month = cls._df_m_w_f
                 df_day = cls._convert_prod_oil_units(cls._df_d_w_f, density)
+                flood_data = FloodData(df_month, df_day, cls._settings)
                 flux_data = FluxData(df_day)
-                flood_data = FloodData(df_month, df_day)
-                zone_dict[name_well][name_formation]['df_flux'] = flux_data.df
+                zone_dict[name_well][name_formation]['df_month'] = flood_data.df_month
+                zone_dict[name_well][name_formation]['df_day'] = flood_data.df_day
                 zone_dict[name_well][name_formation]['df_flood'] = flood_data.df
-                zone_dict[name_well][name_formation]['df_month'] = cls._prepare_df_month(flood_data.df_month)
+                zone_dict[name_well][name_formation]['df_flux'] = flux_data.df
         cls._data.zone_dict = zone_dict
 
     @classmethod
@@ -111,15 +119,3 @@ class Parser(object):
     def _convert_prod_oil_units(df, density):
         df = df.assign(prod_oil=lambda x: x.prod_oil / density)
         return df
-
-    @staticmethod
-    def _prepare_df_month(df_month):
-        df_month['watercut'] = None
-        for i in df_month.index:
-            prod_oil = df_month.loc[i, 'prod_oil']
-            prod_liq = df_month.loc[i, 'prod_liq']
-            df_month.loc[i, 'watercut'] = (prod_liq - prod_oil) / prod_liq
-
-        indexes_to_drop = df_month[df_month['watercut'] == 0].index
-        df_month.drop(index=indexes_to_drop, inplace=True)
-        return df_month

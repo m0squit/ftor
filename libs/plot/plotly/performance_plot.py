@@ -37,14 +37,14 @@ class PerformancePlot(_Plot):
                                bargroupgap=0.05)
         cls._add_11()
         cls._add_21()
-        file = str(cls._path / f'performance')
+        file = str(cls._settings.path / f'performance')
         pl.io.write_html(cls._fig, f'{file}.html', auto_open=False)
 
     @classmethod
     def _add_11(cls):
         pos = dict(row=1, col=1)
         df = cls._project.df_result
-        x = [i for i in range(1, 91)]
+        x = [i for i in range(1, cls._settings.forecast_days_number + 1)]
         devs_rel_rate_oil = df['dev_rel_rate_oil'].to_list()
         devs_abs_cum_oil = df['dev_abs_cum_oil'].to_list()
         trace_1 = cls._create_trace('dev_rel_rate', x, devs_rel_rate_oil, mode='lines+markers', marker_size=5)

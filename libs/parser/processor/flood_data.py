@@ -1,40 +1,64 @@
 import pandas as pd
+from pandas import DataFrame
+
+from data.settings import Settings
 
 
 class FloodData(object):
 
-    _ratio_points_month_day = 10
+    _df_month: DataFrame
+    _df_day: DataFrame
+    _df_test: DataFrame
+    _settings: Settings
 
     def __init__(self,
                  df_month,
-                 df_day):
+                 df_day,
+                 settings):
 
-        self._df_month = df_month.copy()
-        self.df_month = None
-        self._df_day = df_day.copy()
+        self.df_month = df_month.copy()
+        self.df_day = df_day.copy()
+        self._settings = settings
         self._create()
 
     def _create(self):
         self._prepare_month_day()
-        self._save_test_from_day()
-        self._conjoin_month_day()
-        self._combine_month_day_test()
-        self._calc_watercut()
-        self._drop_zero_watercut()
+        self._cut_test()
+        self._create_df()
+        self._convert_prod_to_cum_prod()
 
     def _prepare_month_day(self):
-        self._df_month = self._process(self._df_month, drop_cols=['well', 'formation'])
-        self.df_month = self._df_month.copy()
-        self._df_day = self._process(self._df_day, drop_cols=['well', 'bhp'])
+        self.df_month = self._process(self.df_month, drop_cols=['well', 'formation'])
+        self.df_day = self._process(self.df_day, drop_cols=['well', 'bhp'])
 
-    def _save_test_from_day(self):
-        day_count = len(self._df_day.index)
-        day_number_test = 90
-        day_number_train = day_count - day_number_test
-        self._df_test = self._df_day.tail(day_number_test)
-        self._df_day = self._df_day.head(day_number_train)
+    def _cut_test(self):
+        total_days_number = len(self.df_day.index)
+        forecast_days_number = self._settings.forecast_days_number
+        day_number_train = total_days_number - forecast_days_number
+        self._df_test = self.df_day.tail(forecast_days_number)
+        self._df_day = self.df_day.head(day_number_train)
+        last_train_day = self._df_day.index[-1]
+        self._df_month = self.df_month.loc[:last_train_day]
 
-    def _conjoin_month_day(self):
+    def _create_df(self):
+        train_mode = self._settings.train_mode
+        objs = []
+        keys = []
+        if train_mode == 'month':
+            objs.append(self._df_month)
+            keys.append('month')
+
+        if train_mode == 'day':
+            objs.append(self._df_day)
+            keys.append('day')
+
+        if train_mode == 'mix':
+            self._combine_month_day()
+            objs.extend([self._df_month, self._df_day])
+            keys.extend(['month', 'day'])
+        self._add_test(objs, keys)
+
+    def _combine_month_day(self):
         dates_month = self._df_month.index
         dates_day = self._df_day.index
         ratios = []
@@ -44,39 +68,49 @@ class FloodData(object):
             number_points_day = len(dates_day[dates_day >= date_day])
             ratio = number_points_month / number_points_day
             ratios.append(ratio)
-        ratio_points_month_day = min(ratios, key=lambda x: abs(x - self._ratio_points_month_day))
+        ratio_points_month_day = min(ratios, key=lambda x: abs(x - self._settings.ratio_points_month_day))
         i = ratios.index(ratio_points_month_day)
         number_points_month = len(dates_month[dates_month < dates_day[i]])
         number_points_day = len(dates_day[dates_day >= dates_day[i]])
         self._df_month = self._df_month.head(number_points_month)
         self._df_day = self._df_day.tail(number_points_day)
 
-    def _combine_month_day_test(self):
-        self.df = pd.concat(objs=[self._df_month, self._df_day, self._df_test],
+    def _add_test(self, objs, keys):
+        objs.append(self._df_test)
+        keys.append('test')
+        self.df = pd.concat(objs=objs,
                             axis='index',
-                            keys=['month', 'day', 'test'],
+                            keys=keys,
                             names=['data_key', 'date'],
                             verify_integrity=True)
 
-    def _calc_watercut(self):
-        df = self.df
+    def _convert_prod_to_cum_prod(self):
+        df = self.df[['prod_oil', 'prod_liq']]
         df = df.cumsum(axis='index')
         df.columns = ['cum_prod_oil', 'cum_prod_liq']
-        df['watercut'] = None
-        for i in self.df.index:
-            prod_oil = self.df.loc[i, 'prod_oil']
-            prod_liq = self.df.loc[i, 'prod_liq']
-            df.loc[i, 'watercut'] = (prod_liq - prod_oil) / prod_liq
         self.df = self.df.join(df)
 
-    def _drop_zero_watercut(self):
-        indexes_to_drop = self.df[self.df['watercut'] == 0].index
-        self.df.drop(index=indexes_to_drop, inplace=True)
-
-    @staticmethod
-    def _process(df, drop_cols):
+    @classmethod
+    def _process(cls, df, drop_cols):
         df.drop(columns=drop_cols, inplace=True)
         df.dropna(axis='index', how='any', inplace=True)
         df.set_index(keys=['date', df.index], drop=True, inplace=True, verify_integrity=True)
         df = df.sum(axis='index', level='date')
+        df = cls._calc_watercut(df)
+        df = cls._drop_zero_watercut(df)
+        return df
+
+    @staticmethod
+    def _calc_watercut(df):
+        df['watercut'] = None
+        for i in df.index:
+            prod_oil = df.loc[i, 'prod_oil']
+            prod_liq = df.loc[i, 'prod_liq']
+            df.loc[i, 'watercut'] = (prod_liq - prod_oil) / prod_liq
+        return df
+
+    @staticmethod
+    def _drop_zero_watercut(df):
+        indexes_to_drop = df[df['watercut'] == 0].index
+        df.drop(index=indexes_to_drop, inplace=True)
         return df

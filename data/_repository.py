@@ -1,12 +1,16 @@
 from abc import ABC, abstractmethod
 
+from data.settings import Settings
 from domain.factories.object_creator import ObjectCreator
 
 
-class Repository(ABC):
+class _Repository(ABC):
 
     @abstractmethod
-    def __init__(self):
+    def __init__(self,
+                 settings: Settings):
+
+        self.settings = settings
         self.data = None
 
     @abstractmethod

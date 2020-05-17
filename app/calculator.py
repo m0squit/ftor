@@ -15,7 +15,7 @@ class Calculator(object):
     All object calculation results it save in object.
     """
     _project: Project
-    _forecast_period: int
+    _forecast_days_number: int
     _zone: Zone
     _cum_oil_hist: List[float]
     _cum_liq_hist: List[float]
@@ -28,9 +28,9 @@ class Calculator(object):
     _cum_liq_pred: List[float]
 
     @classmethod
-    def run(cls, project: Project, forecast_period: int = 90) -> Project:
+    def run(cls, project: Project, forecast_days_number: int) -> Project:
         cls._project = project
-        cls._forecast_period = forecast_period
+        cls._forecast_days_number = forecast_days_number
         for zone in cls._project.zones:
             print(zone.well.name)
             cls._zone = zone
@@ -45,7 +45,7 @@ class Calculator(object):
 
     @classmethod
     def _prepare_before_prediction(cls):
-        df = cls._zone.report.df_flood.loc[slice('month', 'day')]
+        df = cls._zone.report.df_flood.loc[:'test']
         cls._cum_oil_hist = df['cum_prod_oil'].to_list()
         cls._cum_liq_hist = df['cum_prod_liq'].to_list()
         cls._cum_oil_max_hist = cls._cum_oil_hist[-1]
@@ -121,7 +121,7 @@ class Calculator(object):
 
     @classmethod
     def _calc(cls):
-        days = [x for x in range(0, 90)]
+        days = [x for x in range(0, cls._forecast_days_number)]
         n = len(cls._project.wells)
         devs_rel_rate_oil = []
         devs_abs_cum_oil = []
