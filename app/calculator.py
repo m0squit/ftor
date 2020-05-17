@@ -45,7 +45,7 @@ class Calculator(object):
 
     @classmethod
     def _prepare_before_prediction(cls):
-        df = cls._zone.report.df_flood.loc[:'test']
+        df = cls._zone.report.df_flood.loc[:('test', None)]
         cls._cum_oil_hist = df['cum_prod_oil'].to_list()
         cls._cum_liq_hist = df['cum_prod_liq'].to_list()
         cls._cum_oil_max_hist = cls._cum_oil_hist[-1]

@@ -34,8 +34,8 @@ class FloodData(object):
     def _cut_test(self):
         total_days_number = len(self.df_day.index)
         forecast_days_number = self._settings.forecast_days_number
-        day_number_train = total_days_number - forecast_days_number
         self._df_test = self.df_day.tail(forecast_days_number)
+        day_number_train = total_days_number - forecast_days_number
         self._df_day = self.df_day.head(day_number_train)
         last_train_day = self._df_day.index[-1]
         self._df_month = self.df_month.loc[:last_train_day]
@@ -56,6 +56,7 @@ class FloodData(object):
             self._combine_month_day()
             objs.extend([self._df_month, self._df_day])
             keys.extend(['month', 'day'])
+
         self._add_test(objs, keys)
 
     def _combine_month_day(self):

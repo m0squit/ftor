@@ -30,7 +30,7 @@ class UnitsPlot(_Plot):
                                           vertical_spacing=0.1,
                                           subplot_titles=['Corey model performance',
                                                           'Abs dev cum is calculated: cum model - cum fact',
-                                                          'Plot is divided: 1-monthly, 2-daily, 3-test',
+                                                          'Plot is divided: 1-train, 3-test',
                                                           ''],
                                           specs=[[{'type': 'table'}, {'secondary_y': True}],
                                                  [{}, {'secondary_y': True}]],
@@ -107,20 +107,15 @@ class UnitsPlot(_Plot):
         trace_2 = cls._create_trace('watercut_model', x, watercuts_model)
         cls._fig.add_trace(trace_1, **pos)
         cls._fig.add_trace(trace_2, **pos)
-        cls._draw_lines(df, pos)
+        cls._draw_train_test_delimiter(df, pos)
         cls._fig.update_xaxes(title_text='date', **pos)
         cls._fig.update_yaxes(title_text='watercut, fr', **pos)
 
     @classmethod
-    def _draw_lines(cls, df, pos):
-        if cls._settings.path == 'mix':
-            x_del_md = df.index.get_loc_level(key='day')[1][0]  # X coordinate for add line month-day delimiter.
-            line_1 = cls._create_line_shape(x0=x_del_md, x1=x_del_md, y0=0, y1=1)
-            cls._fig.add_shape(line_1, **pos)
-
-        x_del_tt = df.index.get_loc_level(key='test')[1][0]  # X coordinate for add line train-test delimiter.
-        line_2 = cls._create_line_shape(x0=x_del_tt, x1=x_del_tt, y0=0, y1=1)
-        cls._fig.add_shape(line_2, **pos)
+    def _draw_train_test_delimiter(cls, df, pos):
+        x_del_tt = df.index.get_loc_level(key='test')[1][0]
+        line = cls._create_line_shape(x0=x_del_tt, x1=x_del_tt, y0=0, y1=1)
+        cls._fig.add_shape(line, **pos)
 
     @classmethod
     def _add_22(cls):
