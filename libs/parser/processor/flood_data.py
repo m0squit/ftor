@@ -24,6 +24,7 @@ class FloodData(object):
     def _create(self):
         self._prepare_month_day()
         self._cut_test()
+        self._find_cum_prod()
         self._create_df()
         self._convert_prod_to_cum_prod()
 
@@ -39,6 +40,14 @@ class FloodData(object):
         self._df_day = self.df_day.head(day_number_train)
         last_train_day = self._df_day.index[-1]
         self._df_month = self.df_month.loc[:last_train_day]
+
+    def _find_cum_prod(self):
+        last_train_day = self._df_day.index[-1]
+        last_train_month = self.df_month.index[-1]
+        prod_oil = self._df_month['prod_oil'].to_list() + self.df_day['prod_oil'][last_train_month:last_train_day].to_list()[1:]
+        prod_liq = self._df_month['prod_liq'].to_list() + self.df_day['prod_liq'][last_train_month:last_train_day].to_list()[1:]
+        self.cum_prod_oil = sum(prod_oil)
+        self.cum_prod_liq = sum(prod_liq)
 
     def _create_df(self):
         train_mode = self._settings.train_mode

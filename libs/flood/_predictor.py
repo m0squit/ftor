@@ -21,6 +21,5 @@ class _Predictor(object):
 
     @classmethod
     def _calc_right_hand_side_ode(cls, cum_prod_liq, cum_prod_oil):
-        stoiip = cls._flood_model.params.stoiip
-        term = (1 - cls._flood_model.calc_watercut(cum_prod_oil)) * 1 / stoiip
+        term = 1 - cls._flood_model.calc_watercut(cum_prod_oil)
         return term

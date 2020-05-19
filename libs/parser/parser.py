@@ -69,7 +69,7 @@ class Parser(object):
     @classmethod
     def _create_zones(cls):
         # TODO: Delete temp code row 67 (it is created here to avoid run all wells).
-        cls._names_well = ['232']
+        cls._names_well = ['128']
 
         zone_dict = dict.fromkeys(cls._names_well)
         for name_well in cls._names_well:
@@ -103,6 +103,9 @@ class Parser(object):
                 zone_dict[name_well][name_formation]['df_day'] = flood_data.df_day
                 zone_dict[name_well][name_formation]['df_flood'] = flood_data.df
                 zone_dict[name_well][name_formation]['df_flux'] = flux_data.df
+                zone_dict[name_well][name_formation]['cum_prod_oil'] = flood_data.cum_prod_oil
+                zone_dict[name_well][name_formation]['cum_prod_liq'] = flood_data.cum_prod_liq
+
         cls._data.zone_dict = zone_dict
 
     @classmethod

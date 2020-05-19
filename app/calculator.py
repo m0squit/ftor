@@ -48,8 +48,9 @@ class Calculator(object):
         df = cls._zone.report.df_flood.loc[:('test', None)]
         cls._cum_oil_hist = df['cum_prod_oil'].to_list()
         cls._cum_liq_hist = df['cum_prod_liq'].to_list()
-        cls._cum_oil_max_hist = cls._cum_oil_hist[-1]
-        cls._cum_liq_max_hist = cls._cum_liq_hist[-1]
+
+        cls._cum_oil_max_hist = cls._zone.report.cum_prod_oil
+        cls._cum_liq_max_hist = cls._zone.report.cum_prod_liq
         cls._watercuts_hist = df['watercut'].to_list()
         cls._zone.report.prepare()
 
@@ -82,6 +83,7 @@ class Calculator(object):
     @classmethod
     def _calc_rate_oil(cls):
         weights = WeightDistributor.run(cls._cum_oil_hist)
+        # weights = None
         cls._zone.flood_model = CoreyModel(cls._cum_oil_hist, cls._watercuts_hist, weights)
         result = cls._zone.flood_model.predict(cls._cum_oil_max_hist, cls._cum_liq_max_hist, cls._rates_liq_pred)
         cls._watercuts_pred = result['watercut']
@@ -112,12 +114,12 @@ class Calculator(object):
 
     @classmethod
     def _calc_project(cls):
-        cls._prepare()
+        # cls._prepare()
         cls._calc()
 
-    @classmethod
-    def _prepare(cls):
-        cls._project.df_result = cls._zone.report.df_result[['dev_rel_rate_oil', 'dev_abs_cum_oil']].copy()
+    # @classmethod
+    # def _prepare(cls):
+    #     cls._project.df_result = cls._zone.report.df_result[['dev_rel_rate_oil', 'dev_abs_cum_oil']].copy()
 
     @classmethod
     def _calc(cls):

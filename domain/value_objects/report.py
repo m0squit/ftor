@@ -1,17 +1,20 @@
-import pandas as pd
+from pandas import DataFrame
 
 
 class Report(object):
 
     def __init__(self,
-                 df_flood: pd.DataFrame,
-                 df_flux: pd.DataFrame):
+                 df_flood: DataFrame,
+                 df_flux: DataFrame):
 
-        self.df_month = pd.DataFrame()
-        self.df_day = pd.DataFrame()
         self.df_flood = df_flood
         self.df_flux = df_flux
-        self.df_result = pd.DataFrame()
+
+        self.df_month = DataFrame()
+        self.df_day = DataFrame()
+        self.df_result = DataFrame()
+        self.cum_prod_oil = None
+        self.cum_prod_liq = None
         self.mae_train = 0
         self.mae_test = 0
 
