@@ -2,26 +2,26 @@ import plotly as pl
 from pandas import DataFrame
 from plotly.graph_objects import Figure
 
-from domain.aggregates.zone import Zone
+from domain.entities.well import Well
 from libs.plot.plotly._plot import _Plot
 
 
 class FloodPlot(_Plot):
 
     _fig: Figure
-    _zone: Zone
+    _well: Well
     _df_month: DataFrame
     _df_day: DataFrame
 
     @classmethod
     def _run(cls):
-        for zone in cls._project.zones:
-            cls._zone = zone
+        for well in cls._project.wells:
+            cls._well = well
             cls._create_fig()
 
     @classmethod
     def _create_fig(cls):
-        name_well = f'{cls._zone.well.name}'
+        name_well = f'{cls._well.name}'
         cls._fig = Figure()
 
         cls._customize_fig()
@@ -35,9 +35,8 @@ class FloodPlot(_Plot):
     @classmethod
     def _customize_fig(cls):
         cls._fig.layout.template = 'plotly_white'
-        name_well = f'{cls._zone.well.name}'
-        name_formation = f'{cls._zone.formation.name}'
-        cls._fig.update_layout(title=dict(text=f'<b>Case {name_well} {name_formation}<b>',
+        name_well = f'{cls._well.name}'
+        cls._fig.update_layout(title=dict(text=f'<b>Case {name_well}<b>',
                                           font=dict(size=20)),
                                font=dict(family='Jost',
                                          size=12))
@@ -46,10 +45,10 @@ class FloodPlot(_Plot):
 
     @classmethod
     def _prepare(cls):
-        report = cls._zone.report
+        report = cls._well.report
         x = report.df_result.index.to_list()[0]
-        cls._df_month = report.df_month.loc[x:]
-        cls._df_day = report.df_day.loc[x:]
+        cls._df_month = report._df_month.loc[x:]
+        cls._df_day = report._df_day.loc[x:]
 
     @classmethod
     def _add_trace(cls, df, name):

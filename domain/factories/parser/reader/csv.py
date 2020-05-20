@@ -1,6 +1,6 @@
 import pandas as pd
 
-from libs.parser.reader._reader import _Reader
+from domain.factories.parser.reader._reader import _Reader
 
 
 class CsvReader(_Reader):

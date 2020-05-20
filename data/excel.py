@@ -1,15 +1,16 @@
+from pathlib import Path
+
 from data._repository import _Repository
-from data.settings import Settings
-from libs.parser.parser import Parser
+from domain.factories.parser.parser import Parser
 
 
 class ExcelRepository(_Repository):
 
     def __init__(self,
-                 settings: Settings):
+                 path: Path):
 
-        super().__init__(settings)
+        self.path = path
         self._get_data()
 
     def _get_data(self):
-        self.data = Parser().run(self.settings)
+        self.data = Parser().run(self.path)

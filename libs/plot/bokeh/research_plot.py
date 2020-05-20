@@ -9,7 +9,7 @@ from bokeh.plotting import figure, ColumnDataSource, output_file, save
 from pathlib import Path
 
 from domain.aggregates.project import Project
-from domain.aggregates.zone import Zone
+from domain.entities.well import Well
 
 
 class ResearchPlot(object):
@@ -20,7 +20,7 @@ class ResearchPlot(object):
     _layout: layouts
     _path: Path
     _project: Project
-    _zone: Zone
+    _well: Well
     _df: pd.DataFrame
 
     @classmethod
@@ -31,20 +31,19 @@ class ResearchPlot(object):
 
     @classmethod
     def _run(cls):
-        for zone in cls._project.zones:
-            cls._zone = zone
+        for well in cls._project.wells:
+            cls._well = well
             cls._create_fig()
 
     @classmethod
     def _create_fig(cls):
-        name_well = f'{cls._zone.well.name}'
-        name_formation = f'{cls._zone.formation.name}'
-        cls._fig = figure(title=f'Case {name_well} {name_formation}',
+        name_well = f'{cls._well.name}'
+        cls._fig = figure(title=f'Case {name_well}',
                           plot_width=800,
                           plot_height=500)
         cls._fig.xaxis.axis_label = 'cumulative oil production, m3'
         cls._fig.yaxis.axis_label = 'watercut, fr'
-        cls._df = cls._zone.report.df_flood.loc[:('test', None)].copy()
+        cls._df = cls._well.report.df
         cls._add_fact_trace()
         cls._add_model_trace()
         cls._add_actions()
@@ -61,7 +60,7 @@ class ResearchPlot(object):
     @classmethod
     def _add_model_trace(cls):
         cum_oil = cls._df['cum_prod_oil'].to_list()
-        watercuts = cls._zone.flood_model.watercuts_model
+        watercuts = cls._well.flood_model.watercuts_model
         cls._source = ColumnDataSource(data=dict(x=cum_oil, y=watercuts))
         cls._fig.line('x', 'y', source=cls._source, line_color='red', line_width=2, line_alpha=0.6)
 
@@ -97,7 +96,7 @@ class ResearchPlot(object):
 
     @classmethod
     def _create_sliders(cls):
-        params = cls._zone.flood_model.params
+        params = cls._well.flood_model.params
         cls._sliders = [cls._create_slider('watercut_initial', params.watercut_initial, step=0.01),
                         cls._create_slider('mobility_ratio', params.mobility_ratio, step=0.001),
                         cls._create_slider('alpha', params.alpha, step=0.01),
@@ -106,7 +105,7 @@ class ResearchPlot(object):
 
     @classmethod
     def _create_slider(cls, param_name, value, step):
-        bounds_params = cls._zone.flood_model.params.usable_params
+        bounds_params = cls._well.flood_model.params.usable_params
         bounds = bounds_params[param_name]
         start = bounds['min']
         end = bounds['max']

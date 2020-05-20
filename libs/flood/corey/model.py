@@ -6,6 +6,7 @@ from libs.flood._predictor import _Predictor
 from libs.flood.corey.params import CoreyModelParams
 from libs.numeric_tools.loss_function import LossFunction
 from libs.numeric_tools.optimizer import Optimizer
+from libs.numeric_tools.weight_distributor import WeightDistributor
 
 
 class CoreyModel(object):
@@ -22,14 +23,11 @@ class CoreyModel(object):
     """
     def __init__(self,
                  cum_prods_oil: List[float],
-                 watercuts: List[float],
-                 weights: List[float] = None,
-                 stoiip: float = None):
+                 watercuts: List[float]):
 
         self.cum_prods_oil = cum_prods_oil
         self.watercuts_fact = watercuts
-        self.weights = weights
-        self._create_model(stoiip)
+        self._create_model()
 
     def calc_watercut(self, cum_prod_oil: float) -> float:
         recovery_factor = cum_prod_oil / (self.params.stoiip * 1e6)
@@ -64,36 +62,34 @@ class CoreyModel(object):
             rates_oil.append(rate_oil)
         return {'watercut': watercuts, 'rate_oil': rates_oil}
 
-    def _create_model(self, stoiip):
+    def _create_model(self):
         self.params = CoreyModelParams()
-        self._add_stoiip(stoiip)
+        self._set_model_preferences()
+        self._add_stoiip_boundaries()
         self._fit_params()
 
-    def _add_stoiip(self, stoiip):
-        self.params.stoiip = stoiip
-        if stoiip is None:
-            cum_prod_max = max(self.cum_prods_oil) / 1e6
-            recovery_factor_min = 0.05
-            recovery_factor_max = 0.9
-            stoiip_min = cum_prod_max * 1 / recovery_factor_max
-            stoiip_max = cum_prod_max * 1 / recovery_factor_min
-            self.params.usable_params['stoiip'] = {'min': stoiip_min,
-                                                   'max': stoiip_max}
+    def _set_model_preferences(self):
+        self.recovery_factor_min = 0.05
+        self.recovery_factor_max = 0.9
+        self.weights = WeightDistributor.run(self.cum_prods_oil)
+
+    def _add_stoiip_boundaries(self):
+        cum_prod_max = max(self.cum_prods_oil) / 1e6
+        stoiip_min = cum_prod_max * 1 / self.recovery_factor_max
+        stoiip_max = cum_prod_max * 1 / self.recovery_factor_min
+        self.params.usable_params['stoiip'] = {'min': stoiip_min, 'max': stoiip_max}
 
     def _fit_params(self):
         params = Optimizer.calc_params(loss_function=self._loss_function,
                                        params=self.params,
                                        method_optimization='shgo')
 
-    def _loss_function(self, params):
+    def _loss_function(self, params: List[float]) -> float:
         self.watercuts_model = []
-        self._set_params(params)
+        self.params.set_values(params)
         for i in range(len(self.cum_prods_oil)):
             cum_prod = self.cum_prods_oil[i]
             watercut_model = self.calc_watercut(cum_prod)
             self.watercuts_model.append(watercut_model)
-        self.error = LossFunction.run(self.watercuts_fact, self.watercuts_model, self.weights, mode='mae')
-        return self.error
-
-    def _set_params(self, params):
-        self.params.set_values(params)
+        self.mae_train = LossFunction.run(self.watercuts_fact, self.watercuts_model, self.weights, mode='mae')
+        return self.mae_train

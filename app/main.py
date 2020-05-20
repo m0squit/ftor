@@ -9,17 +9,18 @@ from libs.plot.plotly.units_plot import UnitsPlot
 from libs.plot.plotly.performance_plot import PerformancePlot
 
 path = pathlib.Path.cwd().parent / 'tests' / 'data' / 'real' / 'nng' / 'kholmogorskoe'
-forecast_days_number = 90
-settings = Settings(forecast_days_number=forecast_days_number,
+repository = ExcelRepository(path)
+
+settings = Settings(project_name='',
+                    forecast_days_number=90,
+                    prediction_mode='test',
                     train_mode='day',
                     ratio_points_month_day=10,
                     path=path)
-
-repository = ExcelRepository(settings)
-project = repository.create_project()
-project = Calculator.run(project, forecast_days_number)
+project = repository.create_project(settings)
+project = Calculator.run(project)
 
 UnitsPlot.create(settings, project)
-PerformancePlot.create(settings, project)
-ResearchPlot.create(path, project)
-FloodPlot.create(settings, project)
+# PerformancePlot.create(settings, project)
+# ResearchPlot.create(path, project)
+# FloodPlot.create(settings, project)
