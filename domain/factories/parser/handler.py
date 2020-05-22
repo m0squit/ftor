@@ -7,7 +7,7 @@ class Handler(object):
 
     @classmethod
     def run(cls, df: DataFrame) -> DataFrame:
-        cls._df = df
+        cls._df = df.copy()
         cls._process()
         cls._calc_watercut()
         return cls._df

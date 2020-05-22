@@ -30,19 +30,17 @@ class Well(object):
 
     def _predict_rate_liquid(self):
         # TODO: Write code about liquid prediction using flux lib.
-        report = self.report
-        report.df_result['prod_oil'] = report.df_test['prod_liq']
-        report.df_result = report.calc_cum_prod(report.df_result, phase='liq')
+        self.report.df_result['prod_liq'] = self.report.df_test['prod_liq']
+        self.report.df_result = self.report.calc_cum_prod(self.report.df_result, phase='liq')
 
     def _predict_rate_oil(self):
-        report = self.report
-        cum_prod_oil_start = report.cum_prod_oil
-        cum_prod_liq_start = report.cum_prod_liq
-        rates_liq = report.df_result['prod_liq']
+        cum_prod_oil_start = self.report.cum_prod_oil
+        cum_prod_liq_start = self.report.cum_prod_liq
+        rates_liq = self.report.df_result['prod_liq'].to_list()
         result = self.flood_model.predict(cum_prod_oil_start, cum_prod_liq_start, rates_liq)
-        report.df_result['watercut'] = result['watercut']
-        report.df_result['rate_oil'] = result['rate_oil']
-        report.df_result = report.calc_cum_prod(report.df_result, phase='oil')
+        self.report.df_result['watercut'] = result['watercut']
+        self.report.df_result['prod_oil'] = result['rate_oil']
+        self.report.df_result = self.report.calc_cum_prod(self.report.df_result, phase='oil')
 
     def _calc_metric(self):
         if self.report.settings.prediction_mode == 'test':

@@ -14,7 +14,7 @@ repository = ExcelRepository(path)
 settings = Settings(project_name='',
                     forecast_days_number=90,
                     prediction_mode='test',
-                    train_mode='day',
+                    train_mode='mix',
                     ratio_points_month_day=10,
                     path=path)
 project = repository.create_project(settings)

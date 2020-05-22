@@ -8,6 +8,9 @@ from data.settings import Settings
 class Report(object):
 
     def __init__(self,
+                 df_train,
+                 df_fact,
+
                  df_month: DataFrame,
                  df_day: DataFrame,
                  settings: Settings):
@@ -24,9 +27,9 @@ class Report(object):
         df_result = self.df_result
         for i in df_test.index:
             ro_fact = df_test.loc[i, 'prod_oil']
-            ro_model = df_result.loc[i, 'prod_oil_model']
+            ro_model = df_result.loc[i, 'prod_oil']
             co_fact = df_test.loc[i, 'cum_prod_oil']
-            co_model = df_result.loc[i, 'cum_oil_model']
+            co_model = df_result.loc[i, 'cum_prod_oil']
             df_result.loc[i, 'dev_rel_rate_oil'] = abs(ro_fact - ro_model) / max(ro_fact, ro_model)
             df_result.loc[i, 'dev_abs_cum_oil'] = co_model - co_fact
 
@@ -40,7 +43,7 @@ class Report(object):
     def _cut_test(self):
         forecast_days_number = self.settings.forecast_days_number
         self.df_test = self._df_day.tail(forecast_days_number)
-        self._calc_cum_prods(self.df_test)
+        self.df_test = self._calc_cum_prods(self.df_test)
 
         first_test_date = self.df_test.index[0]
         self._df_month = self._df_month.loc[:first_test_date]
@@ -67,7 +70,7 @@ class Report(object):
             self.df = self._df_day
         if train_mode == 'mix':
             self._create_mix_month_day()
-        self._calc_cum_prods(self.df)
+        self.df = self._calc_cum_prods(self.df)
 
     def _create_mix_month_day(self):
         dates_month = self._df_month.index
@@ -92,7 +95,10 @@ class Report(object):
     def _create_df_result(self):
         last_date = self.df.index[-1]
         forecast_days_number = self.settings.forecast_days_number
-        index = [last_date + datetime.timedelta(days=x) for x in range(1, forecast_days_number + 1)]
+        if self.settings.prediction_mode == 'test':
+            index = self.df_test.index
+        else:
+            index = [last_date + datetime.timedelta(days=x) for x in range(1, forecast_days_number + 1)]
         columns = self.df.columns
         self.df_result = DataFrame(index=index, columns=columns)
 
@@ -104,5 +110,6 @@ class Report(object):
 
     @staticmethod
     def calc_cum_prod(df: DataFrame, phase: str) -> DataFrame:
+        df = df.copy()
         df[f'cum_prod_{phase}'] = cumsum(df[f'prod_{phase}'].to_list())
         return df

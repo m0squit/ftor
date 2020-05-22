@@ -102,13 +102,13 @@ class UnitsPlot(_Plot):
         df_test = cls._well.report.df_test
         df_result = cls._well.report.df_result
         x = df.index.to_list() + df_test.index.to_list()
-        watercuts_fact = df_test['watercut'].to_list() + df_test['watercut'].to_list()
-        watercuts_model = df_result['watercut'].to_list() + df_result['watercut'].to_list()
+        watercuts_fact = df['watercut'].to_list() + df_test['watercut'].to_list()
+        watercuts_model = cls._well.flood_model.watercuts_model + df_result['watercut'].to_list()
         trace_1 = cls._create_trace('watercut_fact', x, watercuts_fact, mode='markers')
         trace_2 = cls._create_trace('watercut_model', x, watercuts_model)
         cls._fig.add_trace(trace_1, **pos)
         cls._fig.add_trace(trace_2, **pos)
-        cls._draw_train_test_delimiter(df, pos)
+        # cls._draw_train_test_delimiter(df, pos)
         cls._fig.update_xaxes(title_text='date', **pos)
         cls._fig.update_yaxes(title_text='watercut, fr', **pos)
 
@@ -126,7 +126,7 @@ class UnitsPlot(_Plot):
         x = df_test.index.to_list()
         rates_liq_fact = df_test['prod_liq'].to_list()
         rates_oil_fact = df_test['prod_oil'].to_list()
-        rates_oil_model = df_result['prod_oil_model'].to_list()
+        rates_oil_model = df_result['prod_oil'].to_list()
         trace_1 = cls._create_trace('rate_liq_fact', x, rates_liq_fact, mode='lines+markers', marker_size=5)
         trace_2 = cls._create_trace('rate_oil_fact', x, rates_oil_fact)
         trace_3 = cls._create_trace('rate_oil_model', x, rates_oil_model)
