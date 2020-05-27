@@ -24,7 +24,7 @@ class Project(object):
             dev_rel_rate_oil = 0
             dev_abs_cum_oil = 0
             for well in self.wells:
-                df = well.report.df_result
+                df = well.report.df_test
                 dev_rel_rate_oil += df['dev_rel_rate_oil'].to_list()[i - 1]
                 dev_abs_cum_oil += df['dev_abs_cum_oil'].to_list()[i - 1]
             self.df_result.loc[i, 'dev_rel_rate_oil'] = dev_rel_rate_oil / self._num_well

@@ -44,7 +44,7 @@ class Parser(object):
     def _create(cls):
         cls._input_data = InputData()
         names_wells = cls._df_month['well'].unique()
-        names_wells = ['232']
+        # names_wells = ['232']
         for name_well in names_wells:
             cls._cut_well(name_well)
 

@@ -20,8 +20,8 @@ class ProjectCreator(object):
 
     _df_month: DataFrame
     _df_day: DataFrame
-    _df_train: DataFrame
     _df_test: DataFrame
+    _df_train: DataFrame
     _df_fact: DataFrame
 
     @classmethod
@@ -61,51 +61,20 @@ class ProjectCreator(object):
             cls._wells.append(well)
 
     @classmethod
+    def _create_project(cls):
+        cls._project = Project(cls._wells, cls._settings)
+
+    @classmethod
     def _create_report(cls) -> Report:
+        cls._create_df_test()
         cls._create_df_train()
-        cls._create_df_fact()
-        report = Report(cls._df_train, cls._df_fact)
+        report = Report(cls._df_train, cls._df_test)
         return report
 
     @classmethod
-    def _create_df_train(cls):
-        prediction_mode = cls._settings.prediction_mode
-        train_mode = cls._settings.train_mode
-
-        if prediction_mode == 'test':
-            cls._df_test = cls._df_day.tail(cls._settings.forecast_days_number)
-            cls._calc_cum_prods_df_test()
-            cls._modify_df_month_df_day()
-
-        if train_mode == 'month':
-            cls._df_train = cls._calc_cum_prods(cls._df_month)
-        if train_mode == 'day':
-            cls._df_train = cls._df_day
-            cls._calc_cum_prods_df_day()
-        if train_mode == 'mix':
-            cls._create_mix_month_day()
-            cls._df_train = cls._calc_cum_prods(cls._df_train)
-
-    @classmethod
-    def _calc_cum_prods_df_test(cls):
-        cls._df_test = cls._calc_cum_prods(cls._df_test)
-        cls._add_cum_prod_before_df_test(phase='oil')
-        cls._add_cum_prod_before_df_test(phase='liq')
-
-    @classmethod
-    def _add_cum_prod_before_df_test(cls, phase: str):
-        cum_prod = cls._calc_cum_prod_before_df_test(phase)
-        cls._df_test[f'prod_{phase}'] = cls._df_test[f'prod_{phase}'].apply(lambda x: x + cum_prod)
-
-    @classmethod
-    def _calc_cum_prod_before_df_test(cls, phase: str) -> float:
-        day_date = cls._df_month.index[-1] + datetime.timedelta(days=1)
-        first_test_date = cls._df_test.index[0]
-        s_month = cls._df_month[f'prod_{phase}']
-        s_day = cls._df_day[f'prod_{phase}'][day_date:first_test_date]
-        s = s_month.append(s_day)
-        cum_prod = s.sum()
-        return cum_prod
+    def _create_df_test(cls):
+        cls._df_test = cls._df_day.tail(cls._settings.forecast_days_number)
+        cls._modify_df_month_df_day()
 
     @classmethod
     def _modify_df_month_df_day(cls):
@@ -115,33 +84,9 @@ class ProjectCreator(object):
         cls._df_day = cls._df_day.head(train_days_number)
 
     @classmethod
-    def _calc_cum_prods_df_day(cls):
-        cls._df_day = cls._calc_cum_prods(cls._df_day)
-        cls._add_cum_prod_before_df_day(phase='oil')
-        cls._add_cum_prod_before_df_day(phase='liq')
-
-    @classmethod
-    def _add_cum_prod_before_df_day(cls, phase: str):
-        cum_prod = cls._calc_cum_prod_before_df_day(phase)
-        cls._df_day[f'prod_{phase}'] = cls._df_day[f'prod_{phase}'].apply(lambda x: x + cum_prod)
-
-    @classmethod
-    def _calc_cum_prod_before_df_day(cls, phase: str) -> float:
-        dates_month = cls._df_month.index
-        first_day_date = cls._df_day.index[0]
-        for date in dates_month:
-            if date == first_day_date:
-                date += datetime.timedelta(days=1)
-                s_month = cls._df_month[f'prod_{phase}'][:date]
-                cum_prod = s_month.sum()
-                return cum_prod
-            if date > first_day_date:
-                date += datetime.timedelta(days=1)
-                s_month = cls._df_month[f'prod_{phase}'][:date]
-                cum_prod = s_month.sum()
-                for i in cls._df_day.index[:date]:
-                    cum_prod -= cls._df_day[f'prod_{phase}'].loc[i]
-                return cum_prod
+    def _create_df_train(cls):
+        cls._create_mix_month_day()
+        cls._df_train = cls._calc_cum_prods(cls._df_train)
 
     @classmethod
     def _create_mix_month_day(cls):
@@ -167,16 +112,6 @@ class ProjectCreator(object):
         number_points_day = len(dates_day[dates_day >= dates_day[i]])
         cls._df_month = cls._df_month.head(number_points_month)
         cls._df_day = cls._df_day.tail(number_points_day)
-
-    @classmethod
-    def _create_df_fact(cls):
-        cls._df_fact = concat(objs=[cls._df_train, cls._df_test],
-                              axis='index',
-                              verify_integrity=True)
-
-    @classmethod
-    def _create_project(cls):
-        cls._project = Project(cls._wells, cls._settings)
 
     @classmethod
     def _calc_cum_prods(cls, df: DataFrame) -> DataFrame:

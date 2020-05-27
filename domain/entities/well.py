@@ -23,28 +23,42 @@ class Well(object):
         self._calc_metric()
 
     def _create_flood_model(self):
-        report = self.report
-        cum_prods_oil = report.df['cum_prod_oil'].to_list()
-        watercuts = report.df['watercut'].to_list()
+        cum_prods_oil = self.report.df_train['cum_prod_oil'].to_list()
+        watercuts = self.report.df_train['watercut'].to_list()
         self.flood_model = CoreyModel(cum_prods_oil, watercuts)
 
     def _predict_rate_liquid(self):
         # TODO: Write code about liquid prediction using flux lib.
-        self.report.df_result['prod_liq'] = self.report.df_test['prod_liq']
-        self.report.df_result = self.report.calc_cum_prod(self.report.df_result, phase='liq')
+        df = self.report.df_test.copy()
+        df['prod_liq_model'] = self.report.df_test['prod_liq']
+        self.report.df_test = df
 
     def _predict_rate_oil(self):
-        cum_prod_oil_start = self.report.cum_prod_oil
-        cum_prod_liq_start = self.report.cum_prod_liq
-        rates_liq = self.report.df_result['prod_liq'].to_list()
+        cum_prod_oil_start = self.report.df_train['cum_prod_oil'].iloc[-1]
+        cum_prod_liq_start = self.report.df_train['cum_prod_liq'].iloc[-1]
+        rates_liq = self.report.df_test['prod_liq_model'].to_list()
         result = self.flood_model.predict(cum_prod_oil_start, cum_prod_liq_start, rates_liq)
-        self.report.df_result['watercut'] = result['watercut']
-        self.report.df_result['prod_oil'] = result['rate_oil']
-        self.report.df_result = self.report.calc_cum_prod(self.report.df_result, phase='oil')
+        self.report.df_test['watercut_model'] = result['watercut']
+        self.report.df_test['prod_oil_model'] = result['rate_oil']
 
     def _calc_metric(self):
-        if self.report.settings.prediction_mode == 'test':
-            watercuts_fact = self.report.df_test['watercut']
-            watercuts_model = self.report.df_result['watercut']
-            self.flood_model.mae_test = LossFunction.run(watercuts_fact, watercuts_model)
-            self.report.calc_metric()
+        self._calc_metric_watercut()
+        self._calc_metric_prod()
+
+    def _calc_metric_watercut(self):
+        watercuts_fact = self.report.df_test['watercut']
+        watercuts_model = self.report.df_test['watercut_model']
+        self.flood_model.mae_test = LossFunction.run(watercuts_fact, watercuts_model)
+
+    def _calc_metric_prod(self):
+        self.report.df_test['dev_rel_rate_oil'] = None
+        self.report.df_test['dev_abs_cum_oil'] = None
+        for i in self.report.df_test.index:
+            prod_oil_fact = self.report.df_test.loc[i, 'prod_oil']
+            prod_oil_model = self.report.df_test.loc[i, 'prod_oil_model']
+            term_1 = abs(prod_oil_fact - prod_oil_model)
+            term_2 = max(prod_oil_fact, prod_oil_model)
+            self.report.df_test.loc[i, 'dev_rel_rate_oil'] = term_1 / term_2
+            self.report.df_test.loc[i, 'dev_abs_cum_oil'] = prod_oil_fact - prod_oil_model
+
+        self.report.df_test['dev_abs_cum_oil'] = self.report.df_test['dev_abs_cum_oil'].cumsum()

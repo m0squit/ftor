@@ -73,7 +73,7 @@ class UnitsPlot(_Plot):
         units.append('fr')
         units.append('fr')
         values = [x for x in params.get_values()]
-        cum_prod_oil = cls._well.report.df_result['cum_prod_oil'].iloc[-1] / 1e6
+        cum_prod_oil = cls._well.report.df_train['cum_prod_oil'].iloc[-1] / 1e6
         values.append(cum_prod_oil)
         values.append(cls._well.flood_model.mae_train)
         values.append(cls._well.flood_model.mae_test)
@@ -84,7 +84,7 @@ class UnitsPlot(_Plot):
     @classmethod
     def _add_12(cls):
         pos = dict(row=1, col=2)
-        df = cls._well.report.df_result
+        df = cls._well.report.df_test
         x = df.index.to_list()
         devs_rel_rate_oil = df['dev_rel_rate_oil'].to_list()
         devs_abs_cum_oil = df['dev_abs_cum_oil'].to_list()
@@ -98,23 +98,22 @@ class UnitsPlot(_Plot):
     @classmethod
     def _add_21(cls):
         pos = dict(row=2, col=1)
-        df = cls._well.report.df
+        df_train = cls._well.report.df_train
         df_test = cls._well.report.df_test
-        df_result = cls._well.report.df_result
-        x = df.index.to_list() + df_test.index.to_list()
-        watercuts_fact = df['watercut'].to_list() + df_test['watercut'].to_list()
-        watercuts_model = cls._well.flood_model.watercuts_model + df_result['watercut'].to_list()
+        x = df_train.index.to_list() + df_test.index.to_list()
+        watercuts_fact = cls._well.flood_model.watercuts_fact + df_test['watercut'].to_list()
+        watercuts_model = cls._well.flood_model.watercuts_model + df_test['watercut_model'].to_list()
         trace_1 = cls._create_trace('watercut_fact', x, watercuts_fact, mode='markers')
         trace_2 = cls._create_trace('watercut_model', x, watercuts_model)
         cls._fig.add_trace(trace_1, **pos)
         cls._fig.add_trace(trace_2, **pos)
-        # cls._draw_train_test_delimiter(df, pos)
+        cls._draw_train_test_delimiter(df_train, pos)
         cls._fig.update_xaxes(title_text='date', **pos)
         cls._fig.update_yaxes(title_text='watercut, fr', **pos)
 
     @classmethod
     def _draw_train_test_delimiter(cls, df, pos):
-        x_del_tt = df.index.get_loc_level(key='test')[1][0]
+        x_del_tt = df.index.to_list()[-1]
         line = cls._create_line_shape(x0=x_del_tt, x1=x_del_tt, y0=0, y1=1)
         cls._fig.add_shape(line, **pos)
 
@@ -122,11 +121,10 @@ class UnitsPlot(_Plot):
     def _add_22(cls):
         pos = dict(row=2, col=2)
         df_test = cls._well.report.df_test
-        df_result = cls._well.report.df_result
         x = df_test.index.to_list()
         rates_liq_fact = df_test['prod_liq'].to_list()
         rates_oil_fact = df_test['prod_oil'].to_list()
-        rates_oil_model = df_result['prod_oil'].to_list()
+        rates_oil_model = df_test['prod_oil_model'].to_list()
         trace_1 = cls._create_trace('rate_liq_fact', x, rates_liq_fact, mode='lines+markers', marker_size=5)
         trace_2 = cls._create_trace('rate_oil_fact', x, rates_oil_fact)
         trace_3 = cls._create_trace('rate_oil_model', x, rates_oil_model)
