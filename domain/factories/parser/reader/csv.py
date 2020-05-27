@@ -21,4 +21,4 @@ class CsvReader(_Reader):
     @classmethod
     def _process(cls):
         super()._process()
-        cls._df.columns = ['date', 'well', 'prod_oil', 'prod_liq', 'bhp']
+        cls._df.columns = ['date', 'well', 'prod_oil', 'prod_liq']

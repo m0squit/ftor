@@ -6,7 +6,7 @@ class Settings(object):
     def __init__(self,
                  project_name: str,
                  forecast_days_number: int,
-                 ratio_points_month_day: int,
+                 ratio_points_month_day: float,
                  path: Path):
 
         self.project_name = project_name

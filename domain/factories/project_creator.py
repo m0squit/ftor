@@ -5,10 +5,8 @@ from pandas import DataFrame, concat
 
 from data.settings import Settings
 from domain.aggregates.project import Project
-from domain.entities.formation import Formation
 from domain.entities.well import Well
 from domain.factories.input_data import InputData
-from domain.value_objects.fluid import Fluid
 from domain.value_objects.report import Report
 
 
@@ -35,29 +33,10 @@ class ProjectCreator(object):
     def _create_wells(cls, input_data: InputData):
         cls._wells = []
         for name, data in input_data.wells.items():
-            # radius = data['radius']
-            #
-            # fluid = Fluid(data['density'],
-            #               data['viscosity'],
-            #               data['volume_factor'])
-            #
-            # formation = Formation(data['formations_names'],
-            #                       data['thickness'],
-            #                       data['porosity'],
-            #                       fluid,
-            #                       data['compressibility'],
-            #                       data['type_completion'],
-            #                       data['type_boundaries'])
-
             cls._df_month = data['df_month']
             cls._df_day = data['df_day']
             report = cls._create_report()
-
-            well = Well(name,
-                        # radius,
-                        # formation,
-                        report)
-
+            well = Well(name, report)
             cls._wells.append(well)
 
     @classmethod
@@ -78,10 +57,9 @@ class ProjectCreator(object):
 
     @classmethod
     def _modify_df_month_df_day(cls):
-        first_test_date = cls._df_test.index[0]
-        train_days_number = len(cls._df_day.index) - cls._settings.forecast_days_number
-        cls._df_month = cls._df_month.loc[:first_test_date]
-        cls._df_day = cls._df_day.head(train_days_number)
+        last_train_date = cls._df_test.index[0] - datetime.timedelta(days=1)
+        cls._df_month = cls._df_month.loc[:last_train_date]
+        cls._df_day = cls._df_day.loc[:last_train_date]
 
     @classmethod
     def _create_df_train(cls):

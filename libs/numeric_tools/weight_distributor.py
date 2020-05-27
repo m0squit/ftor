@@ -8,6 +8,7 @@ class WeightDistributor(object):
         n = len(x)
         t = 30
         w = [1] * (n - t)
-        for i in range(t):
-            w.append(i * 1)
+        w[0] = 10
+        for i in range(1, t + 1):
+            w.append(i)
         return w

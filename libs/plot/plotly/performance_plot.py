@@ -37,7 +37,7 @@ class PerformancePlot(_Plot):
                                bargroupgap=0.05)
         cls._add_11()
         cls._add_21()
-        file = str(cls._settings.path / f'performance')
+        file = str(cls._settings.path / f'performance_{cls._settings.ratio_points_month_day}')
         pl.io.write_html(cls._fig, f'{file}.html', auto_open=False)
 
     @classmethod
