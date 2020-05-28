@@ -1,6 +1,7 @@
 from typing import List, Dict
 
 import numpy as np
+import scipy.optimize as optimize
 
 from libs.flood._predictor import _Predictor
 from libs.flood.corey.params import CoreyModelParams
@@ -80,16 +81,34 @@ class CoreyModel(object):
         self.params.usable_params['stoiip'] = {'min': stoiip_min, 'max': stoiip_max}
 
     def _fit_params(self):
-        params = Optimizer.calc_params(loss_function=self._loss_function,
-                                       params=self.params,
-                                       method_optimization='shgo')
+        self._minimize_trend()
+        self._minimize_last_value()
+        self._calc_watercut_model()
 
-    def _loss_function(self, params: List[float]) -> float:
+    def _minimize_trend(self):
+        params_min_max = list(self.params.usable_params.values())
+        params = Optimizer.calc_params(self._loss_function_trend, params_min_max, method='shgo')
+
+    def _minimize_last_value(self):
+        initial_guess = self.params.watercut_initial
+        watercut_initial = optimize.minimize(self._loss_function_last_value, initial_guess)
+
+    def _calc_watercut_model(self):
         self.watercuts_model = []
-        self.params.set_values(params)
-        for i in range(len(self.cum_prods_oil)):
-            cum_prod = self.cum_prods_oil[i]
-            watercut_model = self.calc_watercut(cum_prod)
+        for cum_prod_oil in self.cum_prods_oil:
+            watercut_model = self.calc_watercut(cum_prod_oil)
             self.watercuts_model.append(watercut_model)
-        self.mae_train = LossFunction.run(self.watercuts_fact, self.watercuts_model, self.weights, mode='mae')
+        self.mae_train = LossFunction.run(self.watercuts_fact, self.watercuts_model, mode='mae')
+
+    def _loss_function_trend(self, params: List[float]) -> float:
+        self.params.set_values(params)
+        self._calc_watercut_model()
         return self.mae_train
+
+    def _loss_function_last_value(self, watercut_initial: float) -> float:
+        self.params.watercut_initial = watercut_initial[0]
+        cum_prod_oil = self.cum_prods_oil[-1]
+        watercut_fact = self.watercuts_fact[-1]
+        watercut_model = self.calc_watercut(cum_prod_oil)
+        error = abs(watercut_fact - watercut_model)
+        return error

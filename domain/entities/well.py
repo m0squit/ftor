@@ -35,8 +35,8 @@ class Well(object):
         self._calc_metric_prod()
 
     def _calc_metric_watercut(self):
-        watercuts_fact = self.report.df_test['watercut']
-        watercuts_model = self.report.df_test['watercut_model']
+        watercuts_fact = self.report.df_test['watercut'].to_list()
+        watercuts_model = self.report.df_test['watercut_model'].to_list()
         self.flood_model.mae_test = LossFunction.run(watercuts_fact, watercuts_model)
 
     def _calc_metric_prod(self):
