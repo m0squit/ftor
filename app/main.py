@@ -1,4 +1,5 @@
 import pathlib
+import xlwings as xw
 
 from app.calculator import Calculator
 from data.excel import ExcelRepository
@@ -7,7 +8,7 @@ from libs.plot.bokeh.research_plot import ResearchPlot
 from libs.plot.plotly.units_plot import UnitsPlot
 from libs.plot.plotly.performance_plot import PerformancePlot
 
-path = pathlib.Path.cwd().parent / 'tests' / 'data' / 'real' / 'nng' / 'otdelnoe'
+path = pathlib.Path.cwd().parent / 'tests' / 'data' / 'real' / 'nng' / 'kholmogorskoe'
 
 
 def run_app(settings: Settings):
@@ -18,11 +19,18 @@ def run_app(settings: Settings):
     # ResearchPlot.create(path, project)
     PerformancePlot.create(settings, project)
 
+    # wb = xw.Book()
+    # sht = wb.sheets['Лист1']
+    # df = project.df_result
+    # sht.range('A1').value = df
+    # wb.save(path=path / 'results')
+    # wb.close()
 
-ratios = [0.1]
+
+ratios = [10]
 for ratio in ratios:
     _settings = Settings(project_name='',
-                         forecast_days_number=30,
+                         forecast_days_number=90,
                          ratio_points_month_day=ratio,
                          path=path)
     run_app(_settings)

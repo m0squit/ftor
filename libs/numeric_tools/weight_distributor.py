@@ -7,5 +7,5 @@ class WeightDistributor(object):
     def run(x: List[float]) -> List[float]:
         n = len(x)
         w = [1] * n
-        w[0] = 10
+        w[0] = 1000
         return w

@@ -30,6 +30,9 @@ class Well(object):
         self.report.df_test = self.report.df_test.assign(watercut_model=result['watercut'])
         self.report.df_test = self.report.df_test.assign(prod_oil_model=result['rate_oil'])
 
+        self.report.df_test['cum_oil'] = self.report.df_test['prod_oil'].cumsum()
+        self.report.df_test['cum_oil_model'] = self.report.df_test['prod_oil_model'].cumsum()
+
     def _calc_metric(self):
         self._calc_metric_watercut()
         self._calc_metric_prod()
@@ -40,14 +43,23 @@ class Well(object):
         self.flood_model.mae_test = LossFunction.run(watercuts_fact, watercuts_model)
 
     def _calc_metric_prod(self):
-        self.report.df_test['dev_rel_rate_oil'] = None
+        self.report.df_test['dev_abs_rate_oil'] = None
         self.report.df_test['dev_abs_cum_oil'] = None
+
+        self.report.df_test['dev_rel_rate_oil'] = None
+        self.report.df_test['dev_rel_cum_oil'] = None
+
         for i in self.report.df_test.index:
             prod_oil_fact = self.report.df_test.loc[i, 'prod_oil']
             prod_oil_model = self.report.df_test.loc[i, 'prod_oil_model']
             term_1 = abs(prod_oil_fact - prod_oil_model)
             term_2 = max(prod_oil_fact, prod_oil_model)
+            self.report.df_test.loc[i, 'dev_abs_rate_oil'] = term_1
             self.report.df_test.loc[i, 'dev_rel_rate_oil'] = term_1 / term_2
-            self.report.df_test.loc[i, 'dev_abs_cum_oil'] = prod_oil_fact - prod_oil_model
 
-        self.report.df_test['dev_abs_cum_oil'] = self.report.df_test['dev_abs_cum_oil'].cumsum()
+            cum_oil_fact = self.report.df_test.loc[i, 'cum_oil']
+            cum_oil_model = self.report.df_test.loc[i, 'cum_oil_model']
+            term_1 = abs(cum_oil_fact - cum_oil_model)
+            term_2 = max(cum_oil_fact, cum_oil_model)
+            self.report.df_test.loc[i, 'dev_abs_cum_oil'] = term_1
+            self.report.df_test.loc[i, 'dev_rel_cum_oil'] = term_1 / term_2

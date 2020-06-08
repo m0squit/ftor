@@ -98,7 +98,7 @@ class CoreyModel(object):
         for cum_prod_oil in self.cum_prods_oil:
             watercut_model = self.calc_watercut(cum_prod_oil)
             self.watercuts_model.append(watercut_model)
-        self.mae_train = LossFunction.run(self.watercuts_fact, self.watercuts_model, mode='mae')
+        self.mae_train = LossFunction.run(self.watercuts_fact, self.watercuts_model, self.weights, mode='mae')
 
     def _loss_function_trend(self, params: List[float]) -> float:
         self.params.set_values(params)

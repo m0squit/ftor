@@ -87,13 +87,13 @@ class UnitsPlot(_Plot):
         df = cls._well.report.df_test
         x = df.index.to_list()
         devs_rel_rate_oil = df['dev_rel_rate_oil'].to_list()
-        devs_abs_cum_oil = df['dev_abs_cum_oil'].to_list()
+        devs_rel_cum_oil = df['dev_rel_cum_oil'].to_list()
         trace_1 = cls._create_trace('rel_dev_rate', x, devs_rel_rate_oil, mode='lines+markers', marker_size=5)
-        trace_2 = cls._create_trace('abs_dev_cum', x, devs_abs_cum_oil, fill='tozeroy')
+        trace_2 = cls._create_trace('abs_dev_cum', x, devs_rel_cum_oil, fill='tozeroy')
         cls._fig.add_trace(trace_1, **pos)
         cls._fig.add_trace(trace_2, secondary_y=True, **pos)
         cls._fig.update_yaxes(title_text='relative_deviation_rate, fr', **pos)
-        cls._fig.update_yaxes(title_text='absolute_deviation_cum, m3', secondary_y=True, **pos)
+        cls._fig.update_yaxes(title_text='relative_deviation_cum, fr', secondary_y=True, **pos)
 
     @classmethod
     def _add_21(cls):
