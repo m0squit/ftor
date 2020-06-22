@@ -1,3 +1,5 @@
+from typing import List
+
 from domain.value_objects.report import Report
 from libs.flood.corey.model import CoreyModel
 from libs.numeric_tools.loss_function import LossFunction
@@ -13,8 +15,8 @@ class Well(object):
         self.report = report
         self._create_flood_model()
 
-    def calc(self):
-        self._predict_rate_oil()
+    def calc(self, rates_liq: List[float]):
+        self._predict_rate_oil(rates_liq)
         self._calc_metric()
 
     def _create_flood_model(self):
@@ -22,11 +24,15 @@ class Well(object):
         watercuts = self.report.df_train['watercut'].to_list()
         self.flood_model = CoreyModel(cum_prods_oil, watercuts)
 
-    def _predict_rate_oil(self):
+    def _predict_rate_oil(self, rates_liq_model: List[float]):
         cum_prod_oil_start = self.report.df_train['cum_prod_oil'].iloc[-1]
         cum_prod_liq_start = self.report.df_train['cum_prod_liq'].iloc[-1]
-        rates_liq = self.report.df_test['prod_liq'].to_list()
-        result = self.flood_model.predict(cum_prod_oil_start, cum_prod_liq_start, rates_liq)
+        self.report.df_test = self.report.df_test.assign(prod_liq_model=rates_liq_model)
+
+        self.report.df_test['cum_liq'] = self.report.df_test['prod_liq'].cumsum()
+        self.report.df_test['cum_liq_model'] = self.report.df_test['prod_liq_model'].cumsum()
+
+        result = self.flood_model.predict(cum_prod_oil_start, cum_prod_liq_start, rates_liq_model)
         self.report.df_test = self.report.df_test.assign(watercut_model=result['watercut'])
         self.report.df_test = self.report.df_test.assign(prod_oil_model=result['rate_oil'])
 
@@ -35,31 +41,32 @@ class Well(object):
 
     def _calc_metric(self):
         self._calc_metric_watercut()
-        self._calc_metric_prod()
+        self._calc_metric_prod_phase(phase='liq')
+        self._calc_metric_prod_phase(phase='oil')
 
     def _calc_metric_watercut(self):
         watercuts_fact = self.report.df_test['watercut'].to_list()
         watercuts_model = self.report.df_test['watercut_model'].to_list()
         self.flood_model.mae_test = LossFunction.run(watercuts_fact, watercuts_model)
 
-    def _calc_metric_prod(self):
-        self.report.df_test['dev_abs_rate_oil'] = None
-        self.report.df_test['dev_abs_cum_oil'] = None
+    def _calc_metric_prod_phase(self, phase: str):
+        self.report.df_test[f'dev_abs_rate_{phase}'] = None
+        self.report.df_test[f'dev_abs_cum_{phase}'] = None
 
-        self.report.df_test['dev_rel_rate_oil'] = None
-        self.report.df_test['dev_rel_cum_oil'] = None
+        self.report.df_test[f'dev_rel_rate_{phase}'] = None
+        self.report.df_test[f'dev_rel_cum_{phase}'] = None
 
         for i in self.report.df_test.index:
-            prod_oil_fact = self.report.df_test.loc[i, 'prod_oil']
-            prod_oil_model = self.report.df_test.loc[i, 'prod_oil_model']
-            term_1 = abs(prod_oil_fact - prod_oil_model)
-            term_2 = max(prod_oil_fact, prod_oil_model)
-            self.report.df_test.loc[i, 'dev_abs_rate_oil'] = term_1
-            self.report.df_test.loc[i, 'dev_rel_rate_oil'] = term_1 / term_2
+            prod_fact = self.report.df_test.loc[i, f'prod_{phase}']
+            prod_model = self.report.df_test.loc[i, f'prod_{phase}_model']
+            term_1 = abs(prod_fact - prod_model)
+            term_2 = max(prod_fact, prod_model)
+            self.report.df_test.loc[i, f'dev_abs_rate_{phase}'] = term_1
+            self.report.df_test.loc[i, f'dev_rel_rate_{phase}'] = term_1 / term_2 * 100
 
-            cum_oil_fact = self.report.df_test.loc[i, 'cum_oil']
-            cum_oil_model = self.report.df_test.loc[i, 'cum_oil_model']
-            term_1 = abs(cum_oil_fact - cum_oil_model)
-            term_2 = max(cum_oil_fact, cum_oil_model)
-            self.report.df_test.loc[i, 'dev_abs_cum_oil'] = term_1
-            self.report.df_test.loc[i, 'dev_rel_cum_oil'] = term_1 / term_2
+            cum_fact = self.report.df_test.loc[i, f'cum_{phase}']
+            cum_model = self.report.df_test.loc[i, f'cum_{phase}_model']
+            term_1 = abs(cum_fact - cum_model)
+            term_2 = max(cum_fact, cum_model)
+            self.report.df_test.loc[i, f'dev_abs_cum_{phase}'] = term_1
+            self.report.df_test.loc[i, f'dev_rel_cum_{phase}'] = term_1 / term_2 * 100

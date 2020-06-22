@@ -6,16 +6,22 @@ class Handler(object):
     _df: DataFrame
 
     @classmethod
-    def run(cls, df: DataFrame) -> DataFrame:
+    def run(cls, df: DataFrame, df_type: str) -> DataFrame:
         cls._df = df.copy()
-        cls._process()
+        cls._process(df_type)
         cls._calc_watercut()
         return cls._df
 
     @classmethod
-    def _process(cls):
+    def _process(cls, df_type: str):
         cls._df.drop(columns=['well'], inplace=True)
-        cls._df.dropna(axis='index', how='any', inplace=True)
+
+        if df_type == 'month':
+            cls._df.dropna(axis='index', how='any', inplace=True)
+        if df_type == 'day':
+            cls._df.fillna(method='ffill', inplace=True)
+            cls._df.fillna(method='bfill', inplace=True)
+
         cls._df.set_index(keys=['date', cls._df.index], drop=True, inplace=True, verify_integrity=True)
         cls._df = cls._df.sum(axis='index', level='date')
 

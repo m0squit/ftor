@@ -28,16 +28,16 @@ class UnitsPlot(_Plot):
                                           horizontal_spacing=0.1,
                                           vertical_spacing=0.1,
                                           subplot_titles=['Corey model performance',
-                                                          'Abs dev cum is calculated: cum model - cum fact',
-                                                          'Plot is divided: 1-train, 3-test',
-                                                          ''],
+                                                          'Relative deviations',
+                                                          'Watercut. Plot is divided: 1-train, 3-test',
+                                                          'Rates'],
                                           specs=[[{'type': 'table'}, {'secondary_y': True}],
                                                  [{}, {'secondary_y': True}]],
                                           column_widths=[0.5, 0.5],
                                           row_heights=[0.4, 0.6])
         cls._fig.layout.template = 'plotly'
         cls._fig.update_layout(width=1400,
-                               title=dict(text=f'<b>Case {name_well}<b>',
+                               title=dict(text=f'<b>Well {name_well}<b>',
                                           font=dict(size=20)),
                                font=dict(family='Jost',
                                          size=12),
@@ -88,12 +88,20 @@ class UnitsPlot(_Plot):
         x = df.index.to_list()
         devs_rel_rate_oil = df['dev_rel_rate_oil'].to_list()
         devs_rel_cum_oil = df['dev_rel_cum_oil'].to_list()
-        trace_1 = cls._create_trace('rel_dev_rate', x, devs_rel_rate_oil, mode='lines+markers', marker_size=5)
-        trace_2 = cls._create_trace('abs_dev_cum', x, devs_rel_cum_oil, fill='tozeroy')
+        devs_rel_rate_liq = df['dev_rel_rate_liq'].to_list()
+        devs_rel_cum_liq = df['dev_rel_cum_liq'].to_list()
+        trace_1 = cls._create_trace('rel_rate_oil', x, devs_rel_rate_oil, mode='lines+markers', marker_size=3)
+        trace_2 = cls._create_trace('rel_cum_oil', x, devs_rel_cum_oil, mode='lines+markers', marker_size=3)
         cls._fig.add_trace(trace_1, **pos)
         cls._fig.add_trace(trace_2, secondary_y=True, **pos)
-        cls._fig.update_yaxes(title_text='relative_deviation_rate, fr', **pos)
-        cls._fig.update_yaxes(title_text='relative_deviation_cum, fr', secondary_y=True, **pos)
+
+        trace_3 = cls._create_trace('rel_rate_liq', x, devs_rel_rate_liq, mode='lines+markers', marker_size=3)
+        trace_4 = cls._create_trace('rel_cum_liq', x, devs_rel_cum_liq, mode='lines+markers', marker_size=3)
+        cls._fig.add_trace(trace_3, **pos)
+        cls._fig.add_trace(trace_4, secondary_y=True, **pos)
+
+        cls._fig.update_yaxes(title_text='deviation_rate, %', **pos)
+        cls._fig.update_yaxes(title_text='deviation_cum, %', secondary_y=True, **pos)
 
     @classmethod
     def _add_21(cls):
@@ -103,7 +111,7 @@ class UnitsPlot(_Plot):
         x = df_train.index.to_list() + df_test.index.to_list()
         watercuts_fact = cls._well.flood_model.watercuts_fact + df_test['watercut'].to_list()
         watercuts_model = cls._well.flood_model.watercuts_model + df_test['watercut_model'].to_list()
-        trace_1 = cls._create_trace('watercut_fact', x, watercuts_fact, mode='markers')
+        trace_1 = cls._create_trace('watercut_fact', x, watercuts_fact, mode='markers', marker_size=5)
         trace_2 = cls._create_trace('watercut_model', x, watercuts_model)
         cls._fig.add_trace(trace_1, **pos)
         cls._fig.add_trace(trace_2, **pos)
@@ -123,14 +131,17 @@ class UnitsPlot(_Plot):
         df_test = cls._well.report.df_test
         x = df_test.index.to_list()
         rates_liq_fact = df_test['prod_liq'].to_list()
+        rates_liq_model = df_test['prod_liq_model'].to_list()
         rates_oil_fact = df_test['prod_oil'].to_list()
         rates_oil_model = df_test['prod_oil_model'].to_list()
-        trace_1 = cls._create_trace('rate_liq_fact', x, rates_liq_fact, mode='lines+markers', marker_size=5)
-        trace_2 = cls._create_trace('rate_oil_fact', x, rates_oil_fact)
-        trace_3 = cls._create_trace('rate_oil_model', x, rates_oil_model)
+        trace_1 = cls._create_trace('rate_liq_fact', x, rates_liq_fact, mode='lines+markers', marker_size=3)
+        trace_2 = cls._create_trace('rate_liq_model', x, rates_liq_model, mode='lines+markers', marker_size=3)
+        trace_3 = cls._create_trace('rate_oil_fact', x, rates_oil_fact, mode='lines+markers', marker_size=3)
+        trace_4 = cls._create_trace('rate_oil_model', x, rates_oil_model, mode='lines+markers', marker_size=3)
         cls._fig.add_trace(trace_1, **pos)
-        cls._fig.add_trace(trace_2, secondary_y=True, **pos)
+        cls._fig.add_trace(trace_2, **pos)
         cls._fig.add_trace(trace_3, secondary_y=True, **pos)
+        cls._fig.add_trace(trace_4, secondary_y=True, **pos)
         cls._fig.update_xaxes(title_text='date', **pos)
-        cls._fig.update_yaxes(title_text='rate_liquid_fact, m3/d', **pos)
+        cls._fig.update_yaxes(title_text='rate_liq, m3/d', **pos)
         cls._fig.update_yaxes(title_text='rate_oil, m3/d', secondary_y=True, **pos)

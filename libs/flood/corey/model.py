@@ -87,7 +87,7 @@ class CoreyModel(object):
 
     def _minimize_trend(self):
         params_min_max = list(self.params.usable_params.values())
-        params = Optimizer.calc_params(self._loss_function_trend, params_min_max, method='shgo')
+        params = Optimizer.calc_params(self._loss_function_trend, params_min_max, method='diff')
 
     def _minimize_last_value(self):
         initial_guess = self.params.watercut_initial

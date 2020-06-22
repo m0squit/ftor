@@ -8,7 +8,7 @@ from libs.plot.bokeh.research_plot import ResearchPlot
 from libs.plot.plotly.units_plot import UnitsPlot
 from libs.plot.plotly.performance_plot import PerformancePlot
 
-path = pathlib.Path.cwd().parent / 'tests' / 'data' / 'real' / 'nng' / 'kholmogorskoe'
+path = pathlib.Path.cwd().parent / 'tests' / 'data' / 'real' / 'nng' / 'otdelnoe'
 
 
 def run_app(settings: Settings):
@@ -27,7 +27,7 @@ def run_app(settings: Settings):
     # wb.close()
 
 
-ratios = [10]
+ratios = [0.5]
 for ratio in ratios:
     _settings = Settings(project_name='',
                          forecast_days_number=90,

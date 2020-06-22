@@ -29,21 +29,24 @@ class Parser(object):
     def _create_input_data(cls):
         cls._input_data = InputData()
         names_wells = cls._df_month['well'].unique()
+        # TODO: Delete 33-35 rows. It is only for tested otdelnoe field case.
         names_wells = [name_well.replace('Г', '') for name_well in names_wells]
-        # names_wells = ['232']
+        names_wells.remove('7')
+        names_wells.remove('50')
+        # names_wells = ['28']
         for name_well in names_wells:
             cls._cut_well(name_well)
 
     @classmethod
     def _cut_well(cls, name_well):
         data = {}
-        df_month = cls._df_month[cls._df_month['well'] == name_well]
-        df_month = Handler.run(df_month)
+        df_month = cls._df_month[cls._df_month['well'] == f'{name_well}Г']
+        df_month = Handler.run(df_month, df_type='month')
 
         df_day = cls._df_day[cls._df_day['well'] == name_well]
         density = 0.858
         df_day = cls._convert_prod_oil_units(df_day, density)
-        df_day = Handler.run(df_day)
+        df_day = Handler.run(df_day, df_type='day')
 
         data['df_month'] = df_month
         data['df_day'] = df_day

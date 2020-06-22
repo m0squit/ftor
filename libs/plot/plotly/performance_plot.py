@@ -17,14 +17,16 @@ class PerformancePlot(_Plot):
 
     @classmethod
     def _create_fig(cls):
-        cls._fig = subplots.make_subplots(rows=2,
+        cls._fig = subplots.make_subplots(rows=3,
                                           cols=1,
                                           print_grid=True,
-                                          subplot_titles=['Average deviations for wells per day',
+                                          subplot_titles=['Average relative deviations for wells per day',
+                                                          'Average absolute deviations for wells per day',
                                                           'Mean absolute errors per well'],
                                           specs=[[{'secondary_y': True}],
+                                                 [{'secondary_y': True}],
                                                  [{}]],
-                                          row_heights=[0.4, 0.6])
+                                          row_heights=[0.4, 0.4, 0.3])
         cls._fig.layout.template = 'plotly'
         cls._fig.update_layout(width=1400,
                                title=dict(text=f'<b>Total performance on 90 days<b>',
@@ -37,7 +39,8 @@ class PerformancePlot(_Plot):
                                bargroupgap=0.05)
         cls._add_11()
         cls._add_21()
-        file = str(cls._settings.path / f'performance_{cls._settings.ratio_points_month_day}')
+        cls._add_31()
+        file = str(cls._settings.path / 'performance')
         pl.io.write_html(cls._fig, f'{file}.html', auto_open=False)
 
     @classmethod
@@ -47,26 +50,55 @@ class PerformancePlot(_Plot):
         x = [i for i in range(1, cls._settings.forecast_days_number + 1)]
         devs_rel_rate_oil = df['dev_rel_rate_oil'].to_list()
         devs_rel_cum_oil = df['dev_rel_cum_oil'].to_list()
-        trace_1 = cls._create_trace('dev_rel_rate', x, devs_rel_rate_oil, mode='lines+markers', marker_size=5)
-        trace_2 = cls._create_trace('dev_abs_cum', x, devs_rel_cum_oil, fill='tozeroy')
+        devs_rel_rate_liq = df['dev_rel_rate_liq'].to_list()
+        devs_rel_cum_liq = df['dev_rel_cum_liq'].to_list()
+        trace_1 = cls._create_trace('rel_rate_oil', x, devs_rel_rate_oil, mode='lines+markers', marker_size=5)
+        trace_2 = cls._create_trace('rel_cum_oil', x, devs_rel_cum_oil, mode='lines+markers', marker_size=5)
+        trace_3 = cls._create_trace('rel_rate_liq', x, devs_rel_rate_liq, mode='lines+markers', marker_size=5)
+        trace_4 = cls._create_trace('rel_cum_liq', x, devs_rel_cum_liq, mode='lines+markers', marker_size=5)
         cls._fig.add_trace(trace_1, **pos)
         cls._fig.add_trace(trace_2, secondary_y=True, **pos)
+        cls._fig.add_trace(trace_3, **pos)
+        cls._fig.add_trace(trace_4, secondary_y=True, **pos)
+
         cls._fig.update_xaxes(title_text='day', **pos)
-        cls._fig.update_yaxes(title_text='relative_deviation_rate, fr', **pos)
-        cls._fig.update_yaxes(title_text='relative_deviation_cum, fr', secondary_y=True, **pos)
+        cls._fig.update_yaxes(title_text='deviation_rate, %', **pos)
+        cls._fig.update_yaxes(title_text='deviation_cum, %', secondary_y=True, **pos)
 
     @classmethod
     def _add_21(cls):
         pos = dict(row=2, col=1)
+        df = cls._project.df_result
+        x = [i for i in range(1, cls._settings.forecast_days_number + 1)]
+        devs_abs_rate_oil = df['dev_abs_rate_oil'].to_list()
+        devs_abs_cum_oil = df['dev_abs_cum_oil'].to_list()
+        devs_abs_rate_liq = df['dev_abs_rate_liq'].to_list()
+        devs_abs_cum_liq = df['dev_abs_cum_liq'].to_list()
+        trace_1 = cls._create_trace('abs_rate_oil', x, devs_abs_rate_oil, mode='lines+markers', marker_size=5)
+        trace_2 = cls._create_trace('abs_cum_oil', x, devs_abs_cum_oil, mode='lines+markers', marker_size=5)
+        trace_3 = cls._create_trace('abs_rate_liq', x, devs_abs_rate_liq, mode='lines+markers', marker_size=5)
+        trace_4 = cls._create_trace('abs_cum_liq', x, devs_abs_cum_liq, mode='lines+markers', marker_size=5)
+        cls._fig.add_trace(trace_1, **pos)
+        cls._fig.add_trace(trace_2, secondary_y=True, **pos)
+        cls._fig.add_trace(trace_3, **pos)
+        cls._fig.add_trace(trace_4, secondary_y=True, **pos)
+
+        cls._fig.update_xaxes(title_text='day', **pos)
+        cls._fig.update_yaxes(title_text='deviation_rate, m3', **pos)
+        cls._fig.update_yaxes(title_text='deviation_cum, m3', secondary_y=True, **pos)
+
+    @classmethod
+    def _add_31(cls):
+        pos = dict(row=3, col=1)
         x = [f'well_{well.name}' for well in cls._project.wells]
         maes_train = cls._project.maes_train
         maes_test = cls._project.maes_test
-        trace_1 = go.Bar(x=x, y=maes_train, name='mae_train')
-        trace_2 = go.Bar(x=x, y=maes_test, name='mae_test')
+        trace_1 = go.Bar(x=x, y=maes_train, name='MAE_train')
+        trace_2 = go.Bar(x=x, y=maes_test, name='MAE_test')
         cls._fig.add_trace(trace_1, **pos)
         cls._fig.add_trace(trace_2, **pos)
         cls._draw_lines(x, pos)
-        cls._fig.update_yaxes(title_text='mae, fr', **pos)
+        cls._fig.update_yaxes(title_text='MAE, fr', **pos)
 
     @classmethod
     def _draw_lines(cls, x, pos):
