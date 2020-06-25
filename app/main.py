@@ -1,5 +1,4 @@
 import pathlib
-import xlwings as xw
 
 from app.calculator import Calculator
 from data.excel import ExcelRepository
@@ -18,13 +17,6 @@ def run_app(settings: Settings):
     UnitsPlot.create(settings, project)
     # ResearchPlot.create(path, project)
     PerformancePlot.create(settings, project)
-
-    # wb = xw.Book()
-    # sht = wb.sheets['Лист1']
-    # df = project.df_result
-    # sht.range('A1').value = df
-    # wb.save(path=path / 'results')
-    # wb.close()
 
 
 ratios = [0.5]

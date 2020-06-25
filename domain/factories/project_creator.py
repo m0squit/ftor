@@ -45,9 +45,13 @@ class ProjectCreator(object):
 
     @classmethod
     def _create_report(cls) -> Report:
+        report = Report()
+        report.df_month = cls._df_month
+        report.df_day = cls._df_day
         cls._create_df_test()
         cls._create_df_train()
-        report = Report(cls._df_train, cls._df_test)
+        report.df_train = cls._df_train
+        report.df_test = cls._df_test
         return report
 
     @classmethod

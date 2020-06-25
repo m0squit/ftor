@@ -1,3 +1,5 @@
+import datetime
+
 from typing import List
 
 from domain.value_objects.report import Report
@@ -17,6 +19,7 @@ class Well(object):
 
     def calc(self, rates_liq: List[float]):
         self._predict_rate_oil(rates_liq)
+        self._create_df_test_month()
         self._calc_metric()
 
     def _create_flood_model(self):
@@ -38,6 +41,23 @@ class Well(object):
 
         self.report.df_test['cum_oil'] = self.report.df_test['prod_oil'].cumsum()
         self.report.df_test['cum_oil_model'] = self.report.df_test['prod_oil_model'].cumsum()
+
+    def _create_df_test_month(self):
+        first_test_date = self.report.df_test.index[0]
+        df_test_month = self.report.df_month.loc[first_test_date:]
+        df_test_month = df_test_month.drop(columns='watercut')
+        months = [date.month for date in df_test_month.index]
+        prods_oil_model = []
+        prods_liq_model = []
+        for month in months:
+            df = self.report.df_test.filter(like=f'-0{month}-', axis='index')
+            prod_oil_model = df['prod_oil_model'].sum()
+            prod_liq_model = df['prod_liq_model'].sum()
+            prods_oil_model.append(prod_oil_model)
+            prods_liq_model.append(prod_liq_model)
+        df_test_month = df_test_month.assign(prod_oil_model=prods_oil_model)
+        df_test_month = df_test_month.assign(prods_liq_model=prods_liq_model)
+        self.report.df_test_month = df_test_month
 
     def _calc_metric(self):
         self._calc_metric_watercut()
