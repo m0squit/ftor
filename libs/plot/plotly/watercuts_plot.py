@@ -20,23 +20,25 @@ class WatercutsPlot(_Plot):
     @classmethod
     def _create_fig(cls):
         well_name = f'{cls._well.name}'
-        cls._fig = subplots.make_subplots(rows=2,
-                                          cols=1,
+        cls._fig = subplots.make_subplots(rows=1,
+                                          cols=2,
                                           shared_xaxes=True,
                                           print_grid=True,
-                                          vertical_spacing=0.1,
+                                          horizontal_spacing=0.1,
                                           subplot_titles=['Параметры модели ftor',
-                                                          'Обводненность: обучение и прогноз'],
-                                          specs=[[{'type': 'table'}],
-                                                 [{}]],
-                                          row_heights=[0.4, 0.6])
-        cls._fig.layout.template = 'plotly'
-        cls._fig.update_layout(width=900,
-                               title=dict(text=f'<b>Прогноз обводненности по скважине {well_name}<b>', font=dict(size=20)),
-                               font=dict(family='Jost', size=12),
+                                                          'Обводненность, д. ед.: обучение и прогноз'],
+                                          specs=[[{'type': 'table'}, {}]],
+                                          column_widths=[0.3, 0.7])
+        cls._fig.layout.template = 'seaborn'
+        cls._fig.update_layout(width=1450,
+                               title=dict(text=f'<b>Прогноз обводненности по скважине {well_name}<b>',
+                                          font=dict(size=20),
+                                          x=0.05,
+                                          xanchor='left'),
+                               font=dict(family='Jost', size=10),
                                hovermode='x')
         cls._add_11()
-        cls._add_21()
+        cls._add_12()
         file = str(cls._settings.path / f'wc_{well_name}')
         pl.io.write_html(cls._fig, f'{file}.html', auto_open=False)
 
@@ -69,8 +71,8 @@ class WatercutsPlot(_Plot):
         return data
 
     @classmethod
-    def _add_21(cls):
-        pos = dict(row=2, col=1)
+    def _add_12(cls):
+        pos = dict(row=1, col=2)
         df_train = cls._well.report.df_train
         df_test = cls._well.report.df_test
         x = df_train.index.to_list() + df_test.index.to_list()
@@ -82,7 +84,7 @@ class WatercutsPlot(_Plot):
         cls._fig.add_trace(trace_2, **pos)
         cls._draw_train_test_delimiter(df_train, pos)
         cls._fig.update_xaxes(title_text='дата', **pos)
-        cls._fig.update_yaxes(title_text='обводненность, д. ед.', **pos)
+        cls._fig.update_yaxes(title_text='обводненность', **pos)
 
     @classmethod
     def _draw_train_test_delimiter(cls, df, pos):

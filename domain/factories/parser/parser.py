@@ -23,7 +23,7 @@ class Parser(object):
     @classmethod
     def _read(cls, path: Path):
         cls._df_month = ExcelReader().run_specific(path / 'month.xlsx', usecols=[0, 1, 20, 21], skiprows=5)
-        cls._df_day = CsvReader().run_specific(path / 'day_new.csv', usecols=[1, 0, 35, 32], skiprows=1)
+        cls._df_day = CsvReader().run_specific(path / 'day.csv', usecols=[1, 0, 35, 32], skiprows=1)
 
     @classmethod
     def _create_input_data(cls):

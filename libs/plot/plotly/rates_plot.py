@@ -26,17 +26,21 @@ class RatesPlot(_Plot):
                                           print_grid=True,
                                           horizontal_spacing=0.1,
                                           vertical_spacing=0.1,
-                                          subplot_titles=['Дебит',
-                                                          'Добыча',
-                                                          'Отн. отклонение дебита от факта',
-                                                          'Отн. отклонение добычи от факта'],
+                                          subplot_titles=['Дебит, м3/д',
+                                                          'Добыча, м3',
+                                                          'Отн. отклонение дебита от факта, %',
+                                                          'Отн. отклонение добычи от факта, %'],
                                           specs=[[{'secondary_y': True}, {}],
                                                  [{'secondary_y': True}, {'secondary_y': True}]],
-                                          column_widths=[0.6, 0.4])
-        cls._fig.layout.template = 'plotly'
+                                          column_widths=[0.7, 0.3])
+
+        cls._fig.layout.template = 'seaborn'
         cls._fig.update_layout(width=1450,
-                               title=dict(text=f'<b>Прогноз добычи по скважине {well_name}<b>', font=dict(size=20)),
-                               font=dict(family='Jost', size=11),
+                               title=dict(text=f'<b>Прогноз добычи по скважине {well_name}<b>',
+                                          font=dict(size=20),
+                                          x=0.05,
+                                          xanchor='left'),
+                               font=dict(family='Jost', size=10),
                                hovermode='x',
                                barmode='group',
                                bargap=0.2,
@@ -68,8 +72,8 @@ class RatesPlot(_Plot):
         cls._fig.add_trace(trace_3, **pos)
         cls._fig.add_trace(trace_4, secondary_y=True, **pos)
         cls._fig.add_trace(trace_5, secondary_y=True, **pos)
-        cls._fig.update_yaxes(title_text='нефть, м3/д', **pos)
-        cls._fig.update_yaxes(title_text='жидкость, м3/д', secondary_y=True, **pos)
+        cls._fig.update_yaxes(title_text='нефть', **pos)
+        cls._fig.update_yaxes(title_text='жидкость', secondary_y=True, **pos)
 
     @classmethod
     def _add_12(cls):
@@ -81,17 +85,16 @@ class RatesPlot(_Plot):
         prod_oil_model = df['prod_oil_model'].to_list()
         prod_liq_fact = df['prod_liq'].to_list()
         prod_liq_model = df['prod_liq_model'].to_list()
-        trace_1 = go.Bar(name='неф_факт', x=x, y=prod_oil_fact, marker=dict(color='#636EFA'))
-        trace_2 = go.Bar(name='неф_ftor', x=x, y=prod_oil_model, marker=dict(color='#EF553B'))
-        trace_3 = go.Bar(name='неф_ксг', x=x, y=prod_oil_ksg, marker=dict(color='#00CC96'))
-        trace_4 = go.Bar(name='жид_факт', x=x, y=prod_liq_fact, visible='legendonly')
-        trace_5 = go.Bar(name='жид_ftor', x=x, y=prod_liq_model, visible='legendonly')
+        trace_1 = go.Bar(name='неф_факт', x=x, y=prod_oil_fact, marker=dict(color='#636EFA'), opacity=0.4)
+        trace_2 = go.Bar(name='неф_ftor', x=x, y=prod_oil_model, marker=dict(color='#EF553B'), opacity=0.4)
+        trace_3 = go.Bar(name='неф_ксг', x=x, y=prod_oil_ksg, marker=dict(color='#00CC96'), opacity=0.4)
+        trace_4 = go.Bar(name='жид_факт', x=x, y=prod_liq_fact, visible='legendonly', opacity=0.4)
+        trace_5 = go.Bar(name='жид_ftor', x=x, y=prod_liq_model, visible='legendonly', opacity=0.4)
         cls._fig.add_trace(trace_1, **pos)
         cls._fig.add_trace(trace_2, **pos)
         cls._fig.add_trace(trace_3, **pos)
         cls._fig.add_trace(trace_4, **pos)
         cls._fig.add_trace(trace_5, **pos)
-        cls._fig.update_yaxes(title_text='объем, м3', **pos)
 
     @classmethod
     def _add_21(cls):
@@ -108,8 +111,8 @@ class RatesPlot(_Plot):
         cls._fig.add_trace(trace_2, **pos)
         cls._fig.add_trace(trace_3, **pos)
         cls._fig.update_xaxes(title_text='дата', **pos)
-        cls._fig.update_yaxes(title_text='нефть, %', **pos)
-        cls._fig.update_yaxes(title_text='жидкость, %', secondary_y=True, **pos)
+        cls._fig.update_yaxes(title_text='нефть', **pos)
+        cls._fig.update_yaxes(title_text='жидкость', secondary_y=True, **pos)
 
     @classmethod
     def _add_22(cls):
@@ -125,10 +128,10 @@ class RatesPlot(_Plot):
         devs_rel_cum_oil_model = df_test_day['dev_rel_cum_oil_model'].to_list()
         devs_rel_cum_oil_ksg = df_test_day['dev_rel_cum_oil_ksg'].to_list()
 
-        trace_1 = go.Bar(name='мес_неф_ftor', x=x_month, y=devs_prod_oil_model, marker=dict(color='#EF553B'))
-        trace_2 = go.Bar(name='мес_неф_ксг', x=x_month, y=devs_prod_oil_ksg, marker=dict(color='#00CC96'))
-        trace_3 = go.Bar(name='мес_жид_ftor', x=x_month, y=devs_prod_liq_model, visible='legendonly')
-        trace_4 = cls._create_trace('накоп_жид_ftor', x_day, devs_rel_cum_liq, mode='lines+markers', marker_size=3)
+        trace_1 = go.Bar(name='мес_неф_ftor', x=x_month, y=devs_prod_oil_model, marker=dict(color='#EF553B'), opacity=0.4)
+        trace_2 = go.Bar(name='мес_неф_ксг', x=x_month, y=devs_prod_oil_ksg, marker=dict(color='#00CC96'), opacity=0.4)
+        trace_3 = go.Bar(name='мес_жид_ftor', x=x_month, y=devs_prod_liq_model, visible='legendonly', opacity=0.4)
+        trace_4 = cls._create_trace('накоп_жид_ftor', x_day, devs_rel_cum_liq, mode='lines+markers', marker_size=3, visible='legendonly')
         trace_5 = cls._create_trace('накоп_неф_ftor', x_day, devs_rel_cum_oil_model, mode='lines+markers', marker_size=3)
         trace_6 = cls._create_trace('накоп_неф_ксг', x_day, devs_rel_cum_oil_ksg, mode='lines+markers', marker_size=3)
 
@@ -139,5 +142,5 @@ class RatesPlot(_Plot):
         cls._fig.add_trace(trace_5, secondary_y=True, **pos)
         cls._fig.add_trace(trace_6, secondary_y=True, **pos)
         cls._fig.update_xaxes(title_text='дата', **pos)
-        cls._fig.update_yaxes(title_text='добыча за месяц, %', **pos)
-        cls._fig.update_yaxes(title_text='накопленная добыча, %', secondary_y=True, **pos)
+        cls._fig.update_yaxes(title_text='добыча за месяц', **pos)
+        cls._fig.update_yaxes(title_text='накопленная добыча', secondary_y=True, **pos)

@@ -45,16 +45,22 @@ class Calculator(object):
             prods_oil_ksg.extend(s)
 
         dates = project.wells[0].report.df_test.index
+
+        ratios = {}
+        date = dates[0]
+        prod_oil = 0
+        for well in project.wells:
+            prod_oil += well.report.df_test['prod_oil'].loc[date]
+        for well in project.wells:
+            prod_oil_fact = well.report.df_test['prod_oil'].loc[date]
+            ratio = prod_oil_fact / prod_oil
+            ratios[well.name] = ratio
+
         for i in range(len(prods_oil_ksg)):
             prod_oil_ksg = prods_oil_ksg[i]
             date = dates[i]
-            prod_oil = 0
             for well in project.wells:
-                prod_oil += well.report.df_test['prod_oil'].loc[date]
-            for well in project.wells:
-                prod_oil_fact = well.report.df_test['prod_oil'].loc[date]
-                ratio = prod_oil_fact / prod_oil
-                well.report.df_test['prod_oil_ksg'].loc[date] = prod_oil_ksg * ratio
+                well.report.df_test['prod_oil_ksg'].loc[date] = prod_oil_ksg * ratios[well.name]
 
         for well in project.wells:
             print(well.name)
