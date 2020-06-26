@@ -41,52 +41,68 @@ class Well(object):
 
         self.report.df_test['cum_oil'] = self.report.df_test['prod_oil'].cumsum()
         self.report.df_test['cum_oil_model'] = self.report.df_test['prod_oil_model'].cumsum()
+        self.report.df_test['cum_oil_ksg'] = self.report.df_test['prod_oil_ksg'].cumsum()
 
     def _create_df_test_month(self):
         first_test_date = self.report.df_test.index[0]
         df_test_month = self.report.df_month.loc[first_test_date:]
         df_test_month = df_test_month.drop(columns='watercut')
         months = [date.month for date in df_test_month.index]
+        prods_oil_ksg = []
         prods_oil_model = []
         prods_liq_model = []
         for month in months:
             df = self.report.df_test.filter(like=f'-0{month}-', axis='index')
+            prod_oil_ksg = df['prod_oil_ksg'].sum()
             prod_oil_model = df['prod_oil_model'].sum()
             prod_liq_model = df['prod_liq_model'].sum()
+            prods_oil_ksg.append(prod_oil_ksg)
             prods_oil_model.append(prod_oil_model)
             prods_liq_model.append(prod_liq_model)
+        df_test_month = df_test_month.assign(prod_oil_ksg=prods_oil_ksg)
         df_test_month = df_test_month.assign(prod_oil_model=prods_oil_model)
-        df_test_month = df_test_month.assign(prods_liq_model=prods_liq_model)
+        df_test_month = df_test_month.assign(prod_liq_model=prods_liq_model)
         self.report.df_test_month = df_test_month
+        self._calc_metric_prod_phase_for_df_test_month(phase='liq', calc='model')
+        self._calc_metric_prod_phase_for_df_test_month(phase='oil', calc='model')
+        self._calc_metric_prod_phase_for_df_test_month(phase='oil', calc='ksg')
+
+    def _calc_metric_prod_phase_for_df_test_month(self, phase: str, calc: str):
+        self.report.df_test_month[f'dev_abs_prod_{phase}_{calc}'] = None
+        self.report.df_test_month[f'dev_rel_prod_{phase}_{calc}'] = None
+
+        for i in self.report.df_test_month.index:
+            prod_fact = self.report.df_test_month.loc[i, f'prod_{phase}']
+            prod_model = self.report.df_test_month.loc[i, f'prod_{phase}_{calc}']
+            term_1 = abs(prod_fact - prod_model)
+            term_2 = max(prod_fact, prod_model)
+            self.report.df_test_month.loc[i, f'dev_abs_prod_{phase}_{calc}'] = term_1
+            self.report.df_test_month.loc[i, f'dev_rel_prod_{phase}_{calc}'] = term_1 / term_2 * 100
 
     def _calc_metric(self):
         self._calc_metric_watercut()
-        self._calc_metric_prod_phase(phase='liq')
-        self._calc_metric_prod_phase(phase='oil')
+        self._calc_metric_prod_phase(phase='liq', calc='model')
+        self._calc_metric_prod_phase(phase='oil', calc='model')
+        self._calc_metric_prod_phase(phase='oil', calc='ksg')
 
     def _calc_metric_watercut(self):
         watercuts_fact = self.report.df_test['watercut'].to_list()
         watercuts_model = self.report.df_test['watercut_model'].to_list()
         self.flood_model.mae_test = LossFunction.run(watercuts_fact, watercuts_model)
 
-    def _calc_metric_prod_phase(self, phase: str):
-        self.report.df_test[f'dev_abs_rate_{phase}'] = None
-        self.report.df_test[f'dev_abs_cum_{phase}'] = None
-
-        self.report.df_test[f'dev_rel_rate_{phase}'] = None
-        self.report.df_test[f'dev_rel_cum_{phase}'] = None
+    def _calc_metric_prod_phase(self, phase: str, calc: str):
+        self.report.df_test[f'dev_rel_rate_{phase}_{calc}'] = None
+        self.report.df_test[f'dev_rel_cum_{phase}_{calc}'] = None
 
         for i in self.report.df_test.index:
             prod_fact = self.report.df_test.loc[i, f'prod_{phase}']
-            prod_model = self.report.df_test.loc[i, f'prod_{phase}_model']
+            prod_model = self.report.df_test.loc[i, f'prod_{phase}_{calc}']
             term_1 = abs(prod_fact - prod_model)
             term_2 = max(prod_fact, prod_model)
-            self.report.df_test.loc[i, f'dev_abs_rate_{phase}'] = term_1
-            self.report.df_test.loc[i, f'dev_rel_rate_{phase}'] = term_1 / term_2 * 100
+            self.report.df_test.loc[i, f'dev_rel_rate_{phase}_{calc}'] = term_1 / term_2 * 100
 
             cum_fact = self.report.df_test.loc[i, f'cum_{phase}']
-            cum_model = self.report.df_test.loc[i, f'cum_{phase}_model']
+            cum_model = self.report.df_test.loc[i, f'cum_{phase}_{calc}']
             term_1 = abs(cum_fact - cum_model)
             term_2 = max(cum_fact, cum_model)
-            self.report.df_test.loc[i, f'dev_abs_cum_{phase}'] = term_1
-            self.report.df_test.loc[i, f'dev_rel_cum_{phase}'] = term_1 / term_2 * 100
+            self.report.df_test.loc[i, f'dev_rel_cum_{phase}_{calc}'] = term_1 / term_2 * 100

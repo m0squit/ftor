@@ -32,14 +32,17 @@ class Parser(object):
         # TODO: Delete 33-35 rows. It is only for tested otdelnoe field case.
         names_wells = [name_well.replace('Г', '') for name_well in names_wells]
         names_wells.remove('7')
-        # names_wells = ['1']
+        # names_wells = ['50']
         for name_well in names_wells:
             cls._cut_well(name_well)
 
     @classmethod
     def _cut_well(cls, name_well):
         data = {}
-        df_month = cls._df_month[cls._df_month['well'] == f'{name_well}Г']
+        if name_well == '50' or name_well == '52' or name_well == '53' or name_well == '54' or name_well == '55' or name_well == '68Р':
+            df_month = cls._df_month[cls._df_month['well'] == f'{name_well}']
+        else:
+            df_month = cls._df_month[cls._df_month['well'] == f'{name_well}Г']
         df_month = Handler.run(df_month, df_type='month')
 
         df_day = cls._df_day[cls._df_day['well'] == name_well]

@@ -25,9 +25,6 @@ class Calculator(object):
         data = data.transpose()
 
         for well in project.wells:
-            print(well.name)
-            rates_liq_model = data[well.name].to_list()
-            well.calc(rates_liq_model)
             well.report.df_test['prod_oil_ksg'] = None
 
         read_params = {'02': {'col': 'K', 'skiprows': 10, 'nrows': 86},
@@ -58,5 +55,10 @@ class Calculator(object):
                 prod_oil_fact = well.report.df_test['prod_oil'].loc[date]
                 ratio = prod_oil_fact / prod_oil
                 well.report.df_test['prod_oil_ksg'].loc[date] = prod_oil_ksg * ratio
+
+        for well in project.wells:
+            print(well.name)
+            rates_liq_model = data[well.name].to_list()
+            well.calc(rates_liq_model)
 
         return project

@@ -4,7 +4,8 @@ from app.calculator import Calculator
 from data.excel import ExcelRepository
 from data.settings import Settings
 from libs.plot.bokeh.research_plot import ResearchPlot
-from libs.plot.plotly.units_plot import UnitsPlot
+from libs.plot.plotly.rates_plot import RatesPlot
+from libs.plot.plotly.watercuts_plot import WatercutsPlot
 from libs.plot.plotly.performance_plot import PerformancePlot
 
 path = pathlib.Path.cwd().parent / 'tests' / 'data' / 'real' / 'nng' / 'otdelnoe'
@@ -14,7 +15,8 @@ def run_app(settings: Settings):
     repository = ExcelRepository(path)
     project = repository.create_project(settings)
     project = Calculator.run(project)
-    UnitsPlot.create(settings, project)
+    RatesPlot.create(settings, project)
+    WatercutsPlot.create(settings, project)
     # ResearchPlot.create(path, project)
     PerformancePlot.create(settings, project)
 
