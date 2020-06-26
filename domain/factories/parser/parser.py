@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import List
 
 from pandas import DataFrame
 
@@ -26,35 +27,32 @@ class Parser(object):
         cls._df_day = CsvReader().run_specific(path / 'day.csv', usecols=[1, 0, 35, 32], skiprows=1)
 
     @classmethod
-    def _create_input_data(cls):
-        cls._input_data = InputData()
-        names_wells = cls._df_month['well'].unique()
-        # TODO: Delete 33-35 rows. It is only for tested otdelnoe field case.
-        names_wells = [name_well.replace('Г', '') for name_well in names_wells]
-        names_wells.remove('7')
-        # names_wells = ['50']
-        for name_well in names_wells:
-            cls._cut_well(name_well)
+    def _define_well_names(cls) -> List:
+        # TODO: Delete some rows. In this form it is work only for Otdelnoe field case.
+        cls._df_month = cls._df_month.assign(well=lambda x: x.replace('Г', ''))
+        well_names = cls._df_month['well'].unique()
+        well_names.remove('7')
+        return well_names
 
     @classmethod
-    def _cut_well(cls, name_well):
-        data = {}
-        if name_well == '50' or name_well == '52' or name_well == '53' or name_well == '54' or name_well == '55' or name_well == '68Р':
-            df_month = cls._df_month[cls._df_month['well'] == f'{name_well}']
-        else:
-            df_month = cls._df_month[cls._df_month['well'] == f'{name_well}Г']
-        df_month = Handler.run(df_month, df_type='month')
+    def _create_input_data(cls):
+        cls._input_data = InputData()
+        well_names = cls._define_well_names()
+        for well_name in well_names:
+            cls._cut_well(well_name)
 
-        df_day = cls._df_day[cls._df_day['well'] == name_well]
+    @classmethod
+    def _cut_well(cls, well_name: str):
         # TODO: Change density value for specific oil field. 0.858 for Kholmogorskoe, 0.849 for Otdelnoe.
         density = 0.849
+
+        df_month = cls._df_month[cls._df_month['well'] == f'{well_name}']
+        df_day = cls._df_day[cls._df_day['well'] == well_name]
         df_day = cls._convert_prod_oil_units(df_day, density)
+        df_month = Handler.run(df_month, df_type='month')
         df_day = Handler.run(df_day, df_type='day')
-
-        data['df_month'] = df_month
-        data['df_day'] = df_day
-
-        cls._input_data.add_well(name_well, data)
+        well_data = {'df_month': df_month, 'df_day': df_day}
+        cls._input_data.add_well(well_name, well_data)
 
     @staticmethod
     def _convert_prod_oil_units(df, density):
