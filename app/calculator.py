@@ -31,7 +31,7 @@ class Calculator(object):
 
         dates = cls._project.wells[0].report.df_test.index
 
-        # Define prod_oil ratios in prod_oil_total for each well by first forecast day
+        # Define prod_oil_fact ratios in prod_oil_total for each well by first forecast day
         ratios = {}
         first_forecast_date = dates[0]
         prod_oil_total = 0

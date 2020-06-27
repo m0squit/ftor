@@ -1,6 +1,5 @@
 import datetime
 from typing import List
-from numpy import cumsum
 from pandas import DataFrame, concat
 
 from data.settings import Settings
@@ -41,7 +40,7 @@ class ProjectCreator(object):
 
     @classmethod
     def _create_project(cls):
-        cls._project = Project(cls._wells, cls._settings)
+        cls._project = Project(cls._settings, cls._wells)
 
     @classmethod
     def _create_report(cls) -> Report:
@@ -68,7 +67,7 @@ class ProjectCreator(object):
     @classmethod
     def _create_df_train(cls):
         cls._create_mix_month_day()
-        cls._df_train = cls._calc_cum_prods(cls._df_train)
+        cls._df_train = cls._calc_cumulative_productions(cls._df_train)
 
     @classmethod
     def _create_mix_month_day(cls):
@@ -96,13 +95,12 @@ class ProjectCreator(object):
         cls._df_day = cls._df_day.tail(number_points_day)
 
     @classmethod
-    def _calc_cum_prods(cls, df: DataFrame) -> DataFrame:
-        df = cls._calc_cum_prod(df, 'oil')
-        df = cls._calc_cum_prod(df, 'liq')
+    def _calc_cumulative_productions(cls, df: DataFrame) -> DataFrame:
+        df = cls._calc_cumulative_productions_phase(df, 'oil')
+        df = cls._calc_cumulative_productions_phase(df, 'liq')
         return df
 
     @staticmethod
-    def _calc_cum_prod(df: DataFrame, phase: str) -> DataFrame:
-        new_df = df.copy()
-        new_df[f'cum_prod_{phase}'] = cumsum(df[f'prod_{phase}'].to_list())
-        return new_df
+    def _calc_cumulative_productions_phase(df: DataFrame, phase: str) -> DataFrame:
+        df[f'cum_{phase}'] = df[f'prod_{phase}'].cumsum()
+        return df

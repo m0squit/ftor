@@ -29,8 +29,8 @@ class Parser(object):
     @classmethod
     def _define_well_names(cls) -> List:
         # TODO: Delete some rows. In this form it is work only for Otdelnoe field case.
-        cls._df_month = cls._df_month.assign(well=lambda x: x.replace('Г', ''))
-        well_names = cls._df_month['well'].unique()
+        cls._df_month['well'] = cls._df_month['well'].apply(lambda x: x.replace('Г', ''))
+        well_names = cls._df_month['well'].unique().tolist()
         well_names.remove('7')
         return well_names
 

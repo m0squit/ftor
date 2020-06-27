@@ -28,7 +28,7 @@ class _Plot(ABC):
         pass
 
     @staticmethod
-    def _create_trace(name_trace, x, y, mode='lines', marker_size=3, fill=None, visible=True):
+    def _create_trace(name_trace, x, y, color=None, mode='lines', marker_size=3, fill=None, visible=True):
         trace = go.Scatter(name=name_trace,
                            visible=visible,
                            showlegend=True,
@@ -36,7 +36,8 @@ class _Plot(ABC):
                            x=x,
                            y=y,
                            marker=dict(size=marker_size,
-                                       symbol='circle'),
+                                       symbol='circle',
+                                       color=color),
                            fill=fill)
         return trace
 

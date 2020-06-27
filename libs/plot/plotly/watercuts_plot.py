@@ -62,7 +62,7 @@ class WatercutsPlot(_Plot):
         units.append('fr')
         units.append('fr')
         values = [x for x in params.get_values()]
-        cum_prod_oil = cls._well.report.df_train['cum_prod_oil'].iloc[-1] / 1e6
+        cum_prod_oil = cls._well.report.df_train['cum_oil'].iloc[-1] / 1e6
         values.append(cum_prod_oil)
         values.append(cls._well.flood_model.mae_train)
         values.append(cls._well.flood_model.mae_test)
