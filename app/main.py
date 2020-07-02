@@ -21,16 +21,16 @@ def run_app(settings: Settings):
     # ResearchPlot.create(path, project)
     PerformancePlot.create(settings, project)
 
-    wb = xw.Book()
-    sht = wb.sheets['Лист1']
-    col = 1
-    for well in project.wells:
-        sht.range((1, col)).value = well.name
-        df = well.report.df_test[['prod_oil', 'prod_oil_model', 'prod_oil_ksg']]
-        sht.range((2, col)).value = df
-        col += 4
-    wb.save(path=path / 'oil_rate_values.xlsx')
-    wb.close()
+    # wb = xw.Book()
+    # sht = wb.sheets['Лист1']
+    # col = 1
+    # for well in project.wells:
+    #     sht.range((1, col)).value = well.name
+    #     df = well.report.df_test_month[['prod_oil', 'prod_oil_model', 'prod_oil_ksg']]
+    #     sht.range((2, col)).value = df
+    #     col += 4
+    # wb.save(path=path / 'oil_prod_values.xlsx')
+    # wb.close()
 
 
 ratios = [0.5]

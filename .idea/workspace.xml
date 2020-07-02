@@ -25,19 +25,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/platy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/platy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/calculator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/aggregates/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/aggregates/project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/entities/well.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/entities/well.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/factories/parser/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/factories/parser/parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/factories/project_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/factories/project_creator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/flood/corey/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/corey/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/plot/plotly/_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot/plotly/_plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/plot/plotly/performance_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot/plotly/performance_plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/plot/plotly/rates_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot/plotly/rates_plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/plot/plotly/watercuts_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/plot/plotly/watercuts_plot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +214,13 @@
       <workItem from="1593159272426" duration="10230000" />
       <workItem from="1593179732064" duration="1140000" />
       <workItem from="1593192058630" duration="8963000" />
-      <workItem from="1593238256697" duration="21559000" />
+      <workItem from="1593238256697" duration="21612000" />
+      <workItem from="1593419055653" duration="787000" />
+      <workItem from="1593438233780" duration="23000" />
+      <workItem from="1593439418651" duration="818000" />
+      <workItem from="1593683924503" duration="1662000" />
+      <workItem from="1593705325425" duration="6000" />
+      <workItem from="1593716787952" duration="1620000" />
     </task>
     <servers />
   </component>
@@ -274,38 +269,38 @@
     </state>
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587808430820" />
     <state x="32" y="105" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588413866863" />
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1593273611087">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1593441628624">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593273611087" />
-    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1593273611087">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593441628624" />
+    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1593441628624">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593273611087" />
-    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1593273611087">
+    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593441628624" />
+    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1593441628624">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593273611087" />
-    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1593273611087">
+    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593441628624" />
+    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1593441628624">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593273611087" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1593272879564">
+    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593441628624" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1593278874740">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593272879564" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1593272879560">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593278874740" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1593278874740">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1593272879560" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1593272879560">
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1593278874740" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1593278874740">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1593272879560" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1593272879564">
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1593278874740" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1593278874740">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1593272879564" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1593278874740" />
     <state x="238" y="39" key="SettingsEditor" timestamp="1591628424727">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -362,6 +357,6 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1593273433224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1593439640570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
   </component>
 </project>
