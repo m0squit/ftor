@@ -27,6 +27,16 @@
     <list default="true" id="b15d92cf-d3da-4e55-beb5-42900259bb5b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/entities/well.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/entities/well.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/flood/_predictor.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/_predictor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/flood/corey/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/flood/corey/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/corey_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/flood/corey/params.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/corey_model_params.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/numeric_tools/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/numeric_tools/loss_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/numeric_tools/loss_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/numeric_tools/optimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/numeric_tools/optimizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/numeric_tools/solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/flood/numeric_tools/solver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/numeric_tools/weight_distributor.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +53,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JupyterTrust" id="c40208a6-c3ad-4131-ac69-ca2cd696a011" />
   <component name="ProjectId" id="1ZAEMxykEfJ2djxq6cSChu7zfsf" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -64,11 +75,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OneDrive - Peter the Great St. Petersburg Polytechnical University\gpn\kappa\code\ftor\libs\flood" />
       <recent name="D:\OneDrive - Peter the Great St. Petersburg Polytechnical University\gpn\kappa\code\ftor\domain\factories\parser" />
       <recent name="D:\OneDrive - Peter the Great St. Petersburg Polytechnical University\gpn\kappa\code\ftor\domain\entities" />
       <recent name="D:\OneDrive - Peter the Great St. Petersburg Polytechnical University\gpn\kappa\code\ftor\domain\aggregates" />
       <recent name="D:\OneDrive - Peter the Great St. Petersburg Polytechnical University\gpn\kappa\code\ftor\domain\factories" />
-      <recent name="D:\OneDrive - Peter the Great St. Petersburg Polytechnical University\gpn\kappa\code\ftor\data" />
     </key>
   </component>
   <component name="RunManager">
@@ -94,13 +105,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ftor" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -109,7 +117,7 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/main.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -119,9 +127,11 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
   </component>
@@ -221,11 +231,12 @@
       <workItem from="1593683924503" duration="1662000" />
       <workItem from="1593705325425" duration="6000" />
       <workItem from="1593716787952" duration="1620000" />
+      <workItem from="1597212921661" duration="18977000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -240,10 +251,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="561" y="271" key="#Scopes" timestamp="1587890058722">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="561" y="271" key="#Scopes/0.0.1536.824@0.0.1536.824" timestamp="1587890058722" />
     <state x="186" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1589908406959">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -256,71 +263,50 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="873" y="225" width="488" height="592" key="#xdebugger.evaluate/0.0.1536.824@0.0.1536.824" timestamp="1593193450844" />
-    <state width="1534" height="440" key="DebuggerActiveHint" timestamp="1587821370015">
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom" timestamp="1597244362286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1534" height="440" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1587821370015" />
-    <state x="74" y="140" width="1350" height="638" key="DiffContextDialog" timestamp="1588012406992">
+    <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597244362286" />
+    <state width="1493" height="261" key="GridCell.Tab.0.center" timestamp="1597244362286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="74" y="140" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1588012406992" />
-    <state x="32" y="105" key="FileChooserDialogImpl" timestamp="1588413866863">
+    <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1597244362286" />
+    <state width="1493" height="261" key="GridCell.Tab.0.left" timestamp="1597244362286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="32" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587808430820" />
-    <state x="32" y="105" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588413866863" />
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1593441628624">
+    <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1597244362286" />
+    <state width="1493" height="261" key="GridCell.Tab.0.right" timestamp="1597244362286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593441628624" />
-    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1593441628624">
+    <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1597244362286" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1597244362286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593441628624" />
-    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1593441628624">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1597244362286" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1597244362286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593441628624" />
-    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1593441628624">
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1597244362286" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1597244362286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593441628624" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1593278874740">
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1597244362286" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1597244362286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593278874740" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1593278874740">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1593278874740" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1593278874740">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1593278874740" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1593278874740">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1593278874740" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1597244362286" />
     <state x="238" y="39" key="SettingsEditor" timestamp="1591628424727">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="232" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1587808430820" />
     <state x="238" y="39" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1591628424727" />
     <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1593160904042">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1593160904042" />
-    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1588027770513">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1588027770513" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog" timestamp="1589738932058">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1589738932058" />
-    <state x="472" y="261" key="com.intellij.ide.util.TipDialog" timestamp="1587808430820" />
-    <state x="384" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1587808430820" />
-    <state x="472" y="261" key="com.intellij.ide.util.TipDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1587808430820" />
     <state x="322" y="141" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1593271552017">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -357,6 +343,6 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1593439640570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/ftor$main.coverage" NAME="main Coverage Results" MODIFIED="1597244048398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
   </component>
 </project>

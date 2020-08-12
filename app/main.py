@@ -16,10 +16,10 @@ def run_app(settings: Settings):
     repository = ExcelRepository(path)
     project = repository.create_project(settings)
     project = Calculator.run(project)
-    RatesPlot.create(settings, project)
-    WatercutsPlot.create(settings, project)
+    # RatesPlot.create(settings, project)
+    # WatercutsPlot.create(settings, project)
     # ResearchPlot.create(path, project)
-    PerformancePlot.create(settings, project)
+    # PerformancePlot.create(settings, project)
 
     # wb = xw.Book()
     # sht = wb.sheets['Лист1']

@@ -4,10 +4,9 @@ import numpy as np
 import scipy.optimize as optimize
 
 from libs.flood._predictor import _Predictor
-from libs.flood.corey.params import CoreyModelParams
-from libs.numeric_tools.loss_function import LossFunction
-from libs.numeric_tools.optimizer import Optimizer
-from libs.numeric_tools.weight_distributor import WeightDistributor
+from libs.flood.corey_model_params import CoreyModelParams
+from libs.flood.numeric_tools.loss_function import LossFunction
+from libs.flood.numeric_tools.optimizer import Optimizer
 
 
 class CoreyModel(object):
@@ -72,7 +71,6 @@ class CoreyModel(object):
     def _set_model_preferences(self):
         self.recovery_factor_min = 0.05
         self.recovery_factor_max = 0.9
-        self.weights = WeightDistributor.run(self.cums_oil)
 
     def _add_stoiip_boundaries(self):
         cum_max = max(self.cums_oil) / 1e6
@@ -98,7 +96,7 @@ class CoreyModel(object):
         for cum_prod_oil in self.cums_oil:
             watercut_model = self.calc_watercut(cum_prod_oil)
             self.watercuts_model.append(watercut_model)
-        self.mae_train = LossFunction.run(self.watercuts_fact, self.watercuts_model, self.weights, mode='mae')
+        self.mae_train = LossFunction.run(self.watercuts_fact, self.watercuts_model, mode='mae')
 
     def _loss_function_trend(self, params: List[float]) -> float:
         self.params.set_values(params)
