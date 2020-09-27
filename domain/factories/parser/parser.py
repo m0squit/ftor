@@ -32,6 +32,7 @@ class Parser(object):
         cls._df_month['well'] = cls._df_month['well'].apply(lambda x: x.replace('Г', ''))
         well_names = cls._df_month['well'].unique().tolist()
         well_names.remove('7')
+        well_names = ['1']
         return well_names
 
     @classmethod

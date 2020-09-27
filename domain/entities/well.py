@@ -2,7 +2,7 @@ from typing import List
 
 from domain.value_objects.report import Report
 from libs.flood.corey_model import CoreyModel
-from libs.flood.numeric_tools.loss_function import LossFunction
+from libs.flood.loss_function import LossFunction
 
 
 class Well(object):

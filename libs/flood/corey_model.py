@@ -5,26 +5,20 @@ import scipy.optimize as optimize
 
 from libs.flood._predictor import _Predictor
 from libs.flood.corey_model_params import CoreyModelParams
-from libs.flood.numeric_tools.loss_function import LossFunction
-from libs.flood.numeric_tools.optimizer import Optimizer
+from libs.flood.loss_function import LossFunction
+from libs.flood._optimizer import Optimizer
 
 
 class CoreyModel(object):
     """Corey flood model.
 
     Attributes:
-        params: Setting parameters of model.
-            They auto define base on input train data.
+        params: Setting parameters of model. They auto define base on input train data.
         cums_oil: Train sequence of oil cumulative production values.
-        watercuts_fact: Train sequence of watercut values.
-            Each value must be correlated with value in "cum_prods_oil".
-        watercuts_model: Model sequence of watercut values.
-            Each value correlate with value in "cum_prods_oil".
+        watercuts_fact: Train sequence of watercut values. Each value must be correlated with value in "cum_prods_oil".
+        watercuts_model: Model sequence of watercut values. Each value correlate with value in "cum_prods_oil".
     """
-    def __init__(self,
-                 cums_oil: List[float],
-                 watercuts: List[float]):
-
+    def __init__(self, cums_oil: List[float], watercuts: List[float]):
         self.cums_oil = cums_oil
         self.watercuts_fact = watercuts
         self._create_model()
@@ -36,10 +30,7 @@ class CoreyModel(object):
         watercut = self.params.watercut_initial + 1 / (1 + term_1 / term_2)
         return watercut
 
-    def predict(self,
-                cum_oil_start: float,
-                cum_liq_start: float,
-                rates_liq: List[float]) -> Dict[str, List[float]]:
+    def predict(self, cum_oil_start: float, cum_liq_start: float, rates_liq: List[float]) -> Dict[str, List[float]]:
         """Predicts oil rate depending on liquid rate.
 
         Calculates watercut and oil rate values for each value of given liquid rate.
@@ -84,8 +75,9 @@ class CoreyModel(object):
         self._calc_watercut_model()
 
     def _minimize_trend(self):
-        params_min_max = list(self.params.usable_params.values())
-        params = Optimizer.calc_params(self._loss_function_trend, params_min_max, method='diff')
+        bounds = list(tuple(pair.values()) for pair in self.params.usable_params.values())
+        params = optimize.differential_evolution(self._loss_function_trend, bounds)
+        self.params.set_values(params)
 
     def _minimize_last_value(self):
         initial_guess = self.params.watercut_initial

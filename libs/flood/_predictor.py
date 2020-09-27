@@ -1,4 +1,4 @@
-from libs.flood.numeric_tools.solver import solve_ode
+from scipy import integrate
 
 
 class _Predictor(object):
@@ -14,10 +14,13 @@ class _Predictor(object):
 
     @classmethod
     def _calc_cum_prods_oil(cls, cum_prod_oil_start, cum_prods_liq):
-        cls._cum_prods_oil = solve_ode(fun=cls._calc_right_hand_side_ode,
+        solution = integrate.solve_ivp(fun=cls._calc_right_hand_side_ode,
                                        y0=[cum_prod_oil_start],
                                        t_span=(cum_prods_liq[0], cum_prods_liq[-1]),
-                                       t_eval=cum_prods_liq)
+                                       t_eval=cum_prods_liq,
+                                       method='RK45')
+
+        cls._cum_prods_oil = list(solution.y[0])
 
     @classmethod
     def _calc_right_hand_side_ode(cls, cum_prod_liq, cum_prod_oil):

@@ -1,7 +1,7 @@
 import pathlib
 import xlwings as xw
 
-from app.calculator import Calculator
+from calculator import Calculator
 from data.excel import ExcelRepository
 from data.settings import Settings
 from libs.plot.bokeh.research_plot import ResearchPlot
