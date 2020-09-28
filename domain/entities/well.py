@@ -7,10 +7,7 @@ from libs.flood.loss_function import LossFunction
 
 class Well(object):
 
-    def __init__(self,
-                 name: str,
-                 report: Report):
-
+    def __init__(self, name: str, report: Report):
         self.name = name
         self.report = report
         self._create_flood_model()

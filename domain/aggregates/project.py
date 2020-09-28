@@ -7,10 +7,7 @@ from domain.entities.well import Well
 
 class Project(object):
 
-    def __init__(self,
-                 settings: Settings,
-                 wells: List[Well]):
-
+    def __init__(self, settings: Settings, wells: List[Well]):
         self.wells = wells
         self.settings = settings
         self._num_well = len(wells)
