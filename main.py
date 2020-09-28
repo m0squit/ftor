@@ -40,3 +40,4 @@ for ratio in ratios:
                          ratio_points_month_day=ratio,
                          path=path)
     run_app(_settings)
+т
