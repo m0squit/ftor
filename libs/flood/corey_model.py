@@ -5,9 +5,6 @@ from scipy.optimize import differential_evolution, minimize_scalar
 from sklearn.metrics import mean_absolute_error
 from typing import Callable, List, Dict
 
-from libs.flood.corey_model_params import CoreyModelParams
-from libs.flood.loss_function import LossFunction
-
 
 def _calc_cums_oil(watercut: Callable[[float], float], Qo0: float, Ql: np.ndarray) -> np.ndarray:
     """Calulates oil cumulative productions by liquid.
@@ -57,12 +54,12 @@ class CoreyModel(object):
 
         self._create_model()
 
-    def set_params_values(self, params: List[float]):
+    def set_params_values(self, params: np.ndarray):
         self.watercut_initial = params[0]
         self.mobility_ratio = params[1]
         self.n_o = params[2]
         self.n_w = params[3]
-        self.recovery_factor = params[4]
+        self.stoiip = params[4]
 
     def calc_watercut(self, cum_oil: float) -> float:
         recovery_factor = cum_oil / (self.stoiip * 1e6)
@@ -94,20 +91,22 @@ class CoreyModel(object):
 
     def _add_stoiip_boundaries(self):
         cum_max = max(self.cums_oil) / 1e6
-        self.params_bounds['stoiip'] = {'min': cum_max / 0.05, 'max': cum_max / 0.95}
+        self.params_bounds['stoiip'] = {'min': cum_max / 0.95, 'max': cum_max / 0.05}
 
     def _fit(self):
         bounds = list(tuple(min_max.values()) for min_max in self.params_bounds.values())
         # Fit by trend
-        self.set_params_values(differential_evolution(self._loss_function_trend, bounds).x)
+        result = differential_evolution(self._loss_function_trend, bounds)
+        self.set_params_values(result.x)
         # Fit by last value
-        self.watercut_initial = minimize_scalar(self._loss_function_last_value, bounds=bounds[0], method='Bounded')
+        result = minimize_scalar(self._loss_function_last_value, bounds=bounds[0], method='Bounded')
+        self.watercut_initial = result.x
 
     def _calc_watercut_model(self):
         self.watercuts_model = self.calc_watercut(self.cums_oil)
         self.mae_train = mean_absolute_error(self.watercuts_fact, self.watercuts_model)
 
-    def _loss_function_trend(self, params: List[float]) -> float:
+    def _loss_function_trend(self, params: np.ndarray) -> float:
         self.set_params_values(params)
         self._calc_watercut_model()
         return self.mae_train

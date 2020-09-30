@@ -9,7 +9,7 @@ from libs.plot.plotly.rates_plot import RatesPlot
 from libs.plot.plotly.watercuts_plot import WatercutsPlot
 from libs.plot.plotly.performance_plot import PerformancePlot
 
-path = pathlib.Path.cwd().parent / 'tests' / 'data' / 'real' / 'nng' / 'otdelnoe'
+path = pathlib.Path.cwd() / 'tests' / 'data' / 'real' / 'nng' / 'otdelnoe'
 
 
 def run_app(settings: Settings):

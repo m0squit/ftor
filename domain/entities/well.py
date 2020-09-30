@@ -1,8 +1,8 @@
+from sklearn.metrics import mean_absolute_error
 from typing import List
 
 from domain.value_objects.report import Report
 from libs.flood.corey_model import CoreyModel
-from libs.flood.loss_function import LossFunction
 
 
 class Well(object):
@@ -72,7 +72,7 @@ class Well(object):
     def _calc_metric_watercut(self):
         watercuts_fact = self.report.df_test['watercut'].to_list()
         watercuts_model = self.report.df_test['watercut_model'].to_list()
-        self.flood_model.mae_test = LossFunction.run(watercuts_fact, watercuts_model)
+        self.flood_model.mae_test = mean_absolute_error(watercuts_fact, watercuts_model)
 
     def _calc_metric_phase(self, phase: str, source: str):
         self.report.df_test[f'dev_prod_{phase}_{source}'] = None
