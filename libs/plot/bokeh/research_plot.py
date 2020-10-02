@@ -38,9 +38,7 @@ class ResearchPlot(object):
     @classmethod
     def _create_fig(cls):
         name_well = f'{cls._well.name}'
-        cls._fig = figure(title=f'Case {name_well}',
-                          plot_width=800,
-                          plot_height=500)
+        cls._fig = figure(title=f'Case {name_well}', plot_width=800, plot_height=500)
         cls._fig.xaxis.axis_label = 'cumulative oil production, m3'
         cls._fig.yaxis.axis_label = 'watercut, fr'
         cls._df = cls._well.report.df_train
@@ -53,13 +51,13 @@ class ResearchPlot(object):
 
     @classmethod
     def _add_fact_trace(cls):
-        cum_oil = cls._df['cum_prod_oil'].to_list()
+        cum_oil = cls._df['cum_oil'].to_list()
         watercuts = cls._df['watercut'].to_list()
         cls._fig.circle(x=cum_oil, y=watercuts, size=2)
 
     @classmethod
     def _add_model_trace(cls):
-        cum_oil = cls._df['cum_prod_oil'].to_list()
+        cum_oil = cls._df['cum_oil'].to_list()
         watercuts = cls._well.flood_model.watercuts_model
         cls._source = ColumnDataSource(data=dict(x=cum_oil, y=watercuts))
         cls._fig.line('x', 'y', source=cls._source, line_color='red', line_width=2, line_alpha=0.6)
@@ -70,22 +68,22 @@ class ResearchPlot(object):
         callback = CustomJS(args=dict(source=cls._source,
                                       watercut_initial=cls._sliders[0],
                                       mobility_ratio=cls._sliders[1],
-                                      parameter_alpha=cls._sliders[2],
-                                      parameter_beta=cls._sliders[3],
-                                      parameter_stoiip=cls._sliders[4]),
+                                      parameter_n_o=cls._sliders[2],
+                                      parameter_n_w=cls._sliders[3],
+                                      parameter_ooip=cls._sliders[4]),
                             code="""
                 const wc_initial = watercut_initial.value;
                 const m_ratio = mobility_ratio.value;
-                const alpha = parameter_alpha.value;
-                const beta = parameter_beta.value;
-                const stoiip = parameter_stoiip.value;
+                const n_o = parameter_n_o.value;
+                const n_w = parameter_n_w.value;
+                const ooip = parameter_ooip.value;
                 const x = source.data['x'];
                 const y = source.data['y'];
                 for (var i = 0; i < x.length; i++)
                 {
-                    recovery_factor = x[i] / (stoiip * Math.pow(10, 6));
-                    term_1 = Math.pow(1 - recovery_factor, alpha);
-                    term_2 = m_ratio * Math.pow(recovery_factor, beta);
+                    recovery_factor = x[i] / (ooip * Math.pow(10, 6));
+                    term_1 = Math.pow(1 - recovery_factor, n_o);
+                    term_2 = m_ratio * Math.pow(recovery_factor, n_w);
                     y[i] = wc_initial + 1 / (1 + term_1 / term_2);
                 }
                 source.change.emit();
@@ -96,17 +94,17 @@ class ResearchPlot(object):
 
     @classmethod
     def _create_sliders(cls):
-        params = cls._well.flood_model.params
-        cls._sliders = [cls._create_slider('watercut_initial', params.watercut_initial, step=0.01),
-                        cls._create_slider('mobility_ratio', params.mobility_ratio, step=0.001),
-                        cls._create_slider('alpha', params.alpha, step=0.01),
-                        cls._create_slider('beta', params.beta, step=0.01),
-                        cls._create_slider('stoiip', params.stoiip, step=0.001)]
+        fm = cls._well.flood_model
+        cls._sliders = [cls._create_slider('watercut_initial', fm.watercut_initial, step=0.01),
+                        cls._create_slider('mobility_ratio', fm.mobility_ratio, step=0.001),
+                        cls._create_slider('n_o', fm.n_o, step=0.01),
+                        cls._create_slider('n_w', fm.n_w, step=0.01),
+                        cls._create_slider('ooip', fm.ooip, step=0.001)]
 
     @classmethod
     def _create_slider(cls, param_name, value, step):
-        bounds_params = cls._well.flood_model.params.usable_params
-        bounds = bounds_params[param_name]
+        params_bounds = cls._well.flood_model.params_bounds
+        bounds = params_bounds[param_name]
         start = bounds['min']
         end = bounds['max']
         slider = Slider(start=start, end=end, value=value, step=step, title=param_name)

@@ -52,18 +52,12 @@ class WatercutsPlot(_Plot):
 
     @classmethod
     def _group_data_to_table(cls):
-        params = cls._well.flood_model.params
-        names = list(params.usable_params.keys())
-        names.append('cum_prod_oil')
-        names.append('mae_train')
-        names.append('mae_test')
-        units = list(params.get_units().values())
-        units.append('mn_m3')
-        units.append('fr')
-        units.append('fr')
-        values = [x for x in params.get_values()]
-        cum_prod_oil = cls._well.report.df_train['cum_oil'].iloc[-1] / 1e6
-        values.append(cum_prod_oil)
+        names = ['watecut_initial', 'mobility_ratio', 'n_o', 'n_w', 'ooip', 'cum_oil', 'mae_train', 'mae_test']
+        units = ['fr', 'non-dim', 'non-dim', 'non-dim', 'Mm3', 'Mm3', 'fr', 'fr']
+        fm = cls._well.flood_model
+        values = [fm.watercut_initial, fm.mobility_ratio, fm.n_o, fm.n_w, fm.ooip]
+        cum_oil = cls._well.report.df_train['cum_oil'].iloc[-1] / 1e6
+        values.append(cum_oil)
         values.append(cls._well.flood_model.mae_train)
         values.append(cls._well.flood_model.mae_test)
         values = [round(x, 4) for x in values]
@@ -77,7 +71,7 @@ class WatercutsPlot(_Plot):
         df_test = cls._well.report.df_test
         x = df_train.index.to_list() + df_test.index.to_list()
         watercuts_fact = cls._well.flood_model.watercuts_fact + df_test['watercut'].to_list()
-        watercuts_model = cls._well.flood_model.watercuts_model + df_test['watercut_model'].to_list()
+        watercuts_model = cls._well.flood_model.watercuts_model.tolist() + df_test['watercut_model'].to_list()
         trace_1 = cls._create_trace('факт', x, watercuts_fact, mode='markers', marker_size=5)
         trace_2 = cls._create_trace('ftor', x, watercuts_model)
         cls._fig.add_trace(trace_1, **pos)

@@ -27,7 +27,12 @@ class CoreyModel(object):
     Based on modified Brooks-Corey for relative permabilities: https://petrowiki.org/Relative_permeability_models.
 
     Attributes:
-        params: Setting parameters of model. They auto define base on input train data.
+        watercut_initial: Pseudo start watercut, fr.
+        mobility_ratio: Defined as (kr_max / mu)_o / (kr_max / mu)_w, non-dim.
+        n_o: Exponent by oil phase in Brooks-Corey equations, non-dim.
+        n_w: Exponent by water phase in Brooks-Corey equations, non-dim.
+        ooip: Original oil in place, Mm3.
+
         cums_oil: Train sequence of oil cumulative production values.
         watercuts_fact: Train sequence of watercut values. Each value must be correlated with value in "cum_oil".
         watercuts_model: Model sequence of watercut values. Each value correlate with value in "cum_oil".
@@ -37,7 +42,7 @@ class CoreyModel(object):
                      'mobility_ratio': {'min': 0.0025, 'max': 50},
                      'n_o': {'min': 1, 'max': 6},
                      'n_w': {'min': 1, 'max': 6},
-                     'stoiip': {'min': None, 'max': None}}
+                     'ooip': {'min': None, 'max': None}}
 
     def __init__(self, cums_oil: np.ndarray, watercuts: np.ndarray):
         self.cums_oil = cums_oil
@@ -45,12 +50,13 @@ class CoreyModel(object):
 
         self.watercuts_model: np.ndarray
         self.mae_train: float
+        self.mae_train: float
 
         self.watercut_initial: float
         self.mobility_ratio: float
         self.n_o: float
         self.n_w: float
-        self.stoiip: float
+        self.ooip: float
 
         self._create_model()
 
@@ -59,10 +65,10 @@ class CoreyModel(object):
         self.mobility_ratio = params[1]
         self.n_o = params[2]
         self.n_w = params[3]
-        self.stoiip = params[4]
+        self.ooip = params[4]
 
     def calc_watercut(self, cum_oil: float) -> float:
-        recovery_factor = cum_oil / (self.stoiip * 1e6)
+        recovery_factor = cum_oil / (self.ooip * 1e6)
         term_1 = (1 - recovery_factor) ** self.n_o
         term_2 = self.mobility_ratio * recovery_factor ** self.n_w
         watercut = self.watercut_initial + 1 / (1 + term_1 / term_2)
@@ -85,13 +91,13 @@ class CoreyModel(object):
         return {'watercut': watercuts, 'rate_oil': rates_oil}
 
     def _create_model(self):
-        self._add_stoiip_boundaries()
+        self._add_ooip_boundaries()
         self._fit()
         self._calc_watercut_model()
 
-    def _add_stoiip_boundaries(self):
+    def _add_ooip_boundaries(self):
         cum_max = max(self.cums_oil) / 1e6
-        self.params_bounds['stoiip'] = {'min': cum_max / 0.95, 'max': cum_max / 0.05}
+        self.params_bounds['ooip'] = {'min': cum_max / 0.95, 'max': cum_max / 0.05}
 
     def _fit(self):
         bounds = list(tuple(min_max.values()) for min_max in self.params_bounds.values())
